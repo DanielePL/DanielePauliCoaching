@@ -1,1 +1,404 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Strategy Call - Daniele Pauli Coaching</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    /* Booking page specific styles */
+    .booking-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    
+    .booking-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .booking-title {
+      font-size: 2.5rem;
+      color: #ff6600;
+      margin-bottom: 15px;
+    }
+    
+    .booking-subtitle {
+      font-size: 1.2rem;
+      color: #ccc;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .booking-form-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      background-color: #111;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .calendar-section {
+      padding: 30px;
+      background-color: #1a1a1a;
+    }
+    
+    .form-section {
+      padding: 30px;
+    }
+    
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #ff6600;
+    }
+    
+    .date-selector {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+    
+    .date-option {
+      padding: 10px;
+      text-align: center;
+      background-color: #222;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .date-option:hover {
+      background-color: #333;
+    }
+    
+    .date-option.selected {
+      background-color: rgba(255, 102, 0, 0.2);
+      border: 1px solid #ff6600;
+    }
+    
+    .date-day {
+      font-weight: bold;
+    }
+    
+    .date-full {
+      font-size: 0.8rem;
+      color: #999;
+    }
+    
+    .time-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    
+    .time-option {
+      padding: 10px;
+      text-align: center;
+      background-color: #222;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .time-option:hover {
+      background-color: #333;
+    }
+    
+    .time-option.selected {
+      background-color: rgba(255, 102, 0, 0.2);
+      border: 1px solid #ff6600;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      color: #ccc;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 12px;
+      background-color: #222;
+      border: 1px solid #333;
+      border-radius: 6px;
+      color: white;
+      transition: all 0.2s;
+    }
+    
+    .form-input:focus {
+      border-color: #ff6600;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.2);
+    }
+    
+    .form-select {
+      width: 100%;
+      padding: 12px;
+      background-color: #222;
+      border: 1px solid #333;
+      border-radius: 6px;
+      color: white;
+      transition: all 0.2s;
+    }
+    
+    .form-select:focus {
+      border-color: #ff6600;
+      outline: none;
+    }
+    
+    .form-textarea {
+      width: 100%;
+      padding: 12px;
+      background-color: #222;
+      border: 1px solid #333;
+      border-radius: 6px;
+      color: white;
+      min-height: 100px;
+      resize: vertical;
+    }
+    
+    .form-textarea:focus {
+      border-color: #ff6600;
+      outline: none;
+    }
+    
+    .submit-button {
+      width: 100%;
+      padding: 14px;
+      background-color: #ff6600;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 10px;
+    }
+    
+    .submit-button:hover {
+      background-color: #ff7720;
+    }
+    
+    .success-message {
+      display: none;
+      background-color: rgba(0, 128, 0, 0.2);
+      border: 1px solid green;
+      color: white;
+      padding: 20px;
+      border-radius: 6px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .booking-form-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .date-selector {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="booking-container">
+    <div class="booking-header">
+      <h1 class="booking-title">Book Your Free Strategy Call</h1>
+      <p class="booking-subtitle">Schedule a 30-minute call to discuss your fitness goals and see if we're the right fit for your journey.</p>
+    </div>
+    
+    <div class="booking-form-container">
+      <div class="calendar-section">
+        <h2 class="section-title">Select Date & Time</h2>
+        
+        <div class="date-selector" id="dateSelector">
+          <!-- Dates will be dynamically generated -->
+          <div class="date-option">
+            <div class="date-day">Mon</div>
+            <div class="date-full">May 10</div>
+          </div>
+          <div class="date-option">
+            <div class="date-day">Tue</div>
+            <div class="date-full">May 11</div>
+          </div>
+          <div class="date-option">
+            <div class="date-day">Wed</div>
+            <div class="date-full">May 12</div>
+          </div>
+          <div class="date-option">
+            <div class="date-day">Thu</div>
+            <div class="date-full">May 13</div>
+          </div>
+          <div class="date-option">
+            <div class="date-day">Fri</div>
+            <div class="date-full">May 14</div>
+          </div>
+          <div class="date-option">
+            <div class="date-day">Mon</div>
+            <div class="date-full">May 17</div>
+          </div>
+          <div class="date-option">
+            <div class="date-day">Tue</div>
+            <div class="date-full">May 18</div>
+          </div>
+          <div class="date-option">
+            <div class="date-day">Wed</div>
+            <div class="date-full">May 19</div>
+          </div>
+        </div>
+        
+        <h3 class="section-title">Available Times</h3>
+        
+        <div class="time-selector" id="timeSelector">
+          <!-- Times will be dynamically generated -->
+          <div class="time-option">9:00 AM</div>
+          <div class="time-option">10:00 AM</div>
+          <div class="time-option">11:00 AM</div>
+          <div class="time-option">1:00 PM</div>
+          <div class="time-option">2:00 PM</div>
+          <div class="time-option">3:00 PM</div>
+        </div>
+      </div>
+      
+      <div class="form-section">
+        <h2 class="section-title">Your Information</h2>
+        
+        <form id="bookingForm">
+          <div class="form-group">
+            <label for="name" class="form-label">Your Name</label>
+            <input type="text" id="name" name="name" class="form-input" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" id="email" name="email" class="form-input" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone" class="form-label">Phone Number (Optional)</label>
+            <input type="tel" id="phone" name="phone" class="form-input">
+          </div>
+          
+          <div class="form-group">
+            <label for="goal" class="form-label">What's your primary fitness goal?</label>
+            <select id="goal" name="goal" class="form-select" required>
+              <option value="">Select your primary goal</option>
+              <option value="strength">Increase Overall Strength</option>
+              <option value="muscle">Build Muscle Mass</option>
+              <option value="pain">Eliminate Pain/Discomfort</option>
+              <option value="performance">Improve Athletic Performance</option>
+              <option value="energy">Increase Energy & Vitality</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="message" class="form-label">Anything specific you'd like to discuss?</label>
+            <textarea id="message" name="message" class="form-textarea"></textarea>
+          </div>
+          
+          <button type="submit" class="submit-button">Confirm Booking</button>
+        </form>
+        
+        <div id="successMessage" class="success-message">
+          <h3>Your call has been scheduled!</h3>
+          <p>You will receive a confirmation email with all the details.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="../js/firebase-config.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set up date selection
+      const dateOptions = document.querySelectorAll('.date-option');
+      let selectedDate = null;
+      
+      dateOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          // Remove selected class from all date options
+          dateOptions.forEach(opt => opt.classList.remove('selected'));
+          // Add selected class to clicked option
+          this.classList.add('selected');
+          // Store selected date
+          const day = this.querySelector('.date-day').textContent;
+          const date = this.querySelector('.date-full').textContent;
+          selectedDate = `${day}, ${date}`;
+        });
+      });
+      
+      // Set up time selection
+      const timeOptions = document.querySelectorAll('.time-option');
+      let selectedTime = null;
+      
+      timeOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          // Remove selected class from all time options
+          timeOptions.forEach(opt => opt.classList.remove('selected'));
+          // Add selected class to clicked option
+          this.classList.add('selected');
+          // Store selected time
+          selectedTime = this.textContent;
+        });
+      });
+      
+      // Handle form submission
+      const bookingForm = document.getElementById('bookingForm');
+      const successMessage = document.getElementById('successMessage');
+      
+      bookingForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (!selectedDate || !selectedTime) {
+          alert('Please select a date and time for your call.');
+          return;
+        }
+        
+        // Get form data
+        const formData = {
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          phone: document.getElementById('phone').value,
+          goal: document.getElementById('goal').value,
+          message: document.getElementById('message').value,
+          dateTime: `${selectedDate} at ${selectedTime}`,
+          // This would be a proper Date object in a real implementation
+          // For Firebase, we'd convert this to a proper timestamp
+        };
+        
+        // Submit to Firebase using the function from firebase-config.js
+        if (window.createBooking) {
+          window.createBooking(formData)
+            .then(docRef => {
+              // Show success message
+              bookingForm.style.display = 'none';
+              successMessage.style.display = 'block';
+            })
+            .catch(error => {
+              console.error('Error submitting booking:', error);
+              alert('There was an error submitting your booking. Please try again.');
+            });
+        } else {
+          // Demo mode - just show success message
+          bookingForm.style.display = 'none';
+          successMessage.style.display = 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
