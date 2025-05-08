@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import DanieleHomepage from './components/DanieleHomepage';
 import Apply from './pages/Apply';
 import Book from './pages/Book';
@@ -10,7 +10,7 @@ function App() {
   const baseUrl = process.env.PUBLIC_URL || '';
   
   return (
-    <BrowserRouter basename={baseUrl}>
+    <Router basename={baseUrl}>
       <Routes>
         <Route path="/" element={<DanieleHomepage />} />
         <Route path="/apply" element={<Apply />} />
@@ -18,7 +18,7 @@ function App() {
         {/* Redirect any unknown routes to home */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
