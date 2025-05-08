@@ -1,7 +1,7 @@
 {
   "name": "daniele-coaching-site",
   "version": "0.1.0",
-  "homepage": "https://yourusername.github.io/daniele-coaching-site",
+  "homepage": "https://DanielePL.github.io/daniele-coaching-site",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
