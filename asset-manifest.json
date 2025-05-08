@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/daniele-coaching-site/static/css/main.1bf24ad2.css",
+    "main.js": "/daniele-coaching-site/static/js/main.99a72e8f.js",
+    "index.html": "/daniele-coaching-site/index.html",
+    "main.1bf24ad2.css.map": "/daniele-coaching-site/static/css/main.1bf24ad2.css.map",
+    "main.99a72e8f.js.map": "/daniele-coaching-site/static/js/main.99a72e8f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1bf24ad2.css",
+    "static/js/main.99a72e8f.js"
+  ]
+}
