@@ -1,8 +1,7 @@
 {
   "name": "daniele-coaching-site",
   "version": "0.1.0",
-  "homepage": "https://DanielePL.github.io/daniele-coaching-site",
-  "private": true,
+  "homepage": "https://github.com/DanielePL/DanielePauliCoaching",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

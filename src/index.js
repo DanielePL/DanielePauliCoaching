@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
 
+
 // Make sure this element exists in your HTML
 const container = document.getElementById('root');
 

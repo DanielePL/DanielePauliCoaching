@@ -1,0 +1,250 @@
+[debug] [2025-05-08T11:56:07.140Z] ----------------------------------------------------------------------
+[debug] [2025-05-08T11:56:07.144Z] Command:       /nix/store/ixbb20farqh1f4fqbmsn6b1ixn8mc8ij-nodejs-20.18.1/bin/node /home/user/.global_modules/bin/firebase init --debug
+[debug] [2025-05-08T11:56:07.144Z] CLI Version:   14.3.0
+[debug] [2025-05-08T11:56:07.145Z] Platform:      linux
+[debug] [2025-05-08T11:56:07.145Z] Node Version:  v20.18.1
+[debug] [2025-05-08T11:56:07.145Z] Time:          Thu May 08 2025 11:56:07 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-05-08T11:56:07.145Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-05-08T11:56:07.148Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2025-05-08T11:56:07.255Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T11:56:07.628Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2025-05-08T11:56:07.631Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2025-05-08T11:56:39.085Z] Running auto auth
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/user/DanielePauliCoaching
+
+[error] 
+[error] Error: Must select at least one feature. Use SPACEBAR to select features, or specify a feature by running firebase init [feature_name]
+[debug] [2025-05-08T11:56:58.651Z] ----------------------------------------------------------------------
+[debug] [2025-05-08T11:56:58.654Z] Command:       /nix/store/ixbb20farqh1f4fqbmsn6b1ixn8mc8ij-nodejs-20.18.1/bin/node /home/user/.global_modules/bin/firebase init --debug
+[debug] [2025-05-08T11:56:58.654Z] CLI Version:   14.3.0
+[debug] [2025-05-08T11:56:58.655Z] Platform:      linux
+[debug] [2025-05-08T11:56:58.655Z] Node Version:  v20.18.1
+[debug] [2025-05-08T11:56:58.655Z] Time:          Thu May 08 2025 11:56:58 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-05-08T11:56:58.655Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-05-08T11:56:58.661Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T11:56:58.663Z] > authorizing via signed-in user (danielepauli@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/user/DanielePauliCoaching
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2025-05-08T11:57:21.047Z] No OAuth tokens found
+[debug] [2025-05-08T11:57:21.051Z] No OAuth tokens found
+[debug] [2025-05-08T11:57:21.059Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T11:57:21.063Z] > authorizing via signed-in user (danielepauli@gmail.com)
+[debug] [2025-05-08T11:57:21.078Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2025-05-08T11:57:21.778Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-05-08T11:57:21.780Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project daniele-pauli-coaching-512fe (Daniele Pauli Coaching) 
+[info] 
+=== Firestore Setup
+[debug] [2025-05-08T11:57:24.858Z] No OAuth tokens found
+[debug] [2025-05-08T11:57:24.859Z] No OAuth tokens found
+[debug] [2025-05-08T11:57:24.860Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T11:57:24.860Z] > authorizing via signed-in user (danielepauli@gmail.com)
+[debug] [2025-05-08T11:57:24.861Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/services/firestore.googleapis.com [none]
+[debug] [2025-05-08T11:57:24.861Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/services/firestore.googleapis.com x-goog-quota-user=projects/daniele-pauli-coaching-512fe
+[debug] [2025-05-08T11:57:25.924Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/services/firestore.googleapis.com 200
+[debug] [2025-05-08T11:57:25.924Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/services/firestore.googleapis.com [omitted]
+[debug] [2025-05-08T11:57:25.927Z] No OAuth tokens found
+[debug] [2025-05-08T11:57:25.928Z] No OAuth tokens found
+[debug] [2025-05-08T11:57:25.929Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T11:57:25.929Z] > authorizing via signed-in user (danielepauli@gmail.com)
+[debug] [2025-05-08T11:57:25.929Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/databases/(default) [none]
+[debug] [2025-05-08T11:57:27.742Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/databases/(default) 200
+[debug] [2025-05-08T11:57:27.742Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/databases/(default) {"name":"projects/daniele-pauli-coaching-512fe/databases/(default)","uid":"81c6121e-6da2-4ec3-b198-149222fa74d3","createTime":"2025-05-08T10:56:42.141809Z","updateTime":"2025-05-08T10:56:42.141809Z","locationId":"europe-west6","type":"FIRESTORE_NATIVE","concurrencyMode":"PESSIMISTIC","versionRetentionPeriod":"3600s","earliestVersionTime":"2025-05-08T10:57:27.604075Z","appEngineIntegrationMode":"DISABLED","keyPrefix":"o","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED","deleteProtectionState":"DELETE_PROTECTION_DISABLED","databaseEdition":"STANDARD","freeTier":true,"etag":"IKia7e3ok40DMMqu5Orbk40D"}
+[debug] [2025-05-08T11:57:27.743Z] database_type: FIRESTORE_NATIVE
+[debug] [2025-05-08T11:57:27.743Z] database_type: FIRESTORE_NATIVE
+[debug] [2025-05-08T11:57:27.743Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T11:57:27.744Z] > authorizing via signed-in user (danielepauli@gmail.com)
+[debug] [2025-05-08T11:57:27.744Z] [iam] checking project daniele-pauli-coaching-512fe for permissions ["firebase.projects.get"]
+[debug] [2025-05-08T11:57:27.746Z] No OAuth tokens found
+[debug] [2025-05-08T11:57:27.746Z] No OAuth tokens found
+[debug] [2025-05-08T11:57:27.750Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T11:57:27.750Z] > authorizing via signed-in user (danielepauli@gmail.com)
+[debug] [2025-05-08T11:57:27.751Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/daniele-pauli-coaching-512fe:testIamPermissions [none]
+[debug] [2025-05-08T11:57:27.752Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/daniele-pauli-coaching-512fe:testIamPermissions x-goog-quota-user=projects/daniele-pauli-coaching-512fe
+[debug] [2025-05-08T11:57:27.754Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/daniele-pauli-coaching-512fe:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2025-05-08T11:57:28.535Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/daniele-pauli-coaching-512fe:testIamPermissions 200
+[debug] [2025-05-08T11:57:28.535Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/daniele-pauli-coaching-512fe:testIamPermissions {"permissions":["firebase.projects.get"]}
+[info] 
+[info] Firestore Security Rules allow you to define how and when to allow
+[info] requests. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2025-05-08T11:57:32.038Z] No OAuth tokens found
+[debug] [2025-05-08T11:57:32.039Z] No OAuth tokens found
+[debug] [2025-05-08T11:57:32.039Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T11:57:32.040Z] > authorizing via signed-in user (danielepauli@gmail.com)
+[debug] [2025-05-08T11:57:32.041Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/releases pageSize=10&pageToken=
+[debug] [2025-05-08T11:57:33.033Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/releases 200
+[debug] [2025-05-08T11:57:33.034Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/releases {"releases":[{"name":"projects/daniele-pauli-coaching-512fe/releases/cloud.firestore","rulesetName":"projects/daniele-pauli-coaching-512fe/rulesets/3e3bd1ad-b4df-46fc-9f12-d97806299986","createTime":"2025-05-08T10:56:50.528956Z","updateTime":"2025-05-08T10:56:50.528956Z"}]}
+[debug] [2025-05-08T11:57:33.035Z] Found ruleset: projects/daniele-pauli-coaching-512fe/rulesets/3e3bd1ad-b4df-46fc-9f12-d97806299986
+[debug] [2025-05-08T11:57:33.038Z] No OAuth tokens found
+[debug] [2025-05-08T11:57:33.039Z] No OAuth tokens found
+[debug] [2025-05-08T11:57:33.040Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T11:57:33.041Z] > authorizing via signed-in user (danielepauli@gmail.com)
+[debug] [2025-05-08T11:57:33.041Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/rulesets/3e3bd1ad-b4df-46fc-9f12-d97806299986 [none]
+[debug] [2025-05-08T11:57:34.048Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/rulesets/3e3bd1ad-b4df-46fc-9f12-d97806299986 200
+[debug] [2025-05-08T11:57:34.048Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/rulesets/3e3bd1ad-b4df-46fc-9f12-d97806299986 [omitted]
+[debug] [2025-05-08T11:57:34.056Z] TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
+    at Object.isAbsolute (node:path:1235:5)
+    at Config.path (/home/user/.global_modules/lib/node_modules/firebase-tools/lib/config.js:130:18)
+    at Config.writeProjectFile (/home/user/.global_modules/lib/node_modules/firebase-tools/lib/config.js:162:32)
+    at /home/user/.global_modules/lib/node_modules/firebase-tools/lib/init/features/firestore/rules.js:37:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async doSetup (/home/user/.global_modules/lib/node_modules/firebase-tools/lib/init/features/firestore/index.js:48:5)
+    at async init (/home/user/.global_modules/lib/node_modules/firebase-tools/lib/init/index.js:41:9)
+    at async Command.initAction [as actionFn] (/home/user/.global_modules/lib/node_modules/firebase-tools/lib/commands/init.js:187:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2025-05-08T11:58:22.890Z] ----------------------------------------------------------------------
+[debug] [2025-05-08T11:58:22.894Z] Command:       /nix/store/ixbb20farqh1f4fqbmsn6b1ixn8mc8ij-nodejs-20.18.1/bin/node /home/user/.global_modules/bin/firebase init firestore --debug
+[debug] [2025-05-08T11:58:22.894Z] CLI Version:   14.3.0
+[debug] [2025-05-08T11:58:22.895Z] Platform:      linux
+[debug] [2025-05-08T11:58:22.895Z] Node Version:  v20.18.1
+[debug] [2025-05-08T11:58:22.895Z] Time:          Thu May 08 2025 11:58:22 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-05-08T11:58:22.895Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-05-08T11:58:22.903Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T11:58:22.905Z] > authorizing via signed-in user (danielepauli@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/user/DanielePauliCoaching
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2025-05-08T11:58:29.800Z] No OAuth tokens found
+[debug] [2025-05-08T11:58:29.801Z] No OAuth tokens found
+[debug] [2025-05-08T11:58:29.801Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T11:58:29.802Z] > authorizing via signed-in user (danielepauli@gmail.com)
+[debug] [2025-05-08T11:58:29.805Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2025-05-08T11:58:30.386Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-05-08T11:58:30.387Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project daniele-pauli-coaching-512fe (Daniele Pauli Coaching) 
+[info] 
+=== Firestore Setup
+[debug] [2025-05-08T11:58:32.424Z] No OAuth tokens found
+[debug] [2025-05-08T11:58:32.424Z] No OAuth tokens found
+[debug] [2025-05-08T11:58:32.424Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T11:58:32.425Z] > authorizing via signed-in user (danielepauli@gmail.com)
+[debug] [2025-05-08T11:58:32.425Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/services/firestore.googleapis.com [none]
+[debug] [2025-05-08T11:58:32.425Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/services/firestore.googleapis.com x-goog-quota-user=projects/daniele-pauli-coaching-512fe
+[debug] [2025-05-08T11:58:33.524Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/services/firestore.googleapis.com 200
+[debug] [2025-05-08T11:58:33.524Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/services/firestore.googleapis.com [omitted]
+[debug] [2025-05-08T11:58:33.525Z] No OAuth tokens found
+[debug] [2025-05-08T11:58:33.525Z] No OAuth tokens found
+[debug] [2025-05-08T11:58:33.526Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T11:58:33.528Z] > authorizing via signed-in user (danielepauli@gmail.com)
+[debug] [2025-05-08T11:58:33.529Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/databases/(default) [none]
+[debug] [2025-05-08T11:58:35.292Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/databases/(default) 200
+[debug] [2025-05-08T11:58:35.292Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/databases/(default) {"name":"projects/daniele-pauli-coaching-512fe/databases/(default)","uid":"81c6121e-6da2-4ec3-b198-149222fa74d3","createTime":"2025-05-08T10:56:42.141809Z","updateTime":"2025-05-08T10:56:42.141809Z","locationId":"europe-west6","type":"FIRESTORE_NATIVE","concurrencyMode":"PESSIMISTIC","versionRetentionPeriod":"3600s","earliestVersionTime":"2025-05-08T10:58:35.154269Z","appEngineIntegrationMode":"DISABLED","keyPrefix":"o","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED","deleteProtectionState":"DELETE_PROTECTION_DISABLED","databaseEdition":"STANDARD","freeTier":true,"etag":"IJGQiI7pk40DMMqu5Orbk40D"}
+[debug] [2025-05-08T11:58:35.293Z] database_type: FIRESTORE_NATIVE
+[debug] [2025-05-08T11:58:35.293Z] database_type: FIRESTORE_NATIVE
+[debug] [2025-05-08T11:58:35.295Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T11:58:35.296Z] > authorizing via signed-in user (danielepauli@gmail.com)
+[debug] [2025-05-08T11:58:35.296Z] [iam] checking project daniele-pauli-coaching-512fe for permissions ["firebase.projects.get"]
+[debug] [2025-05-08T11:58:35.297Z] No OAuth tokens found
+[debug] [2025-05-08T11:58:35.297Z] No OAuth tokens found
+[debug] [2025-05-08T11:58:35.297Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T11:58:35.298Z] > authorizing via signed-in user (danielepauli@gmail.com)
+[debug] [2025-05-08T11:58:35.298Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/daniele-pauli-coaching-512fe:testIamPermissions [none]
+[debug] [2025-05-08T11:58:35.298Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/daniele-pauli-coaching-512fe:testIamPermissions x-goog-quota-user=projects/daniele-pauli-coaching-512fe
+[debug] [2025-05-08T11:58:35.298Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/daniele-pauli-coaching-512fe:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2025-05-08T11:58:36.065Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/daniele-pauli-coaching-512fe:testIamPermissions 200
+[debug] [2025-05-08T11:58:36.065Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/daniele-pauli-coaching-512fe:testIamPermissions {"permissions":["firebase.projects.get"]}
+[info] 
+[info] Firestore Security Rules allow you to define how and when to allow
+[info] requests. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2025-05-08T11:59:05.042Z] No OAuth tokens found
+[debug] [2025-05-08T11:59:05.043Z] No OAuth tokens found
+[debug] [2025-05-08T11:59:05.043Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T11:59:05.044Z] > authorizing via signed-in user (danielepauli@gmail.com)
+[debug] [2025-05-08T11:59:05.044Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/releases pageSize=10&pageToken=
+[debug] [2025-05-08T11:59:06.028Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/releases 200
+[debug] [2025-05-08T11:59:06.028Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/releases {"releases":[{"name":"projects/daniele-pauli-coaching-512fe/releases/cloud.firestore","rulesetName":"projects/daniele-pauli-coaching-512fe/rulesets/3e3bd1ad-b4df-46fc-9f12-d97806299986","createTime":"2025-05-08T10:56:50.528956Z","updateTime":"2025-05-08T10:56:50.528956Z"}]}
+[debug] [2025-05-08T11:59:06.029Z] Found ruleset: projects/daniele-pauli-coaching-512fe/rulesets/3e3bd1ad-b4df-46fc-9f12-d97806299986
+[debug] [2025-05-08T11:59:06.030Z] No OAuth tokens found
+[debug] [2025-05-08T11:59:06.031Z] No OAuth tokens found
+[debug] [2025-05-08T11:59:06.032Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T11:59:06.032Z] > authorizing via signed-in user (danielepauli@gmail.com)
+[debug] [2025-05-08T11:59:06.033Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/rulesets/3e3bd1ad-b4df-46fc-9f12-d97806299986 [none]
+[debug] [2025-05-08T11:59:06.988Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/rulesets/3e3bd1ad-b4df-46fc-9f12-d97806299986 200
+[debug] [2025-05-08T11:59:06.989Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/daniele-pauli-coaching-512fe/rulesets/3e3bd1ad-b4df-46fc-9f12-d97806299986 [omitted]
+[debug] [2025-05-08T11:59:06.994Z] TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
+    at Object.isAbsolute (node:path:1235:5)
+    at Config.path (/home/user/.global_modules/lib/node_modules/firebase-tools/lib/config.js:130:18)
+    at Config.writeProjectFile (/home/user/.global_modules/lib/node_modules/firebase-tools/lib/config.js:162:32)
+    at /home/user/.global_modules/lib/node_modules/firebase-tools/lib/init/features/firestore/rules.js:37:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async doSetup (/home/user/.global_modules/lib/node_modules/firebase-tools/lib/init/features/firestore/index.js:48:5)
+    at async init (/home/user/.global_modules/lib/node_modules/firebase-tools/lib/init/index.js:41:9)
+    at async Command.initAction [as actionFn] (/home/user/.global_modules/lib/node_modules/firebase-tools/lib/commands/init.js:187:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2025-05-08T12:43:38.701Z] ----------------------------------------------------------------------
+[debug] [2025-05-08T12:43:38.704Z] Command:       /nix/store/ixbb20farqh1f4fqbmsn6b1ixn8mc8ij-nodejs-20.18.1/bin/node /home/user/.global_modules/bin/firebase init hosting --debug
+[debug] [2025-05-08T12:43:38.704Z] CLI Version:   14.3.0
+[debug] [2025-05-08T12:43:38.705Z] Platform:      linux
+[debug] [2025-05-08T12:43:38.705Z] Node Version:  v20.18.1
+[debug] [2025-05-08T12:43:38.705Z] Time:          Thu May 08 2025 12:43:38 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-05-08T12:43:38.705Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-05-08T12:43:38.711Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-08T12:43:38.713Z] > authorizing via signed-in user (danielepauli@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/user/DanielePauliCoaching
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 

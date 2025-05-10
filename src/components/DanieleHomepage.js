@@ -1,12 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import '../styles/animations.css';
+import '../styles/animations.css'; // Import animations
 
 const DanieleHomepage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeSection, setActiveSection] = useState(0);
+  const [expandedTestimonials, setExpandedTestimonials] = useState({});
   
+  // Testimonial data moved outside of JSX to fix the error
+  const testimonialsData = [
+    {
+      quote: "I scaled my company, but my body was in decline. Daniele helped me rebuild strength, focus, and energy.",
+      name: "Tobias, 52",
+      role: "CFO",
+      results: ["Increased deadlift by 60kg", "Eliminated chronic back pain", "Improved energy throughout workday"]
+    },
+    {
+      quote: "I used to just 'work out.' Now I train with purpose – stronger, leaner, no more pain.",
+      name: "Sabine, 46",
+      role: "Entrepreneur",
+      results: ["Lost 8% body fat", "Doubled strength in key lifts", "Resolved shoulder impingement"]
+    },
+    {
+      quote: "If you want to achieve your athletic goals, Daniele is the right place for you! Daniele has extremely extensive expertise and pushes you to the limit in training! He is completely focused and sees every detail. I can simply recommend him.",
+      name: "dragesa Lazarevic",
+      role: "",
+      results: []
+    },
+    {
+      quote: "I have been training with Daniele Pauli for a few months and have already achieved extraordinary results during this time. He is an absolute professional in his field, competent, extremely motivating and brings me to my personal best. Daniele Pauli offers one-to-one personal training at the highest level and, in my opinion, is an absolute recommendation!",
+      name: "Nora Tanner",
+      role: "Entrepreneur",
+      results: ["Achieved extraordinary results", "Brought to personal best"]
+    },
+    {
+      quote: "Daniele is simply great! Weightlifting know-how at its finest! All questions were answered! And his competence is definitely not just theoretical!! Many thanks for the detailed training plans! And yes: it works! You just have to do it yourself :-) Thanks! Here's to more years!",
+      name: "Lukas Schroth",
+      role: "",
+      results: ["Weightlifting know-how at its finest", "All questions were answered", "Detailed training plans", "It works!"]
+    },
+    {
+      quote: "I am incredibly lucky to work with Pauli as a coach, who not only has impressive expertise, but also years of experience in strength sports. In the shortest possible time, he taught me Olympic weightlifting, and thanks to his guidance I am now already in the Nati B team - a success that I would not have been able to imagine without his support. His years of experience and his deep understanding of strength sports make him an extraordinary coach. He knows exactly what matters and manages to convey complicated techniques in such a way that you can quickly see progress. Additionally, he always creates individually tailored training plans that challenge me specifically and help me to achieve and even exceed my goals. We always work online and that works great. If you are looking for a coach who not only understands his craft perfectly, but also brings passion, then I can warmly recommend him!",
+      name: "Batgal",
+      role: "Nati B-Team (Olympic Weightlifting)",
+      results: ["Taught Olympic weightlifting", "In the Nati B team", "Individually tailored training plans", "Quickly sees progress"]
+    }
+  ];
+
   useEffect(() => {
     // Trigger animations after component mount
     setIsVisible(true);
@@ -21,6 +62,48 @@ const DanieleHomepage = () => {
     
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Helper function to truncate text by character length (approximating 3 lines)
+  const truncateText = (text) => {
+    // Approximate character limit for 3 lines in this layout
+    // This might need fine-tuning based on actual rendered font and container width
+    const maxChars = 250; 
+    
+    if (text.length <= maxChars) {
+      return text;
+    }
+    
+    // Find the last space before the character limit
+    let lastSpaceIndex = text.substring(0, maxChars).lastIndexOf(' ');
+    if (lastSpaceIndex === -1) lastSpaceIndex = maxChars;
+    
+    return text.substring(0, lastSpaceIndex) + '...';
+  };
+
+  // Helper function to toggle testimonial expansion
+  const toggleExpansion = (index) => {
+    setExpandedTestimonials(prevState => ({
+      ...prevState,
+      [index]: !prevState[index]
+    }));
+  };
+
+  // Memoize the particle elements to avoid recreating them on every render
+  const fireParticles = React.useMemo(() => {
+    return [...Array(20)].map((_, i) => (
+      <div 
+        key={i}
+        className="absolute rounded-full bg-orange-300 animate-rise"
+        style={{
+          width: `${4 + Math.random() * 4}px`,
+          height: `${4 + Math.random() * 4}px`,
+          left: `${Math.random() * 100}%`,
+          bottom: '0',
+          animationDelay: `${Math.random() * 10}s`
+        }}
+      ></div>
+    ));
   }, []);
 
   return (
@@ -48,19 +131,7 @@ const DanieleHomepage = () => {
 
         {/* Fire particles */}
         <div className="absolute w-full h-full overflow-hidden opacity-40 z-20">
-          {[...Array(20)].map((_, i) => (
-            <div 
-              key={i}
-              className="absolute rounded-full bg-orange-300 animate-rise"
-              style={{
-                width: `${4 + Math.random() * 4}px`,
-                height: `${4 + Math.random() * 4}px`,
-                left: `${Math.random() * 100}%`,
-                bottom: '0',
-                animationDelay: `${Math.random() * 10}s`
-              }}
-            ></div>
-          ))}
+          {fireParticles}
         </div>
 
         {/* Pulsing rings */}
@@ -214,22 +285,26 @@ const DanieleHomepage = () => {
               {
                 icon: "📱",
                 title: "Online Coaching Platform",
-                description: "Secure, easy-to-use platform for your customized training plans and feedback"
+                description: "Secure, easy-to-use platform for your customized training plans and feedback",
+                subtext: "Your training program is accessible anywhere, anytime through our intuitive mobile and desktop platforms—designed specifically for busy executives with limited tech time."
               },
               {
                 icon: "🎥",
                 title: "Bar Path Analysis",
-                description: "Advanced movement tracking to perfect your lifting technique and prevent injury"
+                description: "Advanced movement tracking to perfect your lifting technique and prevent injury",
+                subtext: "We leverage the same biomechanical technology used by Olympic athletes to identify inefficiencies and optimize your lifting mechanics for maximum strength and safety."
               },
               {
                 icon: "🧠",
                 title: "Mindset & Habit Tracking",
-                description: "Psychological tools to overcome mental barriers and build lasting habits"
+                description: "Psychological tools to overcome mental barriers and build lasting habits",
+                subtext: "The same discipline that built your business success is channeled into your physical transformation through evidence-based habit formation techniques and accountability systems."
               },
               {
                 icon: "🔁",
                 title: "Weekly Protocol Updates",
-                description: "Continuous refinement based on your actual performance and recovery metrics"
+                description: "Continuous refinement based on your actual performance and recovery metrics",
+                subtext: "Your program evolves with you—incorporating sleep quality, stress levels, and recovery capacity to optimize training stimulus specifically for your 40+ physiology."
               }
             ].map((item, i) => (
               <div key={i} className="bg-gray-800/40 border border-gray-700 rounded-xl p-6 hover:border-orange-500/50 transition-all">
@@ -241,7 +316,7 @@ const DanieleHomepage = () => {
                   </div>
                 </div>
                 <div className="ml-12 mt-4 pl-2 border-l-2 border-orange-500">
-                  <p className="text-gray-400 text-sm italic">Unlike conventional approaches that rely on generic templates, our technology-enhanced methodology adapts to your unique response patterns.</p>
+                  <p className="text-gray-400 text-sm italic">{item.subtext}</p>
                 </div>
               </div>
             ))}
@@ -259,25 +334,35 @@ const DanieleHomepage = () => {
             Real results from real clients who decided to prioritize their physical performance
           </p>
           
+          {/* Rendering Testimonials */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              {
-                quote: "I scaled my company, but my body was in decline. Daniele helped me rebuild strength, focus, and energy.",
-                name: "Tobias, 52",
-                role: "CFO",
-                results: ["Increased deadlift by 60kg", "Eliminated chronic back pain", "Improved energy throughout workday"]
-              },
-              {
-                quote: "I used to just 'work out.' Now I train with purpose – stronger, leaner, no more pain.",
-                name: "Sabine, 46",
-                role: "Entrepreneur",
-                results: ["Lost 8% body fat", "Doubled strength in key lifts", "Resolved shoulder impingement"]
-              }
-            ].map((testimonial, i) => (
+            {testimonialsData.map((testimonial, i) => (
               <div key={i} className="bg-gray-800/20 rounded-xl overflow-hidden">
                 <div className="p-8 relative">
                   <div className="absolute top-4 left-4 text-6xl text-orange-500/20">"</div>
-                  <p className="text-white text-xl italic relative z-10">{testimonial.quote}</p>
+                  
+                  {/* Testimonial content with fixed height for 3 lines */}
+                  <div className={`relative z-10 ${expandedTestimonials[i] ? '' : 'h-24'}`} style={{ overflow: expandedTestimonials[i] ? 'visible' : 'hidden' }}>
+                    <p className="text-white text-lg italic leading-relaxed">
+                      {testimonial.quote}
+                    </p>
+                  </div>
+                  
+                  {/* Gradient fade effect when collapsed */}
+                  {!expandedTestimonials[i] && testimonial.quote.length > 220 && (
+                    <div className="absolute bottom-16 left-0 right-0 h-8 bg-gradient-to-t from-gray-800/20 to-transparent z-10"></div>
+                  )}
+                  
+                  {testimonial.quote.length > 220 && (
+                    <button
+                      onClick={() => toggleExpansion(i)}
+                      className="text-orange-500 hover:underline mt-2 block text-sm"
+                      aria-expanded={expandedTestimonials[i] ? "true" : "false"}
+                    >
+                      {expandedTestimonials[i] ? 'Read less' : 'Read more'}
+                    </button>
+                  )}
+                  
                   <div className="mt-6 flex justify-between items-end">
                     <div>
                       <p className="text-orange-400 font-bold">{testimonial.name}</p>
@@ -294,14 +379,18 @@ const DanieleHomepage = () => {
                 </div>
                 <div className="bg-gray-800/40 p-4">
                   <p className="text-gray-300 text-sm font-bold mb-2">Measurable results:</p>
-                  <ul className="space-y-1">
-                    {testimonial.results.map((result, idx) => (
-                      <li key={idx} className="flex items-center text-sm">
-                        <span className="text-orange-500 mr-2">•</span>
-                        <span className="text-gray-300">{result}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  {testimonial.results.length > 0 ? (
+                    <ul className="space-y-1">
+                      {testimonial.results.map((result, idx) => (
+                        <li key={idx} className="flex items-center text-sm">
+                          <span className="text-orange-500 mr-2">•</span>
+                          <span className="text-gray-300">{result}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-gray-400 text-sm italic">Detailed results not specified</p>
+                  )}
                 </div>
               </div>
             ))}
@@ -386,9 +475,10 @@ const DanieleHomepage = () => {
             <div className="relative">
               <div className="absolute -top-4 -left-4 w-full h-full bg-orange-500/10 rounded-xl transform rotate-3"></div>
               <div className="relative bg-gray-800 rounded-xl overflow-hidden border border-gray-700">
-                <div className="h-64 bg-gray-700 flex items-center justify-center">
-                  <p className="text-gray-500">[Coach Image]</p>
-                </div>
+                <img 
+                  src="/images/daniele-pauli.jpg" 
+                  alt="Daniele Pauli Coach" 
+                  className="w-full h-64 object-cover" />
                 <div className="p-6">
                   <h3 className="text-2xl font-bold text-white mb-2">Daniele Pauli</h3>
                   <p className="text-orange-400 mb-4">Master Strength Coach</p>
@@ -414,16 +504,19 @@ const DanieleHomepage = () => {
               Monthly insights on training, longevity, and performance optimization – for smart people who don't do average.
             </p>
             
-            <div className="flex flex-col md:flex-row gap-2">
+            <form className="flex flex-col md:flex-row gap-2" onSubmit={(e) => e.preventDefault()}>
               <input 
                 type="email" 
                 placeholder="Your email" 
                 className="flex-1 px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-orange-500"
               />
-              <button className="px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-500 transition-colors whitespace-nowrap">
+              <button 
+                type="submit"
+                className="px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-500 transition-colors whitespace-nowrap"
+              >
                 Subscribe Now
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </section>
