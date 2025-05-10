@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/daniele-coaching-site/static/css/main.1bf24ad2.css",
-    "main.js": "/daniele-coaching-site/static/js/main.99a72e8f.js",
-    "index.html": "/daniele-coaching-site/index.html",
-    "main.1bf24ad2.css.map": "/daniele-coaching-site/static/css/main.1bf24ad2.css.map",
-    "main.99a72e8f.js.map": "/daniele-coaching-site/static/js/main.99a72e8f.js.map"
+    "main.css": "/DanielePL/DanielePauliCoaching/static/css/main.b4cf521f.css",
+    "main.js": "/DanielePL/DanielePauliCoaching/static/js/main.c8c96bda.js",
+    "index.html": "/DanielePL/DanielePauliCoaching/index.html",
+    "main.b4cf521f.css.map": "/DanielePL/DanielePauliCoaching/static/css/main.b4cf521f.css.map",
+    "main.c8c96bda.js.map": "/DanielePL/DanielePauliCoaching/static/js/main.c8c96bda.js.map"
   },
   "entrypoints": [
-    "static/css/main.1bf24ad2.css",
-    "static/js/main.99a72e8f.js"
+    "static/css/main.b4cf521f.css",
+    "static/js/main.c8c96bda.js"
   ]
 }
