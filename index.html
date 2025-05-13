@@ -1468,6 +1468,39 @@
       });
     });
   });
+    
 </script>
+    <!-- Calendly integration for booking calls -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get all application buttons
+    const applyButtons = document.querySelectorAll('a.primary-btn');
+    const bookCallButtons = document.querySelectorAll('a.secondary-btn');
+    
+    // Make Apply Now buttons redirect to apply.html
+    applyButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = 'apply.html';
+      });
+    });
+    
+    // Make Book Call buttons open Calendly
+    bookCallButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Open Calendly popup
+        Calendly.initPopupWidget({
+          url: 'https://calendly.com/danielepauli/free-strategy-call'
+        });
+      });
+    });
+  });
+</script>
+
+<!-- Calendly widget script -->
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<!-- Calendly stylesheet -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 </body>
 </html>
