@@ -259,10 +259,11 @@
             color: #ff6600;
         }
 
+        /* UPDATED: Changed to flex for the phases grid to show in one row */
         .phases-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
         }
 
         .phase-card {
@@ -270,6 +271,7 @@
             border-radius: 12px;
             overflow: hidden;
             transition: transform 0.3s;
+            width: 32%;
         }
 
         .phase-card:hover {
@@ -409,9 +411,10 @@
             font-size: 18px;
         }
 
+        /* UPDATED: Changed testimonials to display all 6 testimonials in a 3x2 grid */
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
         }
 
@@ -663,10 +666,20 @@
             overflow: hidden;
         }
 
+        /* UPDATED: Removed personal image and replaced with logo or generic image */
         .card-image {
             width: 100%;
             height: 250px;
             object-fit: cover;
+            background-color: #333; /* Placeholder background */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-logo {
+            font-size: 48px;
+            color: #ff6600;
         }
 
         .card-body {
@@ -846,6 +859,21 @@
         }
 
         /* Responsive styles */
+        @media (max-width: 992px) {
+            .phases-grid {
+                flex-direction: column;
+            }
+            
+            .phase-card {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 36px;
@@ -867,6 +895,10 @@
             .primary-btn, .secondary-btn {
                 width: 100%;
                 justify-content: center;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -980,6 +1012,7 @@
         <div class="container">
             <h2>Your personalized <span>performance protocol.</span></h2>
             
+            <!-- UPDATED: Changed to flex layout with phase cards side by side -->
             <div class="phases-grid">
                 <div class="phase-card">
                     <div class="phase-header">
@@ -1104,6 +1137,7 @@
                 Real results from real clients who decided to prioritize their physical performance
             </p>
             
+            <!-- UPDATED: Added all 6 testimonials in a 3x2 grid -->
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-content">
@@ -1207,6 +1241,65 @@
                         </ul>
                     </div>
                 </div>
+                
+                <!-- Added new testimonials -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">"</div>
+                        <div class="testimonial-text-container">
+                            <p class="testimonial-text">
+                                Daniele is simply great! Weightlifting know-how at its finest! All questions were answered! And his competence is definitely not just theoretical!! Many thanks for the detailed training plans! And yes: it works! You just have to do it yourself :-) Thanks! Here's to more years!
+                            </p>
+                            <div class="testimonial-fade"></div>
+                        </div>
+                        <button class="read-more-btn" data-testimonial-id="5">Read more</button>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <span class="author-name">Lukas Schroth</span>
+                                <span class="author-role"></span>
+                            </div>
+                            <div class="testimonial-rating">★★★★★</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-results">
+                        <p class="results-title">Measurable results:</p>
+                        <ul class="results-list">
+                            <li>Weightlifting know-how at its finest</li>
+                            <li>All questions were answered</li>
+                            <li>Detailed training plans</li>
+                            <li>It works!</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">"</div>
+                        <div class="testimonial-text-container">
+                            <p class="testimonial-text">
+                                I am incredibly lucky to work with Pauli as a coach, who not only has impressive expertise, but also years of experience in strength sports. In the shortest possible time, he taught me Olympic weightlifting, and thanks to his guidance I am now already in the Nati B team - a success that I would not have been able to imagine without his support.
+                            </p>
+                            <div class="testimonial-fade"></div>
+                        </div>
+                        <button class="read-more-btn" data-testimonial-id="6">Read more</button>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <span class="author-name">Batgal</span>
+                                <span class="author-role">Nati B-Team (Olympic Weightlifting)</span>
+                            </div>
+                            <div class="testimonial-rating">★★★★★</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-results">
+                        <p class="results-title">Measurable results:</p>
+                        <ul class="results-list">
+                            <li>Taught Olympic weightlifting</li>
+                            <li>In the Nati B team</li>
+                            <li>Individually tailored training plans</li>
+                            <li>Quickly sees progress</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1270,10 +1363,19 @@
                     </ul>
                 </div>
                 
+                <!-- UPDATED: Changed the personal image to a logo/icon placeholder -->
                 <div class="about-card">
                     <div class="card-bg"></div>
                     <div class="card-content">
-                        <img src="images/daniele-pauli.jpg" alt="Daniele Pauli Coach" class="card-image">
+                        <div class="card-image">
+                            <div class="card-logo">
+                                <!-- SBD Logo replacement -->
+                                <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="20" y="20" width="80" height="80" rx="8" stroke="#ff6600" stroke-width="5"/>
+                                    <text x="35" y="75" font-family="Arial" font-size="36" font-weight="bold" fill="#ff6600">SBD</text>
+                                </svg>
+                            </div>
+                        </div>
                         <div class="card-body">
                             <h3 class="card-title">Daniele Pauli</h3>
                             <p class="card-subtitle">Master Strength Coach</p>
