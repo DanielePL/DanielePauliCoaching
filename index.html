@@ -1453,5 +1453,21 @@
             }
         });
     </script>
+    <!-- Apply form connection -->
+<script>
+  // Redirect to apply.html when clicking on application buttons
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get all application buttons
+    const applyButtons = document.querySelectorAll('a[href="#contact"]');
+    
+    // Add click event listener to each button
+    applyButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = 'apply.html';
+      });
+    });
+  });
+</script>
 </body>
 </html>
