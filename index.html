@@ -1454,34 +1454,37 @@
         });
     </script>
     
-   <!-- Replace your Book Call buttons directly in HTML -->
+   <!-- Calendly Integration -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Get all secondary buttons
+    // Get all secondary buttons (Book Call buttons)
     const bookButtons = document.querySelectorAll('.secondary-btn');
     
-    // Replace them with direct Calendly buttons
+    // Update each button to use the official Calendly code
     bookButtons.forEach(button => {
-      const buttonText = button.innerHTML;
-      const buttonClass = button.className;
+      button.setAttribute('href', '');
+      button.setAttribute('onclick', "Calendly.initPopupWidget({url: 'https://calendly.com/danielepauli'});return false;");
       
-      // Create a new button with direct Calendly onclick
-      const newButton = document.createElement('button');
-      newButton.className = buttonClass;
-      newButton.innerHTML = buttonText;
-      newButton.onclick = function() {
-        Calendly.initPopupWidget({
-          url: 'https://calendly.com/danielepauli/free-strategy-call'
-        });
-        return false;
-      };
+      // Remove any existing event listeners by cloning and replacing
+      const newButton = button.cloneNode(true);
+      button.parentNode.replaceChild(newButton, button);
+    });
+    
+    // Get all primary buttons (Apply buttons)
+    const applyButtons = document.querySelectorAll('.primary-btn');
+    
+    // Make primary buttons go to apply.html
+    applyButtons.forEach(button => {
+      button.setAttribute('href', 'apply.html');
       
-      // Replace the old button with the new one
+      // Remove any existing event listeners by cloning and replacing
+      const newButton = button.cloneNode(true);
       button.parentNode.replaceChild(newButton, button);
     });
   });
 </script>
-<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 </body>
 </html>
