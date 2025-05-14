@@ -1454,49 +1454,34 @@
         });
     </script>
     
-    <!-- Button functionality for Apply and Book Call -->
+   <!-- Replace your Book Call buttons directly in HTML -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Clear any existing href="#contact" links first
-    document.querySelectorAll('a[href="#contact"]').forEach(button => {
-      // Remove the href to prevent default behavior
-      button.removeAttribute('href');
-      button.style.cursor = 'pointer';
-    });
+    // Get all secondary buttons
+    const bookButtons = document.querySelectorAll('.secondary-btn');
     
-    // Primary buttons (Apply) go to apply.html
-    document.querySelectorAll('.primary-btn').forEach(button => {
-      button.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.location.href = 'apply.html';
-        console.log('Going to apply.html'); // Debug message
-      });
-    });
-    
-    // Secondary buttons (Call) open Calendly
-    document.querySelectorAll('.secondary-btn').forEach(button => {
-      button.addEventListener('click', function(e) {
-        e.preventDefault();
-        console.log('Opening Calendly'); // Debug message
-        
-        // Open Calendly popup
+    // Replace them with direct Calendly buttons
+    bookButtons.forEach(button => {
+      const buttonText = button.innerHTML;
+      const buttonClass = button.className;
+      
+      // Create a new button with direct Calendly onclick
+      const newButton = document.createElement('button');
+      newButton.className = buttonClass;
+      newButton.innerHTML = buttonText;
+      newButton.onclick = function() {
         Calendly.initPopupWidget({
-          url: 'https://calendly.com/danielepauli',
-          prefill: {},
-          customColors: {
-            primary: '#ff6600',
-            secondary: '#222222',
-            text: '#ffffff'
-          }
+          url: 'https://calendly.com/danielepauli/free-strategy-call'
         });
-      });
+        return false;
+      };
+      
+      // Replace the old button with the new one
+      button.parentNode.replaceChild(newButton, button);
     });
   });
 </script>
-
-<!-- Calendly widget script -->
-<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-<!-- Calendly stylesheet -->
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 </body>
 </html>
