@@ -1,0 +1,70 @@
+---
+// About Daniele section
+const achievements = [
+  "Masters World Champion im Powerlifting, Vize-Weltmeister im olympischen Gewichtheben",
+  "Vertrauenswürdiger Coach für High-Performer, von CEOs bis Ironman-Athleten",
+  "Experte für Kraft, Strategie und nachhaltigen Fortschritt",
+  "Klare Ansagen, kein Blabla – nur Resultate"
+];
+---
+
+<section class="section" id="about">
+  <div class="section-container">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- Content -->
+      <div data-animate>
+        <h2 class="heading-lg mb-8">
+          <span class="gradient-text">20 Jahre</span> Elite Coaching.
+          <br />
+          <span class="gradient-text">14,000+</span> Sessions.
+          <br />
+          <span class="gradient-text">1</span> Mission: Deine Transformation.
+        </h2>
+
+        <ul class="space-y-4 mb-8">
+          {achievements.map((achievement) => (
+            <li class="flex items-start gap-3 text-text-secondary">
+              <span class="w-2 h-2 bg-orange rounded-full mt-2 flex-shrink-0"></span>
+              {achievement}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Card -->
+      <div class="relative" data-animate style="transition-delay: 200ms">
+        <!-- Background accent -->
+        <div class="absolute -top-4 -left-4 w-full h-full bg-orange/10 rounded-3xl transform rotate-3"></div>
+
+        <!-- Main card -->
+        <div class="glass-card overflow-hidden relative">
+          <!-- Image placeholder - replace with actual image -->
+          <div class="aspect-[3/4] bg-gradient-to-b from-surface to-background flex items-center justify-center relative overflow-hidden">
+            <img
+              src="/images/daniele-pauli.jpg"
+              alt="Daniele Pauli - Master Strength Coach"
+              class="w-full h-full object-cover"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            />
+            <div class="absolute inset-0 items-center justify-center hidden">
+              <span class="text-6xl">💪</span>
+            </div>
+
+            <!-- Gradient overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+          </div>
+
+          <!-- Info -->
+          <div class="p-6 relative -mt-20">
+            <h3 class="text-2xl font-bold text-text-primary mb-1">Daniele Pauli</h3>
+            <p class="text-orange font-medium mb-4">Master Strength Coach</p>
+            <p class="text-text-secondary text-sm italic">
+              "Mein Ansatz kombiniert Jahrzehnte Elite-Coaching-Erfahrung mit einem tiefen Verständnis dafür,
+              wie vielbeschäftigte Professionals optimale körperliche Performance erreichen können."
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

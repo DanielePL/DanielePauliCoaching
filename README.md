@@ -1,45 +1,43 @@
-# Daniele Pauli Coaching Website
-## Overview
-This repository contains the source code for the official Daniele Pauli Coaching website. The site offers high-performance coaching services for successful individuals aged 40+ who are looking to improve their health, build muscle, and enhance their mindset.
-## Website Structure
-The website is organized into several key sections:
-1. **Hero Section**
-    - Company name with distinctive orange accent color
-    - Main title with gradient styling (orange to yellow)
-    - Subtitle and description
-    - Call-to-action buttons for visitor engagement
+# Astro Starter Kit: Minimal
 
-2. **Who This Is For**
-    - Target audience description
-    - Highlight box featuring key benefits
-    - Target cards outlining different client profiles and needs
+```sh
+npm create astro@latest -- --template minimal
+```
 
-3. **What You Get**
-    - Coaching process presented in three distinct phases
-    - Each phase includes a custom header, detailed description, and progress indicators
-    - Clear progression path for potential clients
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-4. **Tools & Methods**
-    - Introduction to coaching techniques and approaches
-    - Grid layout showcasing various tools with descriptions
-    - Detailed explanations of methodologies
+## 🚀 Project Structure
 
-5. **Testimonials**
-    - Client feedback and success stories
-    - Social proof of coaching effectiveness
+Inside of your Astro project, you'll see the following folders and files:
 
-## Design Specifications
-- Dark color scheme (black background with white text)
-- Accent color: Orange (#ff6600) with gradients
-- Responsive design for various screen sizes
-- Modern, minimalist aesthetic with clear typography
+```text
+/
+├── public/
+├── src/
+│   └── pages/
+│       └── index.astro
+└── package.json
+```
 
-## Technologies Used
-- HTML5
-- CSS3 (with custom animations and transitions)
-- Responsive design principles
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-## Contact
-For more information about Daniele Pauli Coaching, please visit the official website.
-## License
-All rights reserved. Unauthorized use of content is prohibited.
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+
+Any static assets, like images, can be placed in the `public/` directory.
+
+## 🧞 Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
+
+## 👀 Want to learn more?
+
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

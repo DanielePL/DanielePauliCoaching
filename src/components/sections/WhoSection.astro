@@ -1,0 +1,62 @@
+---
+// Target audience section
+const targetCards = [
+  {
+    title: "High-Achievers",
+    description: "Erfolgreich in der Karriere, suchst die gleiche Exzellenz in körperlicher Performance",
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>`
+  },
+  {
+    title: "Age 40+",
+    description: "Einzigartige körperliche Herausforderungen, die strategische, wissenschaftsbasierte Lösungen erfordern",
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`
+  },
+  {
+    title: "Results-Focused",
+    description: "Keine Geduld für Trial & Error – du brauchst bewährte Systeme, die liefern",
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>`
+  }
+];
+---
+
+<section class="section" id="who">
+  <div class="section-container">
+    <!-- Header -->
+    <div class="text-center mb-16" data-animate>
+      <h2 class="heading-lg mb-6">
+        Du hast Business gemeistert –
+        <br />
+        <span class="gradient-text">aber nicht deinen Körper.</span>
+      </h2>
+      <p class="text-xl text-text-secondary max-w-2xl mx-auto">
+        Du bist ein High-Achiever. Unternehmer. Executive. Kreativer Kopf.
+        Du triffst große Entscheidungen – aber in letzter Zeit fühlt sich dein Körper wie eine Last an.
+      </p>
+    </div>
+
+    <!-- Highlight Box -->
+    <div class="glass-card p-8 md:p-12 text-center mb-16 max-w-3xl mx-auto" data-animate>
+      <p class="text-2xl text-text-secondary mb-4 italic">
+        "Du bist nicht hier für Motivation."
+      </p>
+      <p class="text-2xl font-bold gradient-text">
+        Du bist hier für ein System, das funktioniert.
+      </p>
+    </div>
+
+    <!-- Target Cards - Bento Grid -->
+    <div class="bento-grid">
+      {targetCards.map((card, index) => (
+        <div
+          class="glass-card glass-hover p-8"
+          data-animate
+          style={`transition-delay: ${index * 100}ms`}
+        >
+          <div class="text-orange mb-4" set:html={card.icon} />
+          <h3 class="text-xl font-bold text-orange mb-3">{card.title}</h3>
+          <p class="text-text-secondary">{card.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

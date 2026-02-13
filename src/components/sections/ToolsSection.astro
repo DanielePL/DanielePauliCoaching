@@ -1,0 +1,65 @@
+---
+// Tools & Methods section
+const tools = [
+  {
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>`,
+    title: "Online Coaching Platform",
+    description: "Sichere, benutzerfreundliche Plattform für deine individuellen Trainingspläne und Feedback",
+    details: "Dein Trainingsprogramm ist überall und jederzeit zugänglich – designt für vielbeschäftigte Executives."
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>`,
+    title: "Bar Path Analysis",
+    description: "Fortschrittliches Movement Tracking für perfekte Lifttechnik und Verletzungsprävention",
+    details: "Dieselbe biomechanische Technologie, die olympische Athleten nutzen."
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>`,
+    title: "Mindset & Habit Tracking",
+    description: "Psychologische Tools um mentale Barrieren zu überwinden und nachhaltige Gewohnheiten aufzubauen",
+    details: "Dieselbe Disziplin, die deinen Business-Erfolg aufgebaut hat, kanalisiert in deine körperliche Transformation."
+  },
+  {
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>`,
+    title: "Weekly Protocol Updates",
+    description: "Kontinuierliche Verfeinerung basierend auf deiner tatsächlichen Performance und Recovery",
+    details: "Dein Programm entwickelt sich mit dir – inkl. Schlafqualität, Stresslevel und Recovery-Kapazität."
+  }
+];
+---
+
+<section class="section" id="tools">
+  <div class="section-container">
+    <!-- Header -->
+    <div class="text-center mb-16" data-animate>
+      <h2 class="heading-lg mb-6">
+        <span class="gradient-text">Smarte Tools.</span> Echte Resultate.
+      </h2>
+      <p class="text-xl text-text-secondary max-w-2xl mx-auto">
+        Das ist kein Rätselraten. Ich tracke deine Trainingsdaten, Bewegungsqualität und Fortschritt – jede Woche.
+      </p>
+    </div>
+
+    <!-- Tools Grid - Bento Style -->
+    <div class="grid md:grid-cols-2 gap-6">
+      {tools.map((tool, index) => (
+        <div
+          class="glass-card glass-hover p-8"
+          data-animate
+          style={`transition-delay: ${index * 100}ms`}
+        >
+          <div class="flex items-start gap-4 mb-4">
+            <span class="text-orange" set:html={tool.icon} />
+            <div>
+              <h3 class="text-xl font-bold text-text-primary mb-2">{tool.title}</h3>
+              <p class="text-text-secondary">{tool.description}</p>
+            </div>
+          </div>
+          <div class="ml-12 pl-4 border-l-2 border-orange/30">
+            <p class="text-text-secondary/80 text-sm italic">{tool.details}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

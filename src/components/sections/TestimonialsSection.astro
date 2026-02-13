@@ -1,0 +1,102 @@
+---
+// Testimonials section
+const testimonials = [
+  {
+    quote: "Ich habe mein Unternehmen skaliert, aber mein Körper war im Verfall. Daniele hat mir geholfen, Kraft, Fokus und Energie wieder aufzubauen.",
+    name: "Tobias, 52",
+    role: "CFO",
+    results: ["Deadlift um 60kg gesteigert", "Chronische Rückenschmerzen eliminiert", "Mehr Energie im Arbeitsalltag"]
+  },
+  {
+    quote: "Früher habe ich nur 'trainiert'. Jetzt trainiere ich mit Ziel – stärker, schlanker, keine Schmerzen mehr.",
+    name: "Sabine, 46",
+    role: "Unternehmerin",
+    results: ["8% Körperfett verloren", "Kraft verdoppelt", "Schulterprobleme gelöst"]
+  },
+  {
+    quote: "Wenn du deine athletischen Ziele erreichen willst, bist du bei Daniele richtig! Extrem umfassendes Wissen und er pusht dich ans Limit.",
+    name: "Dragesa Lazarevic",
+    role: "",
+    results: []
+  },
+  {
+    quote: "Ich trainiere seit einigen Monaten mit Daniele und habe bereits außergewöhnliche Resultate erzielt. Ein absoluter Profi auf seinem Gebiet.",
+    name: "Nora Tanner",
+    role: "Unternehmerin",
+    results: ["Außergewöhnliche Resultate", "Persönliche Bestleistungen erreicht"]
+  },
+  {
+    quote: "Daniele ist einfach großartig! Weightlifting Know-how vom Feinsten! Alle Fragen wurden beantwortet! Und es funktioniert!",
+    name: "Lukas Schroth",
+    role: "",
+    results: ["Detaillierte Trainingspläne", "Know-how auf höchstem Niveau"]
+  },
+  {
+    quote: "In kürzester Zeit hat er mir Olympisches Gewichtheben beigebracht, und dank seiner Anleitung bin ich jetzt im Nati B-Team.",
+    name: "Batgal",
+    role: "Nati B-Team (Olympic Weightlifting)",
+    results: ["Olympisches Gewichtheben gelernt", "Nati B-Team erreicht"]
+  }
+];
+---
+
+<section class="section" id="testimonials">
+  <div class="section-container">
+    <!-- Header -->
+    <div class="text-center mb-16" data-animate>
+      <h2 class="heading-lg mb-6">
+        <span class="gradient-text">"Ich fühle mich wieder wie ich selbst."</span>
+      </h2>
+      <p class="text-xl text-text-secondary">
+        Echte Resultate von echten Klienten, die ihre körperliche Performance priorisiert haben
+      </p>
+    </div>
+
+    <!-- Testimonials Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {testimonials.map((testimonial, index) => (
+        <div
+          class="glass-card overflow-hidden flex flex-col"
+          data-animate
+          style={`transition-delay: ${index * 100}ms`}
+        >
+          <!-- Quote -->
+          <div class="p-6 flex-grow relative">
+            <span class="absolute top-4 left-4 text-6xl text-orange/10 font-serif">"</span>
+            <p class="text-text-primary relative z-10 italic mb-6 pt-4">
+              {testimonial.quote}
+            </p>
+
+            <!-- Author -->
+            <div class="flex justify-between items-end">
+              <div>
+                <p class="font-bold text-orange">{testimonial.name}</p>
+                {testimonial.role && (
+                  <p class="text-text-secondary text-sm">{testimonial.role}</p>
+                )}
+              </div>
+              <div class="text-orange">★★★★★</div>
+            </div>
+          </div>
+
+          <!-- Results -->
+          {testimonial.results.length > 0 && (
+            <div class="bg-surface/50 p-4 border-t border-glass-border">
+              <p class="text-xs text-text-secondary font-bold mb-2 uppercase tracking-wide">
+                Messbare Resultate:
+              </p>
+              <ul class="space-y-1">
+                {testimonial.results.map((result) => (
+                  <li class="text-sm text-text-secondary flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-orange rounded-full"></span>
+                    {result}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,71 @@
+---
+// What you get - Phases section
+const phases = [
+  {
+    title: "Assessment",
+    icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>`,
+    description: "Movement Screening, Bar Path Analyse, Performance Review",
+    details: "Wir analysieren deine aktuellen Bewegungsmuster, Kraftlevels und Limitierungen",
+    progress: 33
+  },
+  {
+    title: "Planning",
+    icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>`,
+    description: "Wöchentlich aktualisierter Online-Trainingsplan – auf deinen Zeitplan und Recovery abgestimmt",
+    details: "Perfekt strukturiertes Training, das sich basierend auf deinem Fortschritt und Feedback anpasst",
+    progress: 66
+  },
+  {
+    title: "Coaching",
+    icon: `<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>`,
+    description: "Video-Feedback, Progress Review und One-on-One Sessions",
+    details: "Regelmäßige Anpassungen und Expertenführung für optimale Resultate",
+    progress: 100
+  }
+];
+---
+
+<section class="section" id="phases">
+  <div class="section-container">
+    <!-- Header -->
+    <div class="text-center mb-16" data-animate>
+      <h2 class="heading-lg">
+        Dein personalisiertes
+        <span class="gradient-text">Performance Protocol.</span>
+      </h2>
+    </div>
+
+    <!-- Phases Grid -->
+    <div class="grid md:grid-cols-3 gap-6">
+      {phases.map((phase, index) => (
+        <div
+          class="glass-card overflow-hidden group"
+          data-animate
+          style={`transition-delay: ${index * 150}ms`}
+        >
+          <!-- Header -->
+          <div class="bg-gradient-to-r from-orange to-orange-light p-5 flex justify-between items-center">
+            <span class="text-xl font-bold text-white">{phase.title}</span>
+            <span class="text-white" set:html={phase.icon} />
+          </div>
+
+          <!-- Content -->
+          <div class="p-6">
+            <p class="text-text-primary mb-3">{phase.description}</p>
+            <p class="text-text-secondary text-sm">{phase.details}</p>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="p-4 bg-surface/50">
+            <div class="h-1 bg-surface-elevated rounded-full overflow-hidden">
+              <div
+                class="h-full bg-gradient-to-r from-orange to-orange-light rounded-full transition-all duration-1000"
+                style={`width: ${phase.progress}%`}
+              />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

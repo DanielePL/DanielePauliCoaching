@@ -1,0 +1,92 @@
+---
+// Hero Section with glassmorphism and modern effects
+---
+
+<section class="min-h-screen flex items-center justify-center relative overflow-hidden">
+  <!-- Animated gradient rings -->
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+    <div class="absolute w-[300px] h-[300px] rounded-full border border-orange/20 animate-ping" style="animation-duration: 4s;"></div>
+    <div class="absolute w-[500px] h-[500px] rounded-full border border-orange/10 animate-ping" style="animation-duration: 6s; animation-delay: 1s;"></div>
+    <div class="absolute w-[700px] h-[700px] rounded-full border border-orange/5 animate-ping" style="animation-duration: 8s; animation-delay: 2s;"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="absolute top-0 left-0 right-0 z-20 p-6 flex justify-between items-center">
+    <a href="/" class="text-xl font-bold text-text-primary">
+      Daniele Pauli <span class="gradient-text">Coaching</span>
+    </a>
+    <a href="/survey/" class="btn-secondary text-sm py-2 px-4 flex items-center gap-2">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+      </svg>
+      Ich 2.0 Check
+    </a>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="section-container text-center relative z-10 px-6">
+    <div class="max-w-4xl mx-auto">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-8 animate-fade-up">
+        <span class="w-2 h-2 bg-orange rounded-full animate-pulse"></span>
+        <span class="text-sm text-text-secondary">Elite Coaching für High-Performer 40+</span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="heading-xl mb-6 animate-fade-up delay-100">
+        <span class="text-text-primary">Reclaim Your</span>
+        <br />
+        <span class="gradient-text text-glow">Strength</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-xl md:text-2xl text-text-secondary mb-4 animate-fade-up delay-200">
+        Body, Mind, and Clarity
+      </p>
+
+      <!-- Description -->
+      <p class="text-lg text-text-secondary/80 max-w-2xl mx-auto mb-10 animate-fade-up delay-300">
+        High-Performance Coaching für erfolgreiche Menschen 40+, die bereit sind,
+        ihre Gesundheit, Kraft und Mindset auf das nächste Level zu bringen.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up delay-400">
+        <a
+          href="/survey/"
+          class="btn-primary glow-orange-hover group"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+          </svg>
+          Starte den Ich 2.0 Check
+          <span class="group-hover:translate-x-1 transition-transform">→</span>
+        </a>
+        <a
+          href="https://wa.me/41798675705?text=Hi%20Dani,%20ich%20interessiere%20mich%20für%20dein%20Coaching"
+          target="_blank"
+          class="btn-secondary"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+          </svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+    <svg class="w-6 h-6 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+    </svg>
+  </div>
+
+  <!-- Quote -->
+  <div class="absolute bottom-8 left-8 max-w-xs hidden md:block">
+    <p class="text-text-secondary/60 italic text-sm">
+      "Strength is never a weakness."
+    </p>
+  </div>
+</section>
