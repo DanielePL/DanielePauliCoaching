@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# internes Strategie-Doc (nicht öffentlich)
+konzept 2026.md

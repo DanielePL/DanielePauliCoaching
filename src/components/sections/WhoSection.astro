@@ -1,19 +1,25 @@
 ---
-// Target audience section
-const targetCards = [
+// "Kennst du das?" — Pain-Recognition für Männer 40+ (breit)
+// Siehe "konzept 2026.md" Abschnitt 2 & 5. Ersetzt die Executive-/High-Achiever-Ansprache.
+const painCards = [
   {
-    title: "High-Achievers",
-    description: "Erfolgreich in der Karriere, suchst die gleiche Exzellenz in körperlicher Performance",
-    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>`
-  },
-  {
-    title: "Age 40+",
-    description: "Einzigartige körperliche Herausforderungen, die strategische, wissenschaftsbasierte Lösungen erfordern",
+    title: "Ständig müde",
+    description: "Du schläfst – und bist trotzdem leer. Der Antrieb von früher ist einfach weg.",
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`
   },
   {
-    title: "Results-Focused",
-    description: "Keine Geduld für Trial & Error – du brauchst bewährte Systeme, die liefern",
+    title: "Der Bauch bleibt",
+    description: "Es hat sich nichts geändert – aber der Bauch wächst. Die alten Tricks wirken nicht mehr.",
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12a9 9 0 1018 0 9 9 0 00-18 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14s1 1.5 3 1.5 3-1.5 3-1.5" /></svg>`
+  },
+  {
+    title: "Kopf kommt nicht zur Ruhe",
+    description: "Voll, dünnhäutig, reizbar. Du funktionierst – aber richtig abschalten geht nicht mehr.",
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>`
+  },
+  {
+    title: "Kraft & Lust lassen nach",
+    description: "Kraft, Lust und Lebendigkeit werden weniger. Du fühlst dich älter, als du eigentlich bist.",
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>`
   }
 ];
@@ -24,36 +30,36 @@ const targetCards = [
     <!-- Header -->
     <div class="text-center mb-16" data-animate>
       <h2 class="heading-lg mb-6">
-        Du hast Business gemeistert –
+        Du lebst –
         <br />
-        <span class="gradient-text">aber nicht deinen Körper.</span>
+        <span class="gradient-text">aber du fühlst dich nicht lebendig.</span>
       </h2>
       <p class="text-xl text-text-secondary max-w-2xl mx-auto">
-        Du bist ein High-Achiever. Unternehmer. Executive. Kreativer Kopf.
-        Du triffst große Entscheidungen – aber in letzter Zeit fühlt sich dein Körper wie eine Last an.
+        Du arbeitest, trainierst, kümmerst dich um alle – und trotzdem bist du müde,
+        reizbar, unkonzentriert. Das ist kein Versagen. Das ist ein Signal.
       </p>
     </div>
 
     <!-- Highlight Box -->
     <div class="glass-card p-8 md:p-12 text-center mb-16 max-w-3xl mx-auto" data-animate>
       <p class="text-2xl text-text-secondary mb-4 italic">
-        "Du bist nicht hier für Motivation."
+        "Du brauchst keine neue Motivation."
       </p>
       <p class="text-2xl font-bold gradient-text">
-        Du bist hier für ein System, das funktioniert.
+        Du brauchst ein System, das in dein Leben passt.
       </p>
     </div>
 
-    <!-- Target Cards - Bento Grid -->
-    <div class="bento-grid">
-      {targetCards.map((card, index) => (
+    <!-- Pain Cards -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {painCards.map((card, index) => (
         <div
           class="glass-card glass-hover p-8"
           data-animate
           style={`transition-delay: ${index * 100}ms`}
         >
           <div class="text-orange mb-4" set:html={card.icon} />
-          <h3 class="text-xl font-bold text-orange mb-3">{card.title}</h3>
+          <h3 class="text-xl font-bold text-text-primary mb-3">{card.title}</h3>
           <p class="text-text-secondary">{card.description}</p>
         </div>
       ))}

@@ -1,0 +1,168 @@
+---
+const features = [
+  {
+    screen: '/images/app-coach.webp',
+    title: 'AI Coach',
+    description: 'Dein persönlicher AI-Coach kennt deine Daten, dein Training und deine Ernährung – und gibt dir Antworten in Echtzeit.',
+  },
+  {
+    screen: '/images/app-training.webp',
+    title: 'Training',
+    description: 'Individuelle Workouts, Übungsbibliothek und Technik-Videos – Schritt für Schritt, für deinen Alltag.',
+  },
+  {
+    screen: '/images/app-nutrition.webp',
+    title: 'Ernährung',
+    description: 'Einfaches Tracking, Mahlzeiten-Ideen und tägliche Insights – ohne Verzicht, ohne Crash-Diät.',
+  },
+  {
+    screen: '/images/app-statistics.webp',
+    title: 'Fortschritt',
+    description: 'Kraft, Gewicht und Energie sichtbar gemacht – dein Fortschritt auf einen Blick.',
+  },
+  {
+    screen: '/images/app-insights.webp',
+    title: 'Insights',
+    description: 'Trends, Balance und monatliche Analysen – damit du siehst, was wirklich wirkt.',
+  },
+  {
+    screen: '/images/app-community.webp',
+    title: 'Community',
+    description: 'Vernetz dich mit anderen Männern, die am selben Punkt stehen – kein Coaching im stillen Kämmerlein.',
+  },
+];
+---
+
+<section class="section relative overflow-hidden" id="app">
+  <div class="section-container">
+    <!-- Header -->
+    <div class="text-center mb-8" data-animate>
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange/10 border border-orange/20 text-orange text-sm font-medium mb-6">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+        </svg>
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.3 2.3-8.636-8.632z"/>
+        </svg>
+        Eigenentwicklung · jetzt auf Google Play · iOS kommt bald
+      </div>
+      <h2 class="heading-lg mb-6">
+        Meine eigene <span class="gradient-text">Prometheus App.</span><br/>
+        Dein Vorsprung.
+      </h2>
+      <p class="text-xl text-text-secondary max-w-2xl mx-auto">
+        Kein generisches Fitness-Tool von der Stange. Eine eigene Coaching-Plattform, die ich
+        zusammen mit meiner IT-Firma entwickelt habe – mit AI-Coach, Training, Ernährung,
+        Fortschritt und einer Community von Männern, die am selben Punkt stehen.
+      </p>
+    </div>
+
+    <!-- Phone Carousel -->
+    <div class="relative mb-16" data-animate>
+      <!-- Scroll Container -->
+      <div id="app-carousel" class="flex gap-8 overflow-x-auto snap-x snap-mandatory pb-6 scrollbar-hide px-4" style="scroll-padding: 1rem; -ms-overflow-style: none; scrollbar-width: none;">
+        {features.map((feature, index) => (
+          <div class="flex-shrink-0 snap-center flex flex-col items-center" style={`animation-delay: ${index * 100}ms`}>
+            <div class="relative group">
+              <!-- Glow behind phone -->
+              <div class="absolute inset-0 bg-orange/20 blur-3xl rounded-full scale-75 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <!-- Phone Screenshot -->
+              <img
+                src={feature.screen}
+                alt={feature.title}
+                class="w-56 sm:w-64 h-auto relative z-10 drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+            <div class="text-center mt-4 max-w-[16rem]">
+              <h3 class="font-bold text-text-primary text-lg">{feature.title}</h3>
+              <p class="text-text-secondary text-sm mt-1">{feature.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Scroll Arrows -->
+      <button
+        id="app-scroll-left"
+        class="absolute left-0 top-1/3 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-surface/80 backdrop-blur border border-glass-border flex items-center justify-center text-text-secondary hover:text-orange hover:border-orange/30 transition-all opacity-0 pointer-events-none"
+        aria-label="Scroll left"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button
+        id="app-scroll-right"
+        class="absolute right-0 top-1/3 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-surface/80 backdrop-blur border border-glass-border flex items-center justify-center text-text-secondary hover:text-orange hover:border-orange/30 transition-all"
+        aria-label="Scroll right"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Feature Highlights -->
+    <div class="grid sm:grid-cols-3 gap-6 mb-12" data-animate>
+      <div class="glass-card p-6 text-center">
+        <div class="text-3xl font-bold gradient-text mb-2">AI</div>
+        <p class="text-text-secondary text-sm">Persönlicher AI-Coach der deine kompletten Daten kennt</p>
+      </div>
+      <div class="glass-card p-6 text-center">
+        <div class="text-3xl font-bold gradient-text mb-2">24/7</div>
+        <p class="text-text-secondary text-sm">Dein Training, Ernährung & Fortschritt immer dabei</p>
+      </div>
+      <div class="glass-card p-6 text-center">
+        <div class="text-3xl font-bold gradient-text mb-2">4 in 1</div>
+        <p class="text-text-secondary text-sm">Training, Ernährung, Mindset & Fortschritt in einer App</p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center" data-animate>
+      <a href="/survey/" class="btn-primary text-lg inline-flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+        Jetzt Ich 2.0 Check starten
+      </a>
+      <p class="text-text-muted text-sm mt-3">Als Coaching-Klient bekommst du vollen Zugang zur Prometheus App</p>
+    </div>
+  </div>
+</section>
+
+<!-- Carousel Script -->
+<script>
+  const carousel = document.getElementById('app-carousel');
+  const leftBtn = document.getElementById('app-scroll-left');
+  const rightBtn = document.getElementById('app-scroll-right');
+
+  if (carousel && leftBtn && rightBtn) {
+    const scrollAmount = 300;
+
+    rightBtn.addEventListener('click', () => {
+      carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    leftBtn.addEventListener('click', () => {
+      carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    carousel.addEventListener('scroll', () => {
+      const atStart = carousel.scrollLeft <= 10;
+      const atEnd = carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 10;
+
+      leftBtn.classList.toggle('opacity-0', atStart);
+      leftBtn.classList.toggle('pointer-events-none', atStart);
+      rightBtn.classList.toggle('opacity-0', atEnd);
+      rightBtn.classList.toggle('pointer-events-none', atEnd);
+    });
+  }
+</script>
+
+<style>
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>
