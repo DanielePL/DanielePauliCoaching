@@ -20,7 +20,7 @@ const translations = {
     subtitle: "Finde heraus, wo du stehst – und wie dein Ich 2.0 wirklich aussieht.",
     intro: "Willkommen zu deinem persönlichen Tauchgang. In wenigen Minuten erfährst du, wo du aktuell stehst, was dich zurückhält und was du brauchst, um dein Ich 2.0 zu erreichen. Sei ehrlich – du machst das für dich.",
     nameQuestion: {
-      q: "Wie heißt du?",
+      q: "Wie heisst du?",
       placeholder: "Dein Vorname",
       subtext: "Damit ich dich persönlich ansprechen kann"
     },
@@ -126,7 +126,7 @@ const translations = {
         q: "Hast du einen Plan, wie du dein Ziel halten kannst, wenn du es erreicht hast?",
         options: [
           "Ja, ich habe eine klare Vorstellung",
-          "Teilweise – ich weiß, dass Erhalt wichtig ist",
+          "Teilweise – ich weiss, dass Erhalt wichtig ist",
           "Nein – ich fokussiere mich erst auf das Erreichen",
           "Keine Ahnung – das habe ich noch nie geschafft"
         ]
@@ -137,7 +137,7 @@ const translations = {
         options: [
           "Ja, absolut – ich bin bereit, Dinge zu streichen",
           "Ja, aber es wird schwierig",
-          "Ich weiß es nicht – ich habe viele Verpflichtungen",
+          "Ich weiss es nicht – ich habe viele Verpflichtungen",
           "Nein – ich will es irgendwie nebenbei machen"
         ]
       },
@@ -205,7 +205,7 @@ const translations = {
         options: [
           "Ich bleibe wo ich bin – frustriert",
           "Es wird wahrscheinlich schlechter",
-          "Ich weiß es nicht",
+          "Ich weiss es nicht",
           "Ich will nicht darüber nachdenken"
         ]
       },
