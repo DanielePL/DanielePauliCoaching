@@ -1,0 +1,26 @@
+name: Supabase Keep-Alive
+
+# Verhindert, dass das Supabase-Free-Projekt nach ~7 Tagen Inaktivität pausiert.
+# Ein kleiner REST-Request alle 3 Tage zählt als Aktivität → Projekt bleibt wach.
+# URL & anon-Key liegen als Repo-Secrets (Settings → Secrets → Actions).
+
+on:
+  schedule:
+    - cron: '0 6 */3 * *'   # alle 3 Tage, 06:00 UTC
+  workflow_dispatch:         # erlaubt manuelles Auslösen
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase REST
+        run: |
+          code=$(curl -sS -o /dev/null -w "%{http_code}" \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/survey_submissions?select=id&limit=1" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}")
+          echo "Supabase REST antwortete: HTTP $code"
+          # 200 (ok) oder 401/404 (Tabelle/RLS) sind alle "Projekt ist wach" → nur 5xx/000 = Problem
+          if [ "$code" = "000" ] || [ "${code:0:1}" = "5" ]; then
+            echo "::error::Supabase nicht erreichbar (HTTP $code)"; exit 1
+          fi
