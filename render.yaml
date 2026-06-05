@@ -5,10 +5,26 @@ services:
     buildCommand: npm install && npm run build
     staticPublishPath: ./dist
     pullRequestPreviewsEnabled: true
+    # Supabase-Keys werden beim Build benötigt (statische Site → zur Buildzeit eingebacken).
+    # sync: false = Render fragt die Werte im Dashboard ab, sie liegen NICHT im Repo.
+    envVars:
+      - key: PUBLIC_SUPABASE_URL
+        sync: false
+      - key: PUBLIC_SUPABASE_ANON_KEY
+        sync: false
     headers:
-      - path: /*
+      # Gehashte Astro-Assets sind unveränderlich → 1 Jahr cachen
+      - path: /_astro/*
         name: Cache-Control
         value: public, max-age=31536000, immutable
+      # Bilder (stabile Dateinamen) → 30 Tage, aber revalidierbar
+      - path: /images/*
+        name: Cache-Control
+        value: public, max-age=2592000
+      # HTML & alles andere → immer revalidieren, damit Deploys sofort sichtbar sind
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
     routes:
       - type: rewrite
         source: /survey
