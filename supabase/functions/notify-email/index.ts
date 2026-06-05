@@ -89,6 +89,9 @@ serve(async (req: Request) => {
       headers: {
         'Authorization': `Bearer ${RESEND_API_KEY}`,
         'Content-Type': 'application/json',
+        // Dedupe: gleiche Submission (Token) => Resend sendet garantiert nur eine Mail,
+        // selbst wenn Website-Call und (alter) DB-Trigger beide feuern.
+        'Idempotency-Key': `survey-${token}`,
       },
       body: JSON.stringify({
         from: NOTIFY_EMAIL_FROM,

@@ -585,6 +585,28 @@ export default function Survey() {
           strengths: feedback.strengths.map(s => `${s.icon} ${s.title}: ${s.description}`),
           focus_area: `${feedback.focusArea.icon} ${feedback.focusArea.title}: ${feedback.focusArea.description}`,
         });
+
+        // Coach sofort per E-Mail benachrichtigen (zuverlässiger Direkt-Aufruf der Edge Function).
+        // Bewusst NICHT über DB-Trigger – der ist auf Free-Tier unzuverlässig.
+        try {
+          await supabase.functions.invoke('notify-email', {
+            body: {
+              type: 'INSERT',
+              table: 'survey_submissions',
+              record: {
+                name,
+                phone: phoneNumber,
+                score: scoreResult.score,
+                score_label: lang === 'de' ? scoreResult.label : scoreResult.labelEn,
+                token,
+                answers,
+              },
+            },
+          });
+        } catch (notifyErr) {
+          // Benachrichtigung darf den Nutzer-Flow nie blockieren
+          console.error('Notification failed (nicht kritisch):', notifyErr);
+        }
       } catch (err) {
         console.error('Failed to save to Supabase:', err);
       }
