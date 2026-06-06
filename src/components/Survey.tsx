@@ -219,13 +219,13 @@ const translations = {
         ]
       },
       {
-        q: "Welches monatliche Investment wäre für dich realistisch?",
+        q: "Gutes Coaching ist eine Investition in dich. Was wäre dir dein Ziel pro Monat wert?",
         options: [
-          "CHF 150–350",
-          "CHF 500",
-          "CHF 750",
-          "Mehr als CHF 1000",
-          "Ich bin aktuell nicht bereit zu investieren"
+          "Bis CHF 300 – ich taste mich heran",
+          "CHF 300–600 – ich meine es ernst",
+          "CHF 600–1000 – ich will echte Begleitung",
+          "Über CHF 1000 – Ergebnisse haben Priorität",
+          "Ich bin aktuell noch nicht bereit zu investieren"
         ]
       }
     ] as Question[],
@@ -443,13 +443,13 @@ const translations = {
         ]
       },
       {
-        q: "What monthly investment would be realistic for you?",
+        q: "Good coaching is an investment in yourself. What would reaching your goal be worth per month?",
         options: [
-          "$165–385",
-          "$550",
-          "$825",
-          "More than $1100",
-          "I'm not ready to invest monthly"
+          "Up to CHF 300 – just exploring",
+          "CHF 300–600 – I'm serious about this",
+          "CHF 600–1000 – I want real guidance",
+          "Over CHF 1000 – results are my priority",
+          "I'm not ready to invest yet"
         ]
       }
     ] as Question[],
