@@ -23,13 +23,13 @@ const stats = [
     </div>
 
     <!-- Stats & CTA Box -->
-    <div class="glass-card p-8 md:p-12 max-w-4xl mx-auto glow-orange" data-animate>
+    <div class="glass-card p-5 sm:p-8 md:p-12 max-w-4xl mx-auto glow-orange" data-animate>
       <!-- Stats Grid -->
-      <div class="grid grid-cols-3 gap-6 mb-10">
+      <div class="grid grid-cols-3 gap-2 sm:gap-6 mb-10">
         {stats.map((stat) => (
           <div class="text-center">
-            <p class="text-3xl md:text-5xl font-bold gradient-text mb-2">{stat.value}</p>
-            <p class="text-text-secondary text-sm md:text-base">{stat.label}</p>
+            <p class="text-xl sm:text-3xl md:text-5xl font-bold gradient-text mb-2 whitespace-nowrap">{stat.value}</p>
+            <p class="text-text-secondary text-xs sm:text-sm md:text-base">{stat.label}</p>
           </div>
         ))}
       </div>
