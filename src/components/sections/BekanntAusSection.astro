@@ -1,0 +1,32 @@
+---
+// "Bekannt aus" — dezenter Medien-/Press-Streifen (echte Credibility).
+// Nur Medien-Namen/Logos als Autorität – KEINE Schwerathletik-Bilder.
+// Logo nachrüsten: { name, logo: '/images/media/srf.svg' } -> zeigt Bild statt Text.
+const features = [
+  { name: 'SRF', logo: null, note: null },
+  { name: 'Aeschbacher', logo: null, note: null },
+  { name: 'Strength Wars', logo: null, note: '3 Mio.+ Views' },
+];
+---
+
+<section class="py-10 border-y border-glass-border/40" aria-label="Bekannt aus den Medien">
+  <div class="section-container">
+    <p class="text-center text-xs uppercase tracking-[0.2em] text-text-secondary/60 mb-6" data-animate>
+      Bekannt aus
+    </p>
+    <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-5" data-animate>
+      {features.map((m) => (
+        <div class="flex flex-col items-center text-center opacity-80 hover:opacity-100 transition-opacity">
+          {m.logo ? (
+            <img src={m.logo} alt={m.name} class="h-7 md:h-8 w-auto" loading="lazy" />
+          ) : (
+            <span class="text-text-secondary font-semibold text-lg md:text-xl tracking-wide">{m.name}</span>
+          )}
+          {m.note && (
+            <span class="text-orange/80 text-xs font-medium mt-1">{m.note}</span>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
