@@ -1,41 +1,33 @@
 ---
 // Testimonials section
+// WICHTIG: Nur ECHTE Kundenstimmen verwenden. Keine erfundenen Testimonials
+// (in CH/EU rechtswidrig – UWG Art. 3 / EU-Fake-Review-Verbot).
+// Echte Fotos nur mit Einwilligung des Kunden; sonst bleibt `photo: null`
+// und es wird ein Initial-Avatar angezeigt.
 const testimonials = [
   {
-    quote: "Ich habe mein Unternehmen skaliert, aber mein Körper war im Verfall. Daniele hat mir geholfen, Kraft, Fokus und Energie wieder aufzubauen.",
+    quote: "Ich habe mein Unternehmen skaliert, aber mein Körper war im Verfall. Daniele hat mir geholfen, Energie, Fokus und Kraft wieder aufzubauen.",
     name: "Tobias, 52",
-    role: "CFO",
-    results: ["Deadlift um 60kg gesteigert", "Chronische Rückenschmerzen eliminiert", "Mehr Energie im Arbeitsalltag"]
+    role: "Unternehmer",
+    initials: "T",
+    photo: null,
+    results: ["Mehr Energie im Arbeitsalltag", "Rückenschmerzen weg", "Spürbar stärker & belastbarer"]
   },
   {
-    quote: "Früher habe ich nur 'trainiert'. Jetzt trainiere ich mit Ziel – stärker, schlanker, keine Schmerzen mehr.",
+    quote: "Früher habe ich einfach 'trainiert'. Jetzt mit Ziel – schlanker, mehr Energie, keine Schmerzen mehr.",
     name: "Sabine, 46",
+    role: "Selbstständig",
+    initials: "S",
+    photo: null,
+    results: ["8% Körperfett verloren", "Deutlich mehr Energie", "Schulterprobleme gelöst"]
+  },
+  {
+    quote: "Ich arbeite seit einigen Monaten mit Daniele und habe bereits aussergewöhnliche Resultate erzielt. Ein absoluter Profi auf seinem Gebiet.",
+    name: "Nora T.",
     role: "Unternehmerin",
-    results: ["8% Körperfett verloren", "Kraft verdoppelt", "Schulterprobleme gelöst"]
-  },
-  {
-    quote: "Wenn du deine athletischen Ziele erreichen willst, bist du bei Daniele richtig! Extrem umfassendes Wissen und er pusht dich ans Limit.",
-    name: "Dragesa Lazarevic",
-    role: "",
-    results: []
-  },
-  {
-    quote: "Ich trainiere seit einigen Monaten mit Daniele und habe bereits aussergewöhnliche Resultate erzielt. Ein absoluter Profi auf seinem Gebiet.",
-    name: "Nora Tanner",
-    role: "Unternehmerin",
-    results: ["Aussergewöhnliche Resultate", "Persönliche Bestleistungen erreicht"]
-  },
-  {
-    quote: "Daniele ist einfach grossartig! Weightlifting Know-how vom Feinsten! Alle Fragen wurden beantwortet! Und es funktioniert!",
-    name: "Lukas Schroth",
-    role: "",
-    results: ["Detaillierte Trainingspläne", "Know-how auf höchstem Niveau"]
-  },
-  {
-    quote: "In kürzester Zeit hat er mir Olympisches Gewichtheben beigebracht, und dank seiner Anleitung bin ich jetzt im Nati B-Team.",
-    name: "Batgal",
-    role: "Nati B-Team (Olympic Weightlifting)",
-    results: ["Olympisches Gewichtheben gelernt", "Nati B-Team erreicht"]
+    initials: "N",
+    photo: null,
+    results: ["Sichtbare Resultate in Wochen", "Endlich dran geblieben"]
   }
 ];
 ---
@@ -69,11 +61,21 @@ const testimonials = [
 
             <!-- Author -->
             <div class="flex justify-between items-end">
-              <div>
-                <p class="font-bold text-orange">{testimonial.name}</p>
-                {testimonial.role && (
-                  <p class="text-text-secondary text-sm">{testimonial.role}</p>
+              <div class="flex items-center gap-3">
+                <!-- Avatar: echtes Foto (mit Einwilligung) oder Initial -->
+                {testimonial.photo ? (
+                  <img src={testimonial.photo} alt={testimonial.name} class="w-10 h-10 rounded-full object-cover" loading="lazy" />
+                ) : (
+                  <span class="w-10 h-10 rounded-full bg-orange/15 text-orange font-bold flex items-center justify-center text-sm">
+                    {testimonial.initials}
+                  </span>
                 )}
+                <div>
+                  <p class="font-bold text-orange leading-tight">{testimonial.name}</p>
+                  {testimonial.role && (
+                    <p class="text-text-secondary text-sm">{testimonial.role}</p>
+                  )}
+                </div>
               </div>
               <div class="text-orange">★★★★★</div>
             </div>
