@@ -1,11 +1,21 @@
 ---
-// "Bekannt aus" — dezenter Medien-/Press-Streifen (echte Credibility).
+// "Bekannt aus" — dezenter Medien-/Press-Streifen (echte, verifizierte Credibility).
 // Nur Medien-Namen/Logos als Autorität – KEINE Schwerathletik-Bilder.
 // Logo nachrüsten: { name, logo: '/images/media/srf.svg' } -> zeigt Bild statt Text.
+// url -> macht den Eintrag klickbar (überprüfbar = mehr Vertrauen).
 const features = [
-  { name: 'SRF', logo: null, note: null },
-  { name: 'Aeschbacher', logo: null, note: null },
-  { name: 'Strength Wars', logo: null, note: '3 Mio.+ Views' },
+  {
+    name: 'SRF «Aeschbacher»',
+    logo: null,
+    note: null,
+    url: 'https://www.srf.ch/play/tv/aeschbacher/video/daniele-pauli?urn=urn:srf:video:e7e0233c-d358-4b79-96a5-127bf31eddfd',
+  },
+  {
+    name: 'Strength Wars',
+    logo: null,
+    note: '3 Mio.+ Views',
+    url: null,
+  },
 ];
 ---
 
@@ -15,18 +25,23 @@ const features = [
       Bekannt aus
     </p>
     <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-5" data-animate>
-      {features.map((m) => (
-        <div class="flex flex-col items-center text-center opacity-80 hover:opacity-100 transition-opacity">
-          {m.logo ? (
-            <img src={m.logo} alt={m.name} class="h-7 md:h-8 w-auto" loading="lazy" />
-          ) : (
-            <span class="text-text-secondary font-semibold text-lg md:text-xl tracking-wide">{m.name}</span>
-          )}
-          {m.note && (
-            <span class="text-orange/80 text-xs font-medium mt-1">{m.note}</span>
-          )}
-        </div>
-      ))}
+      {features.map((m) => {
+        const Inner = (
+          <div class="flex flex-col items-center text-center opacity-80 hover:opacity-100 transition-opacity">
+            {m.logo ? (
+              <img src={m.logo} alt={m.name} class="h-7 md:h-8 w-auto" loading="lazy" />
+            ) : (
+              <span class="text-text-secondary font-semibold text-lg md:text-xl tracking-wide">{m.name}</span>
+            )}
+            {m.note && (
+              <span class="text-orange/80 text-xs font-medium mt-1">{m.note}</span>
+            )}
+          </div>
+        );
+        return m.url ? (
+          <a href={m.url} target="_blank" rel="noopener noreferrer">{Inner}</a>
+        ) : Inner;
+      })}
     </div>
   </div>
 </section>
