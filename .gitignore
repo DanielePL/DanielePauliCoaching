@@ -25,3 +25,8 @@ pnpm-debug.log*
 
 # internes Strategie-Doc (nicht öffentlich)
 konzept 2026.md
+
+# lokale Hilfsdateien (nicht ins Repo)
+.vscode/
+index.old.html
+supabase/.temp/
