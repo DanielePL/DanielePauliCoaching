@@ -100,10 +100,10 @@ export default function SurveyResults({
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {feedback.strengths.map((strength, i) => (
-              <div key={i} className="glass-card p-6 border-l-4 border-green-500">
+              <div key={i} className="glass-card p-6 border-l-4 border-green-500 min-w-0">
                 <div className="text-2xl mb-2">{strength.icon}</div>
-                <h3 className="font-bold text-green-400 mb-2">{strength.title}</h3>
-                <p className="text-text-secondary text-sm">{strength.description}</p>
+                <h3 className="font-bold text-green-400 mb-2 break-words hyphens-auto" lang={lang}>{strength.title}</h3>
+                <p className="text-text-secondary text-sm break-words">{strength.description}</p>
               </div>
             ))}
           </div>

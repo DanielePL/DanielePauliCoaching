@@ -30,12 +30,22 @@ interface WebhookPayload {
   };
 }
 
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+};
+
 serve(async (req: Request) => {
+  // CORS-Preflight: der Browser ruft die Function via supabase.functions.invoke auf
+  if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers: corsHeaders });
+  }
   try {
     const payload: WebhookPayload = await req.json();
 
     if (payload.type !== 'INSERT') {
-      return new Response('Not an insert', { status: 200 });
+      return new Response('Not an insert', { status: 200, headers: corsHeaders });
     }
 
     const { name, phone, score, score_label, token, answers } = payload.record;
@@ -50,7 +60,7 @@ serve(async (req: Request) => {
 
     if (!RESEND_API_KEY || !NOTIFY_EMAIL_TO) {
       console.error('Missing RESEND_API_KEY or NOTIFY_EMAIL_TO');
-      return new Response('Missing config', { status: 500 });
+      return new Response('Missing config', { status: 500, headers: corsHeaders });
     }
 
     const adminLink = `${SITE_URL}/admin/`;
@@ -107,15 +117,15 @@ serve(async (req: Request) => {
 
     if (!response.ok) {
       console.error('Resend error:', result);
-      return new Response(JSON.stringify(result), { status: 500 });
+      return new Response(JSON.stringify(result), { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
     }
 
     return new Response(JSON.stringify({ success: true, id: result.id }), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (error) {
     console.error('Edge function error:', error);
-    return new Response(JSON.stringify({ error: String(error) }), { status: 500 });
+    return new Response(JSON.stringify({ error: String(error) }), { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
   }
 });

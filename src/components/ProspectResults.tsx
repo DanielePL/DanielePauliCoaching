@@ -134,8 +134,8 @@ export default function ProspectResults() {
             </h2>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {submission.strengths.map((strength, i) => (
-                <div key={i} className="glass-card p-6 border-l-4 border-green-500">
-                  <p className="text-text-primary">{strength}</p>
+                <div key={i} className="glass-card p-6 border-l-4 border-green-500 min-w-0">
+                  <p className="text-text-primary break-words">{strength}</p>
                 </div>
               ))}
             </div>

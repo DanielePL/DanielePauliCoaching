@@ -567,7 +567,8 @@ export default function Survey() {
 
       // Generate unique token
       const token = crypto.randomUUID();
-      const siteUrl = window.location.origin;
+      // Immer die Live-Domain für den persönlichen Link (nicht die onrender-/Preview-URL)
+      const siteUrl = 'https://danielepauli.com';
       const personalLink = `${siteUrl}/ergebnis/?token=${token}`;
 
       // Save to Supabase
