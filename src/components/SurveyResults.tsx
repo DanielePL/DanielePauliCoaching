@@ -136,8 +136,8 @@ export default function SurveyResults({
         <div className="glass-card p-6 text-center mb-8 animate-fade-up" style={{ animationDelay: '1000ms' }}>
           <p className="text-text-secondary mb-3 text-sm">
             {lang === 'de'
-              ? 'Dein persönlicher Link – hier siehst du bald Danis Einschätzung:'
-              : "Your personal link – you'll soon see Dani's assessment here:"}
+              ? 'Dein persönlicher Link zu deinem Ergebnis – jederzeit abrufbar:'
+              : 'Your personal link to your result – available anytime:'}
           </p>
           <div className="flex items-center gap-2 justify-center flex-wrap">
             <code className="text-orange text-sm bg-surface px-3 py-2 rounded-lg break-all">

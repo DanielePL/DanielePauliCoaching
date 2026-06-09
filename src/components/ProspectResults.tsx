@@ -154,12 +154,12 @@ export default function ProspectResults() {
           </div>
         )}
 
-        {/* Coach Note */}
-        <div className="mb-8">
-          <h2 className="text-xl font-bold mb-4 text-center">
-            {lang === 'de' ? 'Danis persönliche Einschätzung' : "Dani's Personal Assessment"}
-          </h2>
-          {submission.coach_note ? (
+        {/* Coach Note (nur falls Dani eine geschrieben hat) ODER persönlicher Follow-up-Hinweis */}
+        {submission.coach_note ? (
+          <div className="mb-8">
+            <h2 className="text-xl font-bold mb-4 text-center">
+              {lang === 'de' ? 'Danis persönliche Einschätzung' : "Dani's Personal Assessment"}
+            </h2>
             <div className="glass-card p-8 border-l-4 border-orange">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-full bg-orange/20 flex items-center justify-center text-orange font-bold">
@@ -176,22 +176,21 @@ export default function ProspectResults() {
                 <Markdown>{submission.coach_note}</Markdown>
               </div>
             </div>
-          ) : (
-            <div className="glass-card p-8 text-center">
-              <div className="w-8 h-8 border-2 border-orange border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          </div>
+        ) : (
+          <div className="mb-8">
+            <div className="glass-card p-8 text-center border-l-4 border-orange">
+              <p className="text-lg text-text-primary font-medium mb-2">
+                {lang === 'de' ? 'Dani meldet sich persönlich bei dir.' : 'Dani will personally get in touch.'}
+              </p>
               <p className="text-text-secondary">
                 {lang === 'de'
-                  ? 'Dani bereitet deine persönliche Einschätzung vor...'
-                  : 'Dani is preparing your personal assessment...'}
-              </p>
-              <p className="text-text-muted text-sm mt-2">
-                {lang === 'de'
-                  ? 'Schau bald wieder vorbei – es lohnt sich!'
-                  : "Check back soon – it'll be worth it!"}
+                  ? 'Er schaut sich deine Antworten an und meldet sich – meist innerhalb von 1–2 Tagen. Wenn du nicht warten willst, buch direkt unten dein Erstgespräch.'
+                  : "He reviews your answers and reaches out – usually within 1–2 days. If you don't want to wait, book your first call below."}
               </p>
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* CTA */}
         <div className="glass-card p-8 text-center glow-orange">
