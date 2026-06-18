@@ -5,9 +5,9 @@
 <footer class="section py-12 border-t border-glass-border">
   <div class="section-container">
     <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-      <!-- Logo -->
+      <!-- Logo (3× tippen öffnet den Admin-Bereich) -->
       <div>
-        <a href="/" class="text-xl font-bold text-text-primary">
+        <a href="/" id="footer-logo" class="text-xl font-bold text-text-primary select-none">
           Daniele Pauli <span class="gradient-text">Coaching</span>
         </a>
         <p class="text-text-secondary text-sm mt-1">
@@ -46,3 +46,23 @@
     </div>
   </div>
 </footer>
+
+<!-- Geheimzugang: 3× schnell auf den Footer-Schriftzug tippen → /admin -->
+<script>
+  const logo = document.getElementById('footer-logo');
+  if (logo) {
+    let taps = 0;
+    let timer;
+    logo.addEventListener('click', (e) => {
+      e.preventDefault();
+      taps++;
+      clearTimeout(timer);
+      if (taps >= 3) {
+        taps = 0;
+        window.location.href = '/admin';
+        return;
+      }
+      timer = window.setTimeout(() => { taps = 0; }, 1500);
+    });
+  }
+</script>
