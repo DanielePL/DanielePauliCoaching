@@ -28,8 +28,8 @@ const promises = [
 <section class="section" id="versprechen">
   <div class="section-container">
     <!-- Header -->
-    <div class="text-center mb-16" data-animate>
-      <h2 class="heading-lg mb-6">
+    <div class="text-center mb-10 md:mb-16" data-animate>
+      <h2 class="heading-lg mb-4 md:mb-6">
         Mein <span class="gradient-text">Versprechen</span> an dich
       </h2>
       <p class="text-xl text-text-secondary max-w-2xl mx-auto">
@@ -40,9 +40,9 @@ const promises = [
     <!-- Versprechen -->
     <div class="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
       {promises.map((p, i) => (
-        <div class="glass-card glass-hover p-8" data-animate style={`transition-delay: ${i * 100}ms`}>
-          <div class="text-orange mb-4" set:html={p.icon} />
-          <h3 class="text-xl font-bold text-text-primary mb-2">{p.title}</h3>
+        <div class="glass-card glass-hover p-6 sm:p-8" data-animate style={`transition-delay: ${i * 100}ms`}>
+          <div class="text-orange mb-3 sm:mb-4" set:html={p.icon} />
+          <h3 class="text-lg sm:text-xl font-bold text-text-primary mb-2">{p.title}</h3>
           <p class="text-text-secondary">{p.text}</p>
         </div>
       ))}

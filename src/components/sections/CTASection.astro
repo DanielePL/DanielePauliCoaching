@@ -1,42 +1,24 @@
 ---
-// Call to Action section with stats
-const stats = [
-  { value: "20+", label: "Jahre Coaching-Erfahrung" },
-  { value: "14,000+", label: "Coaching-Sessions" },
-  { value: "1", label: "System, das zu deinem Leben passt" }
-];
+// Call to Action section (Stats entfernt – stehen bereits in der About-Sektion)
 ---
 
 <section class="section" id="cta">
   <div class="section-container">
     <!-- Header -->
-    <div class="text-center mb-12" data-animate>
-      <h2 class="heading-lg mb-6">
+    <div class="text-center mb-8 md:mb-12" data-animate>
+      <h2 class="heading-lg mb-4 md:mb-6">
         Du brauchst nicht <span class="gradient-text">noch ein Programm.</span>
         <br />
         Du brauchst <span class="gradient-text">das Richtige.</span>
       </h2>
       <p class="text-xl text-text-secondary max-w-2xl mx-auto">
-        Ich arbeite mit einer begrenzten Zahl an Männern persönlich.
+        Ich arbeite mit einer begrenzten Zahl an Klientinnen und Klienten persönlich.
         Wenn du es ernst meinst, wieder zu Energie, Form und Klarheit zu finden – sollten wir reden.
       </p>
     </div>
 
-    <!-- Stats & CTA Box -->
-    <div class="glass-card p-5 sm:p-8 md:p-12 max-w-4xl mx-auto glow-orange" data-animate>
-      <!-- Stats Grid -->
-      <div class="grid grid-cols-3 gap-2 sm:gap-6 mb-10">
-        {stats.map((stat) => (
-          <div class="text-center">
-            <p class="text-xl sm:text-3xl md:text-5xl font-bold gradient-text mb-2 whitespace-nowrap">{stat.value}</p>
-            <p class="text-text-secondary text-xs sm:text-sm md:text-base">{stat.label}</p>
-          </div>
-        ))}
-      </div>
-
-      <!-- Divider -->
-      <div class="h-px bg-gradient-to-r from-transparent via-orange/30 to-transparent mb-10"></div>
-
+    <!-- CTA Box -->
+    <div class="glass-card p-6 sm:p-8 md:p-12 max-w-4xl mx-auto glow-orange" data-animate>
       <!-- CTA Buttons -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a

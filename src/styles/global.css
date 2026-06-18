@@ -37,7 +37,7 @@
   --gradient-surface: linear-gradient(180deg, rgba(26, 26, 26, 0.8) 0%, rgba(10, 10, 10, 0.9) 100%);
 
   /* Spacing */
-  --section-padding: clamp(4rem, 10vw, 8rem);
+  --section-padding: clamp(2.5rem, 7vw, 7rem);
 
   /* Animations */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -339,5 +339,11 @@ body {
 
   .bento-item-lg {
     grid-column: span 1;
+  }
+
+  /* Tighter section side padding on mobile */
+  .section {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
 }

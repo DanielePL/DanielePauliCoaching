@@ -19,29 +19,37 @@ const features = [
 ];
 ---
 
-<section class="py-10 border-y border-glass-border/40" aria-label="Bekannt aus den Medien">
+<section class="py-8 sm:py-10 border-y border-glass-border/40" aria-label="Bekannt aus den Medien">
   <div class="section-container">
-    <p class="text-center text-xs uppercase tracking-[0.2em] text-text-secondary/60 mb-6" data-animate>
-      Bekannt aus
-    </p>
-    <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-5" data-animate>
-      {features.map((m) => {
-        const Inner = (
-          <div class="flex flex-col items-center text-center opacity-80 hover:opacity-100 transition-opacity">
-            {m.logo ? (
-              <img src={m.logo} alt={m.name} class="h-7 md:h-8 w-auto" loading="lazy" />
-            ) : (
-              <span class="text-text-secondary font-semibold text-lg md:text-xl tracking-wide">{m.name}</span>
-            )}
-            {m.note && (
-              <span class="text-orange/80 text-xs font-medium mt-1">{m.note}</span>
-            )}
-          </div>
-        );
-        return m.url ? (
-          <a href={m.url} target="_blank" rel="noopener noreferrer">{Inner}</a>
-        ) : Inner;
-      })}
+    <div class="flex flex-col items-center gap-4 sm:gap-5" data-animate>
+      <p class="text-xs uppercase tracking-[0.2em] text-text-secondary/60">
+        Bekannt aus
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-3">
+        {features.map((m, i) => {
+          const Inner = (
+            <span class="inline-flex items-baseline gap-2 opacity-80 hover:opacity-100 transition-opacity">
+              {m.logo ? (
+                <img src={m.logo} alt={m.name} class="h-6 md:h-7 w-auto self-center" loading="lazy" />
+              ) : (
+                <span class="text-text-secondary font-semibold text-lg md:text-xl tracking-wide whitespace-nowrap">{m.name}</span>
+              )}
+              {m.note && (
+                <span class="text-orange/80 text-xs font-medium whitespace-nowrap">{m.note}</span>
+              )}
+            </span>
+          );
+          return (
+            <Fragment>
+              {i > 0 && <span class="hidden sm:block w-px h-5 bg-glass-border" aria-hidden="true"></span>}
+              {m.url ? (
+                <a href={m.url} target="_blank" rel="noopener noreferrer" class="inline-flex">{Inner}</a>
+              ) : Inner}
+            </Fragment>
+          );
+        })}
+      </div>
     </div>
   </div>
 </section>

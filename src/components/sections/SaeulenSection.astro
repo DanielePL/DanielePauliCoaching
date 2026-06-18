@@ -4,7 +4,7 @@
 const saeulen = [
   {
     title: "Körper & Kraft",
-    description: "Training, das in deinen Alltag passt. Kraft als Mittel für mehr Energie und weniger Schmerzen – nicht als Selbstzweck.",
+    description: "Training, das in deinen Alltag passt – inkl. Video-/Technik-Analyse, mit der ich Weltmeister begleitet habe. Kraft für mehr Energie und weniger Schmerzen, nicht als Selbstzweck.",
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`
   },
   {
@@ -28,8 +28,8 @@ const saeulen = [
 <section class="section" id="saeulen">
   <div class="section-container">
     <!-- Header -->
-    <div class="text-center mb-16" data-animate>
-      <h2 class="heading-lg mb-6">
+    <div class="text-center mb-10 md:mb-16" data-animate>
+      <h2 class="heading-lg mb-4 md:mb-6">
         Vier Säulen.
         <span class="gradient-text">Ein System.</span>
       </h2>
@@ -40,16 +40,16 @@ const saeulen = [
     </div>
 
     <!-- Säulen Grid -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
       {saeulen.map((saeule, index) => (
         <div
-          class="glass-card glass-hover p-8 h-full"
+          class="glass-card glass-hover p-5 sm:p-6 lg:p-8 h-full"
           data-animate
           style={`transition-delay: ${index * 100}ms`}
         >
-          <div class="text-orange mb-4" set:html={saeule.icon} />
-          <h3 class="text-xl font-bold text-text-primary mb-3">{saeule.title}</h3>
-          <p class="text-text-secondary">{saeule.description}</p>
+          <div class="text-orange mb-3 sm:mb-4" set:html={saeule.icon} />
+          <h3 class="text-lg sm:text-xl font-bold text-text-primary mb-2 sm:mb-3">{saeule.title}</h3>
+          <p class="text-sm sm:text-base text-text-secondary">{saeule.description}</p>
         </div>
       ))}
     </div>

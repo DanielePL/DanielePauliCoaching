@@ -1,5 +1,5 @@
 ---
-// "Kennst du das?" — Pain-Recognition für Männer 40+ (breit)
+// "Kennst du das?" — Pain-Recognition ab 40 (breit)
 // Siehe "konzept 2026.md" Abschnitt 2 & 5. Ersetzt die Executive-/High-Achiever-Ansprache.
 const painCards = [
   {
@@ -18,8 +18,8 @@ const painCards = [
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>`
   },
   {
-    title: "Kraft & Lust lassen nach",
-    description: "Kraft, Lust und Lebendigkeit werden weniger. Du fühlst dich älter, als du eigentlich bist.",
+    title: "Antrieb & Lebendigkeit lassen nach",
+    description: "Kraft, Antrieb und Lebendigkeit werden weniger. Du fühlst dich älter, als du eigentlich bist.",
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>`
   }
 ];
@@ -28,8 +28,8 @@ const painCards = [
 <section class="section" id="who">
   <div class="section-container">
     <!-- Header -->
-    <div class="text-center mb-16" data-animate>
-      <h2 class="heading-lg mb-6">
+    <div class="text-center mb-10 md:mb-16" data-animate>
+      <h2 class="heading-lg mb-4 md:mb-6">
         Du lebst –
         <br />
         <span class="gradient-text">aber du fühlst dich nicht lebendig.</span>
@@ -41,26 +41,26 @@ const painCards = [
     </div>
 
     <!-- Highlight Box -->
-    <div class="glass-card p-8 md:p-12 text-center mb-16 max-w-3xl mx-auto" data-animate>
-      <p class="text-2xl text-text-secondary mb-4 italic">
+    <div class="glass-card p-6 sm:p-8 md:p-12 text-center mb-10 md:mb-16 max-w-3xl mx-auto" data-animate>
+      <p class="text-xl sm:text-2xl text-text-secondary mb-3 sm:mb-4 italic">
         "Du brauchst keine neue Motivation."
       </p>
-      <p class="text-2xl font-bold gradient-text">
+      <p class="text-xl sm:text-2xl font-bold gradient-text">
         Du brauchst ein System, das in dein Leben passt.
       </p>
     </div>
 
     <!-- Pain Cards -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
       {painCards.map((card, index) => (
         <div
-          class="glass-card glass-hover p-8"
+          class="glass-card glass-hover p-5 sm:p-6 lg:p-8"
           data-animate
           style={`transition-delay: ${index * 100}ms`}
         >
-          <div class="text-orange mb-4" set:html={card.icon} />
-          <h3 class="text-xl font-bold text-text-primary mb-3">{card.title}</h3>
-          <p class="text-text-secondary">{card.description}</p>
+          <div class="text-orange mb-3 sm:mb-4" set:html={card.icon} />
+          <h3 class="text-lg sm:text-xl font-bold text-text-primary mb-2 sm:mb-3">{card.title}</h3>
+          <p class="text-sm sm:text-base text-text-secondary">{card.description}</p>
         </div>
       ))}
     </div>
