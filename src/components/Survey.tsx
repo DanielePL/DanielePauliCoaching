@@ -12,6 +12,7 @@ interface Question {
   options: string[];
   multiple?: boolean;
   scale?: boolean;
+  text?: boolean;
 }
 
 const translations = {
@@ -123,6 +124,11 @@ const translations = {
         multiple: true
       },
       {
+        q: "Beschreib in einem Satz: Wie fühlt sich dein Alltag an, wenn du dein Ich 2.0 erreicht hast?",
+        options: [],
+        text: true
+      },
+      {
         q: "Hast du einen Plan, wie du dein Ziel halten kannst, wenn du es erreicht hast?",
         options: [
           "Ja, ich habe eine klare Vorstellung",
@@ -157,15 +163,6 @@ const translations = {
           "Wichtig – es hilft mir dranzubleiben",
           "Etwas wichtig – ich bin meist selbstmotiviert",
           "Nicht wichtig – ich mache es sowieso"
-        ]
-      },
-      {
-        q: "Wie effizient soll deine zukünftige Top-Strategie sein?",
-        options: [
-          "Effizient",
-          "Sehr effizient",
-          "So effizient wie möglich",
-          "Die bestmögliche, individuellste Strategie"
         ]
       },
       {
@@ -217,6 +214,11 @@ const translations = {
           "Gesundheit – ich spüre, dass ich handeln muss",
           "Ich will beweisen, dass ich es kann"
         ]
+      },
+      {
+        q: "Was ist das EINE, das sich ändern müsste, damit sich alles andere leichter anfühlt?",
+        options: [],
+        text: true
       },
       {
         q: "Gutes Coaching ist eine Investition in dich. Was wäre dir dein Ziel pro Monat wert?",
@@ -349,6 +351,11 @@ const translations = {
         multiple: true
       },
       {
+        q: "Describe in one sentence: How does your everyday life feel once you've reached your Me 2.0?",
+        options: [],
+        text: true
+      },
+      {
         q: "Do you have a plan for maintaining your goal once you reach it?",
         options: [
           "Yes, I have a clear vision",
@@ -382,15 +389,6 @@ const translations = {
           "Important – it helps me stay on track",
           "Somewhat important – I'm usually self-motivated",
           "Not important – I'll do it anyway"
-        ]
-      },
-      {
-        q: "How efficient should your future strategy be?",
-        options: [
-          "Efficient",
-          "Very efficient",
-          "As efficient as possible",
-          "The best possible, most individualized strategy"
         ]
       },
       {
@@ -443,6 +441,11 @@ const translations = {
         ]
       },
       {
+        q: "What's the ONE thing that would have to change to make everything else feel easier?",
+        options: [],
+        text: true
+      },
+      {
         q: "Good coaching is an investment in yourself. What would reaching your goal be worth per month?",
         options: [
           "Up to CHF 300 – just exploring",
@@ -470,7 +473,8 @@ const translations = {
   }
 };
 
-const STORAGE_KEY = 'survey_progress';
+// v2: Fragen-Struktur geändert (Freitext ergänzt, Effizienz entfernt) → alte Zwischenstände entwerten
+const STORAGE_KEY = 'survey_progress_v2';
 
 export default function Survey() {
   const [lang, setLang] = useState<Language>('de');
@@ -497,6 +501,7 @@ export default function Survey() {
   const currentQuestion = !isNameStep && !isPhoneStep ? t.questions[step - 1] : null;
   const isMultiple = currentQuestion?.multiple;
   const isScale = currentQuestion?.scale;
+  const isText = currentQuestion?.text;
 
   // Load from localStorage
   useEffect(() => {
@@ -544,6 +549,8 @@ export default function Survey() {
       const phoneRegex = /^[+]?[\d\s-()]{10,}$/;
       return phoneRegex.test(phoneNumber);
     }
+    // Freitext ist optional – darf immer weiter
+    if (isText) return true;
     const questionIndex = step - 1;
     if (isMultiple) {
       return ((answers[questionIndex] as string[]) || []).length > 0;
@@ -631,7 +638,7 @@ export default function Survey() {
     if (step === 0) return 0;
     if (step <= 4) return 0; // IST
     if (step <= 7) return 1; // VERGANGENHEIT
-    if (step <= 10) return 2; // SOLL
+    if (step <= 11) return 2; // SOLL (inkl. neuer Freitext-Frage)
     if (step <= 18) return 3; // COMMITMENT
     return 4; // REALITY CHECK
   };
@@ -791,8 +798,28 @@ export default function Survey() {
             </div>
           )}
 
+          {/* Free-Text Question */}
+          {isText && currentQuestion && (
+            <div>
+              <h2 className="text-2xl font-bold mb-2">{currentQuestion.q}</h2>
+              <p className="text-text-secondary mb-6 text-sm">
+                {lang === 'de'
+                  ? 'Ein, zwei Sätze reichen – in deinen Worten. (Optional, aber wertvoll für deine Analyse.)'
+                  : 'A sentence or two is enough – in your own words. (Optional, but valuable for your analysis.)'}
+              </p>
+              <textarea
+                value={(answers[step - 1] as string) || ''}
+                onChange={(e) => handleAnswer(e.target.value)}
+                rows={4}
+                placeholder={lang === 'de' ? 'Schreib einfach drauflos…' : 'Just write freely…'}
+                className="w-full p-4 rounded-xl bg-surface border border-glass-border text-text-primary placeholder-text-muted focus:border-orange focus:outline-none transition-colors resize-none"
+                autoFocus
+              />
+            </div>
+          )}
+
           {/* Regular Questions */}
-          {!isNameStep && !isPhoneStep && !isScale && currentQuestion && (
+          {!isNameStep && !isPhoneStep && !isScale && !isText && currentQuestion && (
             <div>
               <h2 className="text-2xl font-bold mb-8">{currentQuestion.q}</h2>
               <div className="space-y-3">

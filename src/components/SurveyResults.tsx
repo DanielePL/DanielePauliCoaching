@@ -109,10 +109,29 @@ export default function SurveyResults({
           </div>
         </div>
 
-        {/* Fokus-Bereich */}
+        {/* Tieferer Treiber – "Warum unterm Warum" */}
+        {feedback.deepDriver && (
+          <div className="mb-8 animate-fade-up" style={{ animationDelay: '500ms' }}>
+            <h2 className="text-xl font-bold mb-2 text-center">
+              {lang === 'de' ? 'Was dich wirklich antreibt' : 'What truly drives you'}
+            </h2>
+            <p className="text-text-secondary text-sm text-center mb-4 max-w-xl mx-auto">
+              {lang === 'de'
+                ? 'Nicht die Zahl auf der Waage – das hier ist der eigentliche Hebel hinter deinem Ziel:'
+                : "Not the number on the scale – this is the real lever behind your goal:"}
+            </p>
+            <div className="glass-card p-6 border-l-4 border-beige">
+              <div className="text-2xl mb-2">{feedback.deepDriver.icon}</div>
+              <h3 className="font-bold text-beige mb-2">{feedback.deepDriver.title}</h3>
+              <p className="text-text-secondary">{feedback.deepDriver.description}</p>
+            </div>
+          </div>
+        )}
+
+        {/* Fokus-Bereich – "Wo wir ansetzen" */}
         <div className="mb-8 animate-fade-up" style={{ animationDelay: '600ms' }}>
           <h2 className="text-xl font-bold mb-4 text-center">
-            {lang === 'de' ? 'Dein Fokus-Bereich' : 'Your Focus Area'}
+            {lang === 'de' ? 'Wo wir ansetzen' : "Where we'll start"}
           </h2>
           <div className="glass-card p-6 border-l-4 border-orange glow-orange">
             <div className="text-2xl mb-2">{feedback.focusArea.icon}</div>

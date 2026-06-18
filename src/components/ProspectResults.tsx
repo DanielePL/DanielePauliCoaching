@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import type { SurveySubmission } from '../lib/types';
+import { getDeepDriver } from '../lib/feedback';
 import Markdown from 'react-markdown';
 
 function ProximityRing({ score, label }: { score: number; label: string }) {
@@ -101,6 +102,9 @@ export default function ProspectResults() {
   }
 
   const lang = submission.language || 'de';
+  const deepDriver = submission.answers
+    ? getDeepDriver(submission.answers as Record<number, string | string[]>, lang)
+    : null;
 
   return (
     <div className="min-h-screen py-20 px-4">
@@ -142,11 +146,30 @@ export default function ProspectResults() {
           </div>
         )}
 
+        {/* Tieferer Treiber – "Warum unterm Warum" */}
+        {deepDriver && (
+          <div className="mb-8">
+            <h2 className="text-xl font-bold mb-2 text-center">
+              {lang === 'de' ? 'Was dich wirklich antreibt' : 'What truly drives you'}
+            </h2>
+            <p className="text-text-secondary text-sm text-center mb-4 max-w-xl mx-auto">
+              {lang === 'de'
+                ? 'Nicht die Zahl auf der Waage – das hier ist der eigentliche Hebel hinter deinem Ziel:'
+                : "Not the number on the scale – this is the real lever behind your goal:"}
+            </p>
+            <div className="glass-card p-6 border-l-4 border-beige">
+              <div className="text-2xl mb-2">{deepDriver.icon}</div>
+              <h3 className="font-bold text-beige mb-2">{deepDriver.title}</h3>
+              <p className="text-text-secondary">{deepDriver.description}</p>
+            </div>
+          </div>
+        )}
+
         {/* Fokus-Bereich */}
         {submission.focus_area && (
           <div className="mb-8">
             <h2 className="text-xl font-bold mb-4 text-center">
-              {lang === 'de' ? 'Dein Fokus-Bereich' : 'Your Focus Area'}
+              {lang === 'de' ? 'Wo wir ansetzen' : "Where we'll start"}
             </h2>
             <div className="glass-card p-6 border-l-4 border-orange glow-orange">
               <p className="text-text-primary">{submission.focus_area}</p>
