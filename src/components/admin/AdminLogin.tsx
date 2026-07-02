@@ -9,11 +9,13 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [info, setInfo] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setInfo('');
     setLoading(true);
 
     const { error: authError } = await supabase.auth.signInWithPassword({
@@ -22,12 +24,38 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
     });
 
     if (authError) {
-      setError('Login fehlgeschlagen. Bitte überprüfe deine Zugangsdaten.');
+      // Echten Grund anzeigen statt pauschaler Meldung.
+      if (authError.message?.toLowerCase().includes('invalid login credentials')) {
+        setError('E-Mail oder Passwort ist falsch.');
+      } else if (authError.message?.toLowerCase().includes('email not confirmed')) {
+        setError('Diese E-Mail ist noch nicht bestätigt. Bitte im Supabase-Dashboard bestätigen.');
+      } else {
+        setError(`Login fehlgeschlagen: ${authError.message}`);
+      }
       setLoading(false);
       return;
     }
 
     onLogin();
+  };
+
+  const handleReset = async () => {
+    setError('');
+    setInfo('');
+    if (!email) {
+      setError('Bitte zuerst deine E-Mail-Adresse eingeben.');
+      return;
+    }
+    setLoading(true);
+    const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/admin/reset/`,
+    });
+    setLoading(false);
+    if (resetError) {
+      setError(`Konnte Reset-Link nicht senden: ${resetError.message}`);
+      return;
+    }
+    setInfo(`Falls ein Konto für ${email} existiert, wurde ein Link zum Zurücksetzen gesendet. Prüfe dein Postfach.`);
   };
 
   return (
@@ -68,6 +96,9 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
           {error && (
             <p className="text-red-400 text-sm">{error}</p>
           )}
+          {info && (
+            <p className="text-green-400 text-sm">{info}</p>
+          )}
 
           <button
             type="submit"
@@ -75,6 +106,15 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
             className={`btn-primary w-full ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             {loading ? 'Anmelden...' : 'Anmelden'}
+          </button>
+
+          <button
+            type="button"
+            onClick={handleReset}
+            disabled={loading}
+            className="w-full text-text-secondary text-sm hover:text-orange transition-colors disabled:opacity-50"
+          >
+            Passwort vergessen?
           </button>
         </form>
       </div>
