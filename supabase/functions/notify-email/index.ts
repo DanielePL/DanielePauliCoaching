@@ -49,9 +49,11 @@ serve(async (req: Request) => {
     }
 
     const { name, phone, score, score_label, token, answers } = payload.record;
-    // Q17 = Wichtigkeit (1–10), Q20 = monatliches Investment (Preis-Indikator)
+    // Q17 = Wichtigkeit (1–10), Q21 = monatliches Investment (Preis-Indikator).
+    // Index 20 ist der Fallback für Einsendungen von vor der Fragebogen-Erweiterung
+    // (zwei Freitext-Fragen dazu, "Effizienz" raus => 21 auf 22 Fragen).
     const importance = answers?.['17'] ?? '?';
-    const investment = answers?.['20'] ?? '–';
+    const investment = answers?.['21'] ?? answers?.['20'] ?? '–';
 
     const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
     const NOTIFY_EMAIL_TO = Deno.env.get('NOTIFY_EMAIL_TO');

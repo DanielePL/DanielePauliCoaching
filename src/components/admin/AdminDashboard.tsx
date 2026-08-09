@@ -10,7 +10,10 @@ const STATUS_LABELS: Record<string, { label: string; color: string }> = {
   kontaktiert: { label: 'Kontaktiert', color: 'bg-green-500/20 text-green-400' },
 };
 
-// German question labels for the detail view
+// German question labels for the detail view.
+// Reihenfolge und Anzahl müssen zum Fragen-Array in Survey.tsx passen (0-basiert).
+// Gerendert wird über die Antwort-Keys, nicht über diese Liste – eine neue Frage
+// taucht also auch dann auf, wenn hier das Label fehlt.
 const QUESTION_LABELS = [
   'Körperlich/Mental',
   'Barrieren',
@@ -21,17 +24,18 @@ const QUESTION_LABELS = [
   'Zeiteinschätzung',
   'Ich 2.0 Vision',
   'Bedeutung des Ziels',
+  'Alltag als Ich 2.0 (Freitext)',
   'Erhaltungsplan',
   'Bereitschaft Prioritäten',
   'Umgang mit Feedback',
   'Accountability',
-  'Effizienz',
   'Bereit alles zu geben',
   'Zeitinvestment (geplant)',
   'Zeitinvestment (aktuell)',
   'Wichtigkeit (1-10)',
   '2-Jahres-Konsequenz',
   'Warum JETZT',
+  'Das EINE, das sich ändern müsste (Freitext)',
   'Investment-Bereitschaft',
 ];
 
@@ -177,24 +181,28 @@ export default function AdminDashboard() {
             </div>
           </div>
 
-          {/* Alle 21 Antworten */}
+          {/* Alle Antworten */}
           <div className="glass-card p-6 mb-6">
             <h2 className="text-xl font-bold mb-4">Alle Antworten</h2>
             <div className="space-y-4">
-              {QUESTION_LABELS.map((label, i) => {
-                const answer = answers[i];
-                if (answer === undefined) return null;
+              {Object.keys(answers)
+                .map(Number)
+                .filter((i) => !Number.isNaN(i) && answers[i] !== undefined)
+                .sort((a, b) => a - b)
+                .map((i) => {
+                  const answer = answers[i];
+                  const label = QUESTION_LABELS[i] ?? `Frage ${i + 1}`;
 
-                return (
-                  <div key={i} className="border-b border-glass-border pb-3 last:border-0">
-                    <p className="text-text-muted text-xs mb-1">Frage {i + 1}</p>
-                    <p className="text-text-secondary text-sm font-medium mb-1">{label}</p>
-                    <p className="text-text-primary">
-                      {Array.isArray(answer) ? answer.join(', ') : String(answer)}
-                    </p>
-                  </div>
-                );
-              })}
+                  return (
+                    <div key={i} className="border-b border-glass-border pb-3 last:border-0">
+                      <p className="text-text-muted text-xs mb-1">Frage {i + 1}</p>
+                      <p className="text-text-secondary text-sm font-medium mb-1">{label}</p>
+                      <p className="text-text-primary">
+                        {Array.isArray(answer) ? answer.join(', ') : String(answer)}
+                      </p>
+                    </div>
+                  );
+                })}
             </div>
           </div>
 
