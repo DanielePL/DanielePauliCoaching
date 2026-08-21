@@ -1,0 +1,185 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/sections/Footer.astro';
+import { OPERATOR, PROCESSING, isComplete } from '../lib/legal';
+
+/* Beschreibt, was der Code wirklich tut — nicht was üblicherweise in solchen
+   Texten steht. Geprüft am 2026-08-20 an:
+     src/components/Survey.tsx   → insert in `survey_submissions`, danach
+                                   Edge Function `notify-email`
+     src/layouts/Layout.astro    → Google Fonts, Calendly-Widget
+     localStorage                → nur `survey_progress_v2`
+   Wer den Code ändert, ändert diese Seite mit. Eine Datenschutzerklärung, die
+   etwas anderes behauptet als die Software macht, ist schlimmer als keine. */
+const updated = '20. August 2026';
+---
+
+<Layout
+  title="Datenschutzerklärung | Daniele Pauli Coaching"
+  description="Welche Daten auf danielepauli.com erhoben werden, wozu, wo sie liegen und welche Rechte du hast."
+>
+  <main class="section py-24">
+    <div class="section-container max-w-3xl">
+      <a href="/" class="text-text-secondary hover:text-orange text-sm">&larr; Zurück</a>
+
+      <h1 class="text-4xl md:text-5xl font-bold mt-6 mb-3">Datenschutzerklärung</h1>
+      <p class="text-text-secondary mb-10">Stand: {updated}</p>
+
+      {!isComplete && (
+        <div class="glass-card p-6 mb-10 border-l-4" style="border-left-color:#ff6b00">
+          <p class="font-semibold text-orange">Diese Seite ist noch unvollständig.</p>
+          <p class="text-text-secondary text-sm mt-2">
+            Rechtsform und Anschrift der verantwortlichen Stelle fehlen —
+            einzutragen in <code>src/lib/legal.ts</code>.
+          </p>
+        </div>
+      )}
+
+      <div class="glass-card p-8 space-y-8">
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Kurz gesagt</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Wer diese Website nur liest, hinterlässt bei uns nichts. Erhoben werden Daten
+            an genau einer Stelle: beim „Ich 2.0 Check". Es gibt keine Werbe-Cookies, kein
+            Analyse-Werkzeug und keinen Weiterverkauf von Daten. Details stehen unten.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">1. Verantwortliche Stelle</h2>
+          <p class="text-text-secondary leading-relaxed">
+            {OPERATOR.name}<br />
+            {OPERATOR.legalForm || <span class="text-orange">[Rechtsform ergänzen]</span>}<br />
+            {OPERATOR.address
+              ? OPERATOR.address.split('\n').map((l) => <>{l}<br /></>)
+              : <span class="text-orange">[Anschrift ergänzen]</span>}
+            E-Mail: <a href={`mailto:${OPERATOR.email}`} class="text-orange hover:underline">{OPERATOR.email}</a>
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">2. Der „Ich 2.0 Check"</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Wer den Check ausfüllt und absendet, übermittelt uns:
+          </p>
+          <ul class="list-disc list-inside text-text-secondary mt-3 space-y-1">
+            {PROCESSING.fields.map((f) => <li>{f}</li>)}
+          </ul>
+          <p class="text-text-secondary leading-relaxed mt-4">
+            <strong class="text-text-primary">Zweck:</strong> {PROCESSING.purpose}.
+            Nach dem Absenden erhältst du einen persönlichen Ergebnis-Link, und wir werden
+            über den Eingang benachrichtigt, damit sich jemand bei dir meldet.
+          </p>
+          <p class="text-text-secondary leading-relaxed mt-4">
+            <strong class="text-text-primary">Rechtsgrundlage:</strong> deine Einwilligung
+            durch das Absenden des Checks (Art. 6 Abs. 1 lit. a DSGVO) sowie die Anbahnung
+            eines Vertragsverhältnisses (lit. b). Für die Schweiz gilt das Datenschutzgesetz
+            (DSG) entsprechend.
+          </p>
+          <p class="text-text-secondary leading-relaxed mt-4">
+            <strong class="text-text-primary">Freiwilligkeit:</strong> Der Check ist ein
+            Angebot, keine Bedingung. Ohne ihn erreichst du uns jederzeit per E-Mail,
+            Telefon oder über die Terminbuchung.
+          </p>
+          <p class="text-text-secondary leading-relaxed mt-4">
+            <strong class="text-text-primary">Angaben zum Befinden:</strong> Der Check fragt,
+            wie du dich körperlich und mental fühlst. Diese Angaben können je nach Antwort
+            Rückschlüsse auf deine Gesundheit zulassen. Sie werden ausschliesslich für die
+            Auswertung und ein mögliches Coaching verwendet, nicht an Dritte weitergegeben
+            und nicht für Werbung genutzt. Wer das nicht möchte, füllt den Check nicht aus.
+          </p>
+          <p class="text-text-secondary leading-relaxed mt-4">
+            <strong class="text-text-primary">Zwischenspeicherung im Browser:</strong> Damit
+            ein angefangener Check nicht verloren geht, speichert dein Browser den
+            Fortschritt lokal (<code>survey_progress_v2</code> im localStorage). Diese Daten
+            verlassen dein Gerät nicht und lassen sich über die Browser-Einstellungen
+            jederzeit löschen.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">3. Wo die Daten liegen</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Datenbank und Serverfunktionen laufen bei {PROCESSING.host}. Der Anbieter
+            verarbeitet die Daten in unserem Auftrag und ausschliesslich nach unseren
+            Weisungen. Je nach gewählter Region kann die Verarbeitung ausserhalb der Schweiz
+            und der EU stattfinden; die Übermittlung wird über die dafür vorgesehenen
+            Standardvertragsklauseln abgesichert.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">4. Wie lange gespeichert wird</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Check-Ergebnisse werden aufbewahrt, solange ein Coaching-Interesse besteht oder
+            ein Coaching läuft, danach längstens 24 Monate. Kommt es zu einem
+            Vertragsverhältnis, gelten die gesetzlichen Aufbewahrungsfristen. Auf Wunsch
+            löschen wir früher — eine E-Mail genügt.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">5. Externe Dienste</h2>
+          <ul class="text-text-secondary leading-relaxed space-y-3">
+            <li>
+              <strong class="text-text-primary">Calendly</strong> — Terminbuchung. Wer einen
+              Termin bucht, übermittelt Name, E-Mail und Terminwunsch direkt an Calendly.
+              Das Buchungs-Widget wird auf unseren Seiten geladen, wodurch deine IP-Adresse
+              technisch bedingt an Calendly übermittelt wird.
+            </li>
+            <li>
+              <strong class="text-text-primary">WhatsApp</strong> — Kontaktaufnahme. Wer den
+              WhatsApp-Link nutzt, kommuniziert unter den Bedingungen von WhatsApp; es gilt
+              deren Datenschutzerklärung.
+            </li>
+            <li>
+              <strong class="text-text-primary">Google Fonts</strong> — Schriftarten werden
+              beim Seitenaufruf von Google-Servern geladen, wodurch deine IP-Adresse dorthin
+              übermittelt wird.
+            </li>
+            <li>
+              <strong class="text-text-primary">Cloudflare</strong> — Auslieferung der
+              Website. Verarbeitet technisch notwendige Verbindungsdaten.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">6. Was wir nicht tun</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Keine Werbe- oder Analyse-Cookies. Keine Weitergabe oder Verkauf von Daten an
+            Dritte zu Werbezwecken. Keine automatisierte Entscheidung mit rechtlicher
+            Wirkung — die Auswertung des Checks ist eine Einordnung, keine Diagnose und
+            keine Entscheidung über dich.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">7. Deine Rechte</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Du kannst jederzeit Auskunft darüber verlangen, welche Daten wir zu dir haben,
+            und ihre Berichtigung, Löschung oder Einschränkung fordern. Du kannst der
+            Verarbeitung widersprechen, eine erteilte Einwilligung mit Wirkung für die
+            Zukunft widerrufen und deine Daten in einem gängigen Format erhalten.
+          </p>
+          <p class="text-text-secondary leading-relaxed mt-3">
+            Eine formlose E-Mail an
+            <a href={`mailto:${OPERATOR.email}`} class="text-orange hover:underline">{OPERATOR.email}</a>
+            genügt. Ausserdem steht dir der Weg zu einer Aufsichtsbehörde offen — in der
+            Schweiz dem EDÖB, in der EU der Datenschutzbehörde deines Wohnsitzlandes.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">8. Änderungen</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Ändert sich die Website, ändert sich diese Erklärung mit. Das oben genannte
+            Datum zeigt den aktuellen Stand.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

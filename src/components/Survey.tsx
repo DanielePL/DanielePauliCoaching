@@ -718,6 +718,28 @@ export default function Survey() {
             <h1 className="heading-lg mb-4">{t.title}</h1>
             <p className="text-xl text-orange mb-4">{t.subtitle}</p>
             <p className="text-text-secondary">{t.intro}</p>
+            {/* Datenschutzhinweis VOR dem ersten Feld, nicht erst beim Absenden.
+                Verlangt ist die Information zum Zeitpunkt der Erhebung — und
+                Google Ads prüft bei Zielseiten, die Daten erheben, ob eine
+                Datenschutzerklärung erreichbar ist. */}
+            <p className="text-text-secondary text-sm mt-6 opacity-70">
+              {lang === 'de' ? (
+                <>
+                  Deine Antworten werden gespeichert, um dein Ergebnis zu erstellen und dich
+                  zu kontaktieren.{' '}
+                  <a href="/datenschutz/" className="text-orange hover:underline">
+                    Datenschutzerklärung
+                  </a>
+                </>
+              ) : (
+                <>
+                  Your answers are stored so we can produce your result and get in touch.{' '}
+                  <a href="/datenschutz/" className="text-orange hover:underline">
+                    Privacy policy
+                  </a>
+                </>
+              )}
+            </p>
           </div>
         )}
 

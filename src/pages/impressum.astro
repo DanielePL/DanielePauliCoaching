@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/sections/Footer.astro';
+import { OPERATOR, isComplete } from '../lib/legal';
+---
+
+<Layout
+  title="Impressum | Daniele Pauli Coaching"
+  description="Anbieterangaben und Kontakt für danielepauli.com."
+>
+  <main class="section py-24">
+    <div class="section-container max-w-3xl">
+      <a href="/" class="text-text-secondary hover:text-orange text-sm">&larr; Zurück</a>
+
+      <h1 class="text-4xl md:text-5xl font-bold mt-6 mb-10">Impressum</h1>
+
+      {!isComplete && (
+        <div class="glass-card p-6 mb-10 border-l-4" style="border-left-color:#ff6b00">
+          <p class="font-semibold text-orange">Diese Seite ist noch unvollständig.</p>
+          <p class="text-text-secondary text-sm mt-2">
+            Rechtsform und Anschrift fehlen. Beides in <code>src/lib/legal.ts</code>
+            eintragen — danach verschwindet dieser Hinweis von selbst.
+          </p>
+        </div>
+      )}
+
+      <div class="glass-card p-8 space-y-6">
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Verantwortlich für diese Website</h2>
+          <p class="text-text-secondary leading-relaxed">
+            {OPERATOR.name}<br />
+            {OPERATOR.legalForm || <span class="text-orange">[Rechtsform ergänzen]</span>}<br />
+            {OPERATOR.address
+              ? OPERATOR.address.split('\n').map((l) => <>{l}<br /></>)
+              : <span class="text-orange">[Anschrift ergänzen]</span>}
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Kontakt</h2>
+          <p class="text-text-secondary leading-relaxed">
+            E-Mail: <a href={`mailto:${OPERATOR.email}`} class="text-orange hover:underline">{OPERATOR.email}</a><br />
+            Telefon: <a href={`tel:${OPERATOR.phone.replace(/\s/g, '')}`} class="text-orange hover:underline">{OPERATOR.phone}</a>
+          </p>
+        </section>
+
+        {OPERATOR.uid && (
+          <section>
+            <h2 class="text-xl font-semibold mb-3">Unternehmens-Identifikationsnummer</h2>
+            <p class="text-text-secondary">{OPERATOR.uid}</p>
+          </section>
+        )}
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Haftung für Inhalte</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Die Inhalte dieser Website werden mit Sorgfalt erstellt. Für Richtigkeit,
+            Vollständigkeit und Aktualität wird keine Gewähr übernommen.
+          </p>
+          <p class="text-text-secondary leading-relaxed mt-3">
+            Die Angebote auf dieser Website sind Coaching-Dienstleistungen in den Bereichen
+            Training, Ernährung und Lebensstil. <strong class="text-text-primary">Sie ersetzen
+            keine ärztliche Beratung, Diagnose oder Behandlung.</strong> Wer gesundheitliche
+            Beschwerden hat, schwanger ist oder Medikamente einnimmt, klärt die Aufnahme eines
+            Trainings- oder Ernährungsprogramms vorher mit einer Ärztin oder einem Arzt ab.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Haftung für Links</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Diese Website verweist auf externe Angebote (unter anderem WhatsApp, Calendly und
+            SRF). Für deren Inhalte sind ausschliesslich die jeweiligen Anbieter verantwortlich.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Urheberrecht</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Texte, Bilder und Videos auf dieser Website sind urheberrechtlich geschützt.
+            Eine Verwendung ausserhalb der gesetzlich erlaubten Fälle bedarf der vorherigen
+            schriftlichen Zustimmung.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-3">Datenschutz</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Wie mit personenbezogenen Daten umgegangen wird, steht in der
+            <a href="/datenschutz/" class="text-orange hover:underline">Datenschutzerklärung</a>.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
