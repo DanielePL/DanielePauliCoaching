@@ -62,6 +62,18 @@ const { title, description = "Ganzheitliches Online-Coaching ab 40: mehr Energie
       Ich 2.0 Check
     </a>
 
+    <!-- Messung: Herkunft merken und Besuch zählen.
+         Ohne diese Zahlen gibt Werbung Geld aus, ohne zu zeigen, welcher
+         Suchbegriff einen Lead gebracht hat. Kein Cookie, keine Kennung —
+         siehe src/lib/visits.ts. -->
+    <script>
+      import { captureClickSource, listenForCalendlyBooking } from '../lib/tracking';
+      import { countVisit } from '../lib/visits';
+      captureClickSource();
+      countVisit();
+      listenForCalendlyBooking();
+    </script>
+
     <!-- Scroll Animation Script -->
     <script>
       const observerOptions = {

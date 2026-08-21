@@ -4,6 +4,7 @@ import { calculateScoreWithIndices } from '../lib/scoring';
 import { generateFeedback } from '../lib/feedback';
 import type { FeedbackResult } from '../lib/feedback';
 import SurveyResults from './SurveyResults';
+import { getClickSource, reportCoachingLead } from '../lib/tracking';
 
 type Language = 'de' | 'en';
 
@@ -572,6 +573,8 @@ export default function Survey() {
       // Generate feedback
       const feedback = generateFeedback(name, scoreResult.score, answers, deQuestions, lang);
 
+      const clickSource = getClickSource();
+
       // Generate unique token
       const token = crypto.randomUUID();
       // Immer die Live-Domain für den persönlichen Link (nicht die onrender-/Preview-URL)
@@ -590,6 +593,11 @@ export default function Survey() {
           token,
           status: 'neu',
           coach_note: null,
+          // Woher der Besucher kam. Fast immer null — die meisten kommen nicht
+          // über eine Anzeige, und das ist kein Fehler.
+          gclid: clickSource?.gclid ?? null,
+          utm_source: clickSource?.utm_source ?? null,
+          utm_campaign: clickSource?.utm_campaign ?? null,
           strengths: feedback.strengths.map(s => `${s.icon} ${s.title}: ${s.description}`),
           focus_area: `${feedback.focusArea.icon} ${feedback.focusArea.title}: ${feedback.focusArea.description}`,
         });
@@ -618,6 +626,11 @@ export default function Survey() {
       } catch (err) {
         console.error('Failed to save to Supabase:', err);
       }
+
+      // Google melden, dass aus dem Klick ein Lead wurde. Bewusst nach dem
+      // Speichern und ohne await: schlägt es fehl, sieht der Nutzer trotzdem
+      // sein Ergebnis. Ohne gclid tut die Funktion von sich aus nichts.
+      void reportCoachingLead();
 
       setResultData({
         score: scoreResult.score,
