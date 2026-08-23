@@ -233,9 +233,9 @@ const translations = {
       }
     ] as Question[],
     phoneQuestion: {
-      q: "Fast geschafft! Wo soll ich dir deine persönliche Analyse schicken?",
+      q: "Wohin darf ich dir deine Analyse schicken?",
       placeholder: "+41 79 123 45 67",
-      subtext: "Ich schicke dir deine IST/SOLL-Analyse + erste Schritte direkt per WhatsApp",
+      subtext: "Am Ende bekommst du deine IST/SOLL-Analyse und die ersten Schritte per WhatsApp",
       privacy: "Deine Nummer wird nur für das Strategiegespräch verwendet."
     },
     result: {
@@ -458,9 +458,9 @@ const translations = {
       }
     ] as Question[],
     phoneQuestion: {
-      q: "Almost done! Where should I send your personalized analysis?",
+      q: "Where should I send your analysis?",
       placeholder: "+41 79 123 45 67",
-      subtext: "I'll send you your analysis + first steps via WhatsApp",
+      subtext: "At the end you get your analysis and first steps via WhatsApp",
       privacy: "Your number will only be used for the strategy call."
     },
     result: {
@@ -483,6 +483,10 @@ export default function Survey() {
   const [name, setName] = useState('');
   const [answers, setAnswers] = useState<Record<number, string | string[]>>({});
   const [phoneNumber, setPhoneNumber] = useState('');
+  /* Der Token entsteht am Anfang, nicht am Ende: er ist der Schlüssel, unter
+     dem eine angefangene Zeile später vervollständigt wird. Läge er erst beim
+     Absenden vor, gäbe es für einen Abbrecher nichts, worauf man zurückkommt. */
+  const [token, setToken] = useState(() => crypto.randomUUID());
   const [showResult, setShowResult] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -498,8 +502,19 @@ export default function Survey() {
   const progress = ((step + 1) / totalSteps) * 100;
 
   const isNameStep = step === 0;
-  const isPhoneStep = step === t.questions.length + 1;
-  const currentQuestion = !isNameStep && !isPhoneStep ? t.questions[step - 1] : null;
+  /* ACHTUNG bei Änderungen: der Fragen-Index ist `step - 2`, nicht `step - 1`
+     (Schritt 0 = Name, Schritt 1 = Telefon). Diese Rechnung steht an sieben
+     Stellen; wird eine vergessen, landen Antworten still bei der falschen Frage
+     und die Auswertung ist falsch, ohne dass etwas kaputt aussieht.
+
+     Die Nummer wird an Position 2 gefragt, nicht am Schluss.
+     Vorher stand sie hinter allen 24 Fragen: wer bei Frage 12 aufhörte, war
+     spurlos weg — der Klick war bezahlt, der Kontakt verloren. Jetzt bleibt
+     wenigstens die Nummer, und ein Abbrecher ist ein Interessent statt nichts.
+     Wer sie nicht geben will, springt ohnehin sofort ab und hätte auch die 24
+     Fragen nicht beantwortet. */
+  const isPhoneStep = step === 1;
+  const currentQuestion = !isNameStep && !isPhoneStep ? t.questions[step - 2] : null;
   const isMultiple = currentQuestion?.multiple;
   const isScale = currentQuestion?.scale;
   const isText = currentQuestion?.text;
@@ -515,6 +530,7 @@ export default function Survey() {
         if (data.step) setStep(data.step);
         if (data.lang) setLang(data.lang);
         if (data.phoneNumber) setPhoneNumber(data.phoneNumber);
+        if (data.token) setToken(data.token);
       } catch (e) {
         console.error('Failed to load progress');
       }
@@ -526,13 +542,13 @@ export default function Survey() {
   useEffect(() => {
     if (isLoaded && !showResult) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({
-        name, answers, step, lang, phoneNumber
+        name, answers, step, lang, phoneNumber, token
       }));
     }
-  }, [name, answers, step, lang, phoneNumber, isLoaded, showResult]);
+  }, [name, answers, step, lang, phoneNumber, token, isLoaded, showResult]);
 
   const handleAnswer = (value: string) => {
-    const questionIndex = step - 1;
+    const questionIndex = step - 2;
     if (isMultiple) {
       const current = (answers[questionIndex] as string[]) || [];
       const newValue = current.includes(value)
@@ -552,7 +568,7 @@ export default function Survey() {
     }
     // Freitext ist optional – darf immer weiter
     if (isText) return true;
-    const questionIndex = step - 1;
+    const questionIndex = step - 2;
     if (isMultiple) {
       return ((answers[questionIndex] as string[]) || []).length > 0;
     }
@@ -561,6 +577,35 @@ export default function Survey() {
 
   const handleNext = async () => {
     if (step < totalSteps - 1) {
+      /* Sobald Name und Nummer da sind, wird eine offene Zeile angelegt. Wer
+         danach bei Frage 12 aufhört, ist trotzdem erfasst — vorher war so
+         jemand spurlos weg, obwohl sein Klick bezahlt war.
+         Ohne await und mit verschlucktem Fehler: das Weiterklicken darf nie an
+         der Datenbank hängen.
+
+         Das abschliessende .then() ist Pflicht, nicht Kosmetik: supabase-js
+         gibt einen trägen Query-Builder zurück, der erst losläuft, wenn jemand
+         ihn awaitet oder .then() aufruft. Mit `void davor` und ohne .then()
+         passiert überhaupt nichts — genau so ist diese Zeile erst stillschweigend
+         ins Leere gelaufen, bis ein Netzwerk-Mitschnitt es zeigte. */
+      if (isPhoneStep) {
+        const src = getClickSource();
+        supabase
+          .rpc('save_submission', {
+            p_token: token,
+            p_name: name,
+            p_phone: phoneNumber,
+            p_language: lang,
+            p_complete: false,
+            p_gclid: src?.gclid ?? null,
+            p_utm_source: src?.utm_source ?? null,
+            p_utm_campaign: src?.utm_campaign ?? null,
+          })
+          .then(
+            () => {},
+            () => {}, // Ein Fehler hier darf den Trichter nicht anhalten.
+          );
+      }
       setStep(step + 1);
     } else {
       localStorage.removeItem(STORAGE_KEY);
@@ -575,31 +620,32 @@ export default function Survey() {
 
       const clickSource = getClickSource();
 
-      // Generate unique token
-      const token = crypto.randomUUID();
+      // Der Token steht schon fest (siehe useState oben) — unter ihm liegt die
+      // beim Telefonschritt angelegte Zeile, die jetzt vervollständigt wird.
       // Immer die Live-Domain für den persönlichen Link (nicht die onrender-/Preview-URL)
       const siteUrl = 'https://danielepauli.com';
       const personalLink = `${siteUrl}/ergebnis/?token=${token}`;
 
       // Save to Supabase
       try {
-        await supabase.from('survey_submissions').insert({
-          name,
-          phone: phoneNumber,
-          language: lang,
-          answers,
-          score: scoreResult.score,
-          score_label: lang === 'de' ? scoreResult.label : scoreResult.labelEn,
-          token,
-          status: 'neu',
-          coach_note: null,
-          // Woher der Besucher kam. Fast immer null — die meisten kommen nicht
-          // über eine Anzeige, und das ist kein Fehler.
-          gclid: clickSource?.gclid ?? null,
-          utm_source: clickSource?.utm_source ?? null,
-          utm_campaign: clickSource?.utm_campaign ?? null,
-          strengths: feedback.strengths.map(s => `${s.icon} ${s.title}: ${s.description}`),
-          focus_area: `${feedback.focusArea.icon} ${feedback.focusArea.title}: ${feedback.focusArea.description}`,
+        // Über die Funktion, nicht direkt in die Tabelle: sie ergänzt die
+        // offene Zeile zu diesem Token und lässt eine bereits abgeschlossene
+        // unangetastet. Eine UPDATE-Regel für anon müsste `USING (true)`
+        // lauten und liesse jeden jede fremde Zeile überschreiben.
+        await supabase.rpc('save_submission', {
+          p_token: token,
+          p_name: name,
+          p_phone: phoneNumber,
+          p_language: lang,
+          p_answers: answers,
+          p_score: scoreResult.score,
+          p_score_label: lang === 'de' ? scoreResult.label : scoreResult.labelEn,
+          p_strengths: feedback.strengths.map(s => `${s.icon} ${s.title}: ${s.description}`),
+          p_focus_area: `${feedback.focusArea.icon} ${feedback.focusArea.title}: ${feedback.focusArea.description}`,
+          p_complete: true,
+          p_gclid: clickSource?.gclid ?? null,
+          p_utm_source: clickSource?.utm_source ?? null,
+          p_utm_campaign: clickSource?.utm_campaign ?? null,
         });
 
         // Coach sofort per E-Mail benachrichtigen (zuverlässiger Direkt-Aufruf der Edge Function).
@@ -647,13 +693,15 @@ export default function Survey() {
     if (step > 0) setStep(step - 1);
   };
 
+  /* Grenzen um 1 verschoben, seit der Telefonschritt an Position 1 sitzt und
+     alle Fragen dahinter aufrücken. */
   const getPhaseIndex = () => {
-    if (step === 0) return 0;
-    if (step <= 4) return 0; // IST
-    if (step <= 7) return 1; // VERGANGENHEIT
-    if (step <= 11) return 2; // SOLL (inkl. neuer Freitext-Frage)
-    if (step <= 18) return 3; // COMMITMENT
-    return 4; // REALITY CHECK
+    if (step <= 1) return 0;  // Name + Telefon
+    if (step <= 5) return 0;  // IST
+    if (step <= 8) return 1;  // VERGANGENHEIT
+    if (step <= 12) return 2; // SOLL
+    if (step <= 19) return 3; // COMMITMENT
+    return 4;                 // REALITY CHECK
   };
 
   const resetSurvey = () => {
@@ -813,13 +861,13 @@ export default function Survey() {
                   type="range"
                   min="1"
                   max="10"
-                  value={answers[step - 1] || 5}
+                  value={answers[step - 2] || 5}
                   onChange={(e) => handleAnswer(e.target.value)}
                   className="w-full h-3 bg-surface rounded-full appearance-none cursor-pointer accent-orange"
                 />
                 <div className="flex justify-between mt-2 text-text-secondary text-sm">
                   {currentQuestion.options.map((opt) => (
-                    <span key={opt} className={answers[step - 1] === opt ? 'text-orange font-bold' : ''}>
+                    <span key={opt} className={answers[step - 2] === opt ? 'text-orange font-bold' : ''}>
                       {opt}
                     </span>
                   ))}
@@ -827,7 +875,7 @@ export default function Survey() {
               </div>
               <div className="text-center">
                 <span className="text-6xl font-bold gradient-text">
-                  {answers[step - 1] || 5}
+                  {answers[step - 2] || 5}
                 </span>
               </div>
             </div>
@@ -843,7 +891,7 @@ export default function Survey() {
                   : 'A sentence or two is enough – in your own words. (Optional, but valuable for your analysis.)'}
               </p>
               <textarea
-                value={(answers[step - 1] as string) || ''}
+                value={(answers[step - 2] as string) || ''}
                 onChange={(e) => handleAnswer(e.target.value)}
                 rows={4}
                 placeholder={lang === 'de' ? 'Schreib einfach drauflos…' : 'Just write freely…'}
@@ -859,7 +907,7 @@ export default function Survey() {
               <h2 className="text-2xl font-bold mb-8">{currentQuestion.q}</h2>
               <div className="space-y-3">
                 {currentQuestion.options.map((option) => {
-                  const questionIndex = step - 1;
+                  const questionIndex = step - 2;
                   const isSelected = isMultiple
                     ? ((answers[questionIndex] as string[]) || []).includes(option)
                     : answers[questionIndex] === option;
