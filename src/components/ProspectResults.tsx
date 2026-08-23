@@ -61,11 +61,16 @@ export default function ProspectResults() {
     }
 
     async function fetchSubmission() {
-      const { data, error: fetchError } = await supabase
-        .from('survey_submissions')
-        .select('*')
-        .eq('token', token)
-        .single();
+      // Über eine Funktion statt direkt auf die Tabelle. Grund: die
+      // SELECT-Regel für anon war `USING (true)` — RLS sieht den Filter einer
+      // Abfrage nicht, also hiess das nicht „darf die eigene Zeile lesen",
+      // sondern „darf jede Zeile lesen". Mit dem anon-Key aus dem Bundle liessen
+      // sich sämtliche Leads samt Telefonnummern abrufen.
+      // Die Funktion gibt genau eine Zeile zum Token zurück — und die
+      // Telefonnummer bewusst gar nicht, die braucht diese Seite nicht.
+      const { data: rows, error: fetchError } = await supabase
+        .rpc('get_submission_by_token', { p_token: token });
+      const data = Array.isArray(rows) ? rows[0] : null;
 
       if (fetchError || !data) {
         setError('Ergebnis nicht gefunden.');
