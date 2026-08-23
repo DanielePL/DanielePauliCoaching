@@ -6,7 +6,16 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Ganzheitliches Online-Coaching ab 40: mehr Energie, weniger Bauch, klarer Kopf. Körper, Ernährung, Mindset & Lifestyle in einem System – mit einem Coach, der dich dranbleiben lässt." } = Astro.props;
+/* Kürzer als vorher: 181 Zeichen wurden in der Trefferliste abgeschnitten, und
+   abgeschnitten wird immer am Ende — also da, wo der Aufruf zum Handeln steht. */
+const { title, description = "Ganzheitliches Online-Coaching ab 40: mehr Energie, weniger Bauch, klarer Kopf. Körper, Ernährung und Mindset in einem System." } = Astro.props;
+
+/* Astro.site ist nicht gesetzt, deshalb die Domain fest. Absolute URLs sind bei
+   Open Graph Pflicht — ein relativer Pfad wird von WhatsApp und LinkedIn
+   ignoriert, und der geteilte Link bleibt ein grauer Kasten. */
+const SITE = 'https://www.danielepauli.com';
+const canonical = new URL(Astro.url.pathname, SITE).href;
+const ogImage = `${SITE}/images/og-cover.jpg`;
 ---
 
 <!doctype html>
@@ -25,11 +34,21 @@ const { title, description = "Ganzheitliches Online-Coaching ab 40: mehr Energie
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Open Graph -->
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph. og:url zeigt auf die jeweilige Seite, nicht pauschal auf die
+         Startseite — sonst meldet jede geteilte Unterseite sich als Startseite. -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://danielepauli.com" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="de_CH" />
+    <meta property="og:site_name" content="Daniele Pauli Coaching" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
 
     <title>{title}</title>
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Von Hand gepflegt — vier indexierbare Seiten brauchen keinen Generator.
+  /admin und /ergebnis fehlen absichtlich (siehe robots.txt).
+  lastmod nur bei echter inhaltlicher Änderung anfassen; ein Datum, das bei
+  jedem Deploy springt, bringt Crawler dazu, das Feld zu ignorieren.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.danielepauli.com/</loc><lastmod>2026-08-23</lastmod><priority>1.0</priority></url>
+  <url><loc>https://www.danielepauli.com/survey/</loc><lastmod>2026-08-23</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.danielepauli.com/impressum/</loc><lastmod>2026-08-21</lastmod><priority>0.2</priority></url>
+  <url><loc>https://www.danielepauli.com/datenschutz/</loc><lastmod>2026-08-21</lastmod><priority>0.2</priority></url>
+</urlset>

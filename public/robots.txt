@@ -1,0 +1,9 @@
+# /admin und /ergebnis gehören nicht in eine Suchmaschine: das eine ist der
+# interne Bereich, das andere die persönliche Auswertung eines Interessenten,
+# erreichbar nur über einen Token.
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /ergebnis
+
+Sitemap: https://www.danielepauli.com/sitemap.xml
