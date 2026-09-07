@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
 import type { SurveySubmission } from '../../lib/types';
+import AdminBookings from './AdminBookings';
 
 type ViewMode = 'list' | 'detail';
+type Tab = 'survey' | 'bookings';
 
 const STATUS_LABELS: Record<string, { label: string; color: string }> = {
   neu: { label: 'Neu', color: 'bg-blue-500/20 text-blue-400' },
@@ -43,6 +45,8 @@ export default function AdminDashboard() {
   const [submissions, setSubmissions] = useState<SurveySubmission[]>([]);
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<ViewMode>('list');
+  const [tab, setTab] = useState<Tab>('survey');
+  const [upcomingBookings, setUpcomingBookings] = useState<number>(0);
   const [selectedSubmission, setSelectedSubmission] = useState<SurveySubmission | null>(null);
   const [coachNote, setCoachNote] = useState('');
   const [saving, setSaving] = useState(false);
@@ -50,7 +54,18 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     fetchSubmissions();
+    fetchUpcomingBookingCount();
   }, []);
+
+  async function fetchUpcomingBookingCount() {
+    const { count } = await supabase
+      .from('site_bookings')
+      .select('id', { count: 'exact', head: true })
+      .eq('is_deleted', false)
+      .neq('status', 'abgesagt')
+      .gte('slot_start', new Date().toISOString());
+    setUpcomingBookings(count ?? 0);
+  }
 
   async function fetchSubmissions() {
     const { data, error } = await supabase
@@ -247,22 +262,39 @@ export default function AdminDashboard() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-            <p className="text-text-secondary">
-              {submissions.length} Submissions
-              {newCount > 0 && (
-                <span className="ml-2 bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full text-xs">
-                  {newCount} neu
-                </span>
-              )}
-            </p>
+            <div className="flex gap-4 mt-2">
+              <button
+                onClick={() => setTab('survey')}
+                className={`text-sm pb-1 border-b-2 transition-colors ${tab === 'survey' ? 'border-orange text-text-primary' : 'border-transparent text-text-secondary hover:text-text-primary'}`}
+              >
+                Survey ({submissions.length})
+                {newCount > 0 && (
+                  <span className="ml-2 bg-blue-500/15 text-blue-700 px-2 py-0.5 rounded-full text-xs">
+                    {newCount} neu
+                  </span>
+                )}
+              </button>
+              <button
+                onClick={() => setTab('bookings')}
+                className={`text-sm pb-1 border-b-2 transition-colors ${tab === 'bookings' ? 'border-orange text-text-primary' : 'border-transparent text-text-secondary hover:text-text-primary'}`}
+              >
+                Erstgespräche
+                {upcomingBookings > 0 && (
+                  <span className="ml-2 bg-orange/15 text-orange px-2 py-0.5 rounded-full text-xs">
+                    {upcomingBookings} kommend
+                  </span>
+                )}
+              </button>
+            </div>
           </div>
           <button onClick={handleLogout} className="text-text-secondary hover:text-text-primary transition-colors text-sm">
             Abmelden
           </button>
         </div>
 
-        {/* Submissions Table */}
-        {submissions.length === 0 ? (
+        {tab === 'bookings' ? (
+          <AdminBookings />
+        ) : submissions.length === 0 ? (
           <div className="glass-card p-12 text-center">
             <div className="text-4xl mb-4">📋</div>
             <h2 className="text-xl font-bold mb-2">Noch keine Submissions</h2>
