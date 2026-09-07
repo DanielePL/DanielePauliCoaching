@@ -227,17 +227,15 @@ export default function ProspectResults() {
               ? 'Bereit für dein Strategiegespräch?'
               : 'Ready for your strategy call?'}
           </h3>
-          <a
-            href="https://calendly.com/danielepauli"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent('open-booking'))}
             className="btn-primary text-lg inline-flex items-center gap-2"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
             {lang === 'de' ? 'Termin buchen' : 'Book appointment'}
-          </a>
+          </button>
         </div>
 
         {/* Back to home */}

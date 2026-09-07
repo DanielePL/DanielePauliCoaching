@@ -48,6 +48,11 @@ serve(async (req: Request) => {
       return new Response('Not an insert', { status: 200, headers: corsHeaders });
     }
 
+    // Buchung aus dem eigenen Erstgespräch-Kalender (ersetzt Calendly)
+    if (payload.table === 'site_bookings') {
+      return await sendBookingEmail(payload.record as unknown as BookingRecord);
+    }
+
     const { name, phone, score, score_label, token, answers } = payload.record;
     // Q17 = Wichtigkeit (1–10), Q21 = monatliches Investment (Preis-Indikator).
     // Index 20 ist der Fallback für Einsendungen von vor der Fragebogen-Erweiterung
@@ -131,3 +136,83 @@ serve(async (req: Request) => {
     return new Response(JSON.stringify({ error: String(error) }), { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
   }
 });
+
+interface BookingRecord {
+  name: string;
+  phone: string;
+  email?: string | null;
+  note?: string | null;
+  slot_start: string;
+  token: string;
+}
+
+async function sendBookingEmail(record: BookingRecord): Promise<Response> {
+  const { name, phone, email, note, slot_start, token } = record;
+
+  const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
+  const NOTIFY_EMAIL_TO = Deno.env.get('NOTIFY_EMAIL_TO');
+  const NOTIFY_EMAIL_FROM = Deno.env.get('NOTIFY_EMAIL_FROM') || 'onboarding@resend.dev';
+
+  if (!RESEND_API_KEY || !NOTIFY_EMAIL_TO) {
+    console.error('Missing RESEND_API_KEY or NOTIFY_EMAIL_TO');
+    return new Response('Missing config', { status: 500, headers: corsHeaders });
+  }
+
+  const when = new Intl.DateTimeFormat('de-CH', {
+    timeZone: 'Europe/Zurich',
+    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+    hour: '2-digit', minute: '2-digit',
+  }).format(new Date(slot_start));
+
+  const waLink = `https://wa.me/${String(phone).replace(/[^0-9]/g, '')}`;
+  const subject = `📅 Erstgespräch gebucht: ${name} — ${when}`;
+
+  const text = [
+    `Neues Erstgespräch über die Website gebucht!`,
+    ``,
+    `Termin:   ${when} Uhr (Schweizer Zeit)`,
+    `Name:     ${name}`,
+    `Telefon:  ${phone}`,
+    `E-Mail:   ${email || '–'}`,
+    `Anliegen: ${note || '–'}`,
+  ].join('\n');
+
+  const html = `
+    <div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:520px;margin:0 auto;color:#111">
+      <h2 style="margin:0 0 16px">📅 Erstgespräch gebucht</h2>
+      <table style="border-collapse:collapse;font-size:15px">
+        <tr><td style="padding:4px 12px 4px 0;color:#666">Termin</td><td style="padding:4px 0"><strong>${when} Uhr</strong></td></tr>
+        <tr><td style="padding:4px 12px 4px 0;color:#666">Name</td><td style="padding:4px 0"><strong>${name}</strong></td></tr>
+        <tr><td style="padding:4px 12px 4px 0;color:#666">Telefon</td><td style="padding:4px 0"><a href="tel:${phone}">${phone}</a> · <a href="${waLink}">WhatsApp</a></td></tr>
+        <tr><td style="padding:4px 12px 4px 0;color:#666">E-Mail</td><td style="padding:4px 0">${email || '–'}</td></tr>
+        <tr><td style="padding:4px 12px 4px 0;color:#666">Anliegen</td><td style="padding:4px 0">${note || '–'}</td></tr>
+      </table>
+    </div>`;
+
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${RESEND_API_KEY}`,
+      'Content-Type': 'application/json',
+      'Idempotency-Key': `booking-${token}`,
+    },
+    body: JSON.stringify({
+      from: NOTIFY_EMAIL_FROM,
+      to: [NOTIFY_EMAIL_TO],
+      subject,
+      text,
+      html,
+      reply_to: email || NOTIFY_EMAIL_TO,
+    }),
+  });
+
+  const result = await response.json();
+  if (!response.ok) {
+    console.error('Resend error (booking):', result);
+    return new Response(JSON.stringify(result), { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+  }
+  return new Response(JSON.stringify({ success: true, id: result.id }), {
+    status: 200,
+    headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+  });
+}

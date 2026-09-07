@@ -2,39 +2,39 @@
 
 /* ===== 2026 DESIGN SYSTEM - Daniele Pauli Coaching ===== */
 
-/* Custom Theme */
+/* Custom Theme — Warm-Hell (Konzept 13.10, 2026-09-05) */
 @theme {
-  /* Colors - Warm Dark Theme */
-  --color-background: #0a0a0a;
-  --color-background-secondary: #111111;
-  --color-surface: #1a1a1a;
-  --color-surface-elevated: #222222;
+  /* Colors - Warm Light Theme (Creme) */
+  --color-background: #f7f2e7;
+  --color-background-secondary: #f5efe3;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #ffffff;
 
-  /* Brand Colors */
-  --color-orange: #ff6b00;
+  /* Brand Colors — Orange abgedunkelt für Kontrast auf hellem Grund */
+  --color-orange: #e05f00;
   --color-orange-light: #ff8533;
   --color-orange-dark: #cc5500;
-  --color-orange-glow: rgba(255, 107, 0, 0.4);
+  --color-orange-glow: rgba(224, 95, 0, 0.22);
 
   /* Accent - Warm Beige */
   --color-beige: #e8dcc4;
   --color-beige-light: #f5efe3;
   --color-beige-dark: #c4b8a0;
 
-  /* Text */
-  --color-text-primary: #f5f5f5;
-  --color-text-secondary: #a0a0a0;
-  --color-text-muted: #666666;
+  /* Text — warmes Anthrazit / Stone */
+  --color-text-primary: #1c1917;
+  --color-text-secondary: #57534e;
+  --color-text-muted: #a8a29e;
 
-  /* Glass */
-  --color-glass-bg: rgba(255, 255, 255, 0.03);
-  --color-glass-border: rgba(255, 255, 255, 0.08);
-  --color-glass-border-hover: rgba(255, 255, 255, 0.15);
+  /* Glass — weisse Karten mit warmen Rändern */
+  --color-glass-bg: rgba(255, 255, 255, 0.65);
+  --color-glass-border: rgba(28, 25, 23, 0.08);
+  --color-glass-border-hover: rgba(28, 25, 23, 0.16);
 
   /* Gradients */
-  --gradient-hero: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
-  --gradient-orange: linear-gradient(135deg, #ff6b00 0%, #ff8533 100%);
-  --gradient-surface: linear-gradient(180deg, rgba(26, 26, 26, 0.8) 0%, rgba(10, 10, 10, 0.9) 100%);
+  --gradient-hero: linear-gradient(135deg, #f7f2e7 0%, #faf8f2 50%, #f7f2e7 100%);
+  --gradient-orange: linear-gradient(135deg, #e05f00 0%, #ff8533 100%);
+  --gradient-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(247, 242, 231, 0.9) 100%);
 
   /* Spacing */
   --section-padding: clamp(2.5rem, 7vw, 7rem);
@@ -71,7 +71,7 @@ body {
 }
 
 .glass-hover:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.95);
   border-color: var(--color-glass-border-hover);
   transform: translateY(-4px);
 }
@@ -79,16 +79,16 @@ body {
 .glass-card {
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(255, 255, 255, 0.02) 100%
+    #ffffff 0%,
+    #fdfbf6 100%
   );
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--color-glass-border);
   border-radius: 24px;
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    0 8px 32px rgba(28, 25, 23, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 /* ===== GRADIENT MESH BLOBS ===== */
@@ -96,7 +96,7 @@ body {
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.5;
+  opacity: 0.3;
   animation: blob-float 20s ease-in-out infinite;
 }
 
@@ -152,7 +152,7 @@ body {
 .glow-orange-hover:hover {
   box-shadow:
     0 0 60px var(--color-orange-glow),
-    0 0 120px rgba(255, 107, 0, 0.2);
+    0 0 120px rgba(224, 95, 0, 0.15);
 }
 
 .text-glow {
@@ -180,7 +180,7 @@ body {
   transform: translateY(-2px);
   box-shadow:
     0 8px 40px var(--color-orange-glow),
-    0 0 60px rgba(255, 107, 0, 0.3);
+    0 0 60px rgba(224, 95, 0, 0.2);
 }
 
 .btn-secondary {
@@ -199,8 +199,8 @@ body {
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 107, 0, 0.1);
-  box-shadow: 0 0 30px rgba(255, 107, 0, 0.2);
+  background: rgba(224, 95, 0, 0.08);
+  box-shadow: 0 0 30px rgba(224, 95, 0, 0.15);
 }
 
 /* ===== TYPOGRAPHY ===== */
@@ -253,7 +253,7 @@ body {
     box-shadow: 0 0 40px var(--color-orange-glow);
   }
   50% {
-    box-shadow: 0 0 80px var(--color-orange-glow), 0 0 120px rgba(255, 107, 0, 0.2);
+    box-shadow: 0 0 80px var(--color-orange-glow), 0 0 120px rgba(224, 95, 0, 0.15);
   }
 }
 

@@ -1,0 +1,33 @@
+---
+// Vollbild-Foto-Band (wie der Hero): Daniele mit Kundengruppe.
+// Trägt die Anti-Elite-Zahl aus Konzept 13.9 A: 950 von 1'000 waren normale Menschen.
+---
+
+<section class="relative overflow-hidden">
+  <!-- Hintergrundfoto -->
+  <div class="absolute inset-0 pointer-events-none">
+    <img
+      src="/images/daniele-gruppe.webp"
+      alt=""
+      class="w-full h-full object-cover"
+      loading="lazy"
+      style="object-position: 50% 35%;"
+    />
+    <!-- Overlays: rechts lesbar, oben/unten Übergang in den Seitenhintergrund -->
+    <div class="absolute inset-0 bg-gradient-to-l from-background via-background/60 to-background/15"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
+  </div>
+
+  <div class="section-container relative z-10 px-6 py-28 md:py-44">
+    <div class="max-w-xl mx-auto md:mr-0 md:ml-auto text-center md:text-left" data-animate>
+      <h2 class="heading-md text-text-primary mb-4">
+        In 22 Jahren habe ich rund
+        <span class="gradient-text">1'000 Menschen</span> begleitet.
+      </h2>
+      <p class="text-lg text-text-secondary">
+        50 davon Profis. 950 davon Leute wie du: mit Job, Familie
+        und einem vollen Alltag.
+      </p>
+    </div>
+  </div>
+</section>

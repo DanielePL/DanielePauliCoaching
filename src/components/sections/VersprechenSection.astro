@@ -4,17 +4,17 @@
 const promises = [
   {
     title: "Kein Programm von der Stange",
-    text: "Dein Plan wird auf deinen Körper, deinen Alltag und dein Tempo zugeschnitten – nicht umgekehrt.",
+    text: "Dein Plan wird auf deinen Körper, deinen Alltag und dein Tempo zugeschnitten, nicht umgekehrt.",
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>`
   },
   {
     title: "Ich bleibe dran",
-    text: "Du wurschtelst nicht allein. Echte Check-ins, ehrliches Feedback – ich begleite dich, bis es sitzt.",
+    text: "Du kämpfst dich nicht alleine durch. Echte Check-ins, ehrliches Feedback. Ich begleite dich, bis es sitzt.",
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>`
   },
   {
     title: "Realistisch, nicht extrem",
-    text: "Kein Bodybuilder-Programm, keine Crash-Diät. Schritte, die in dein Leben passen – und bleiben.",
+    text: "Keine Extreme, keine Crash-Diät. Schritte, die in dein Leben passen und bleiben.",
     icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>`
   },
   {
@@ -33,7 +33,7 @@ const promises = [
         Mein <span class="gradient-text">Versprechen</span> an dich
       </h2>
       <p class="text-xl text-text-secondary max-w-2xl mx-auto">
-        Du kennst mich noch nicht – also gebe ich dir mein Wort, woran du mich messen kannst.
+        Du kennst mich noch nicht. Also gebe ich dir mein Wort, woran du mich messen kannst.
       </p>
     </div>
 
@@ -54,12 +54,12 @@ const promises = [
         Dein erstes Gespräch ist <span class="gradient-text">kostenlos & unverbindlich.</span>
       </p>
       <p class="text-text-secondary mb-8 max-w-xl mx-auto">
-        Du gehst null Risiko ein. Wir finden in Ruhe heraus, ob wir zusammenpassen –
-        und du nimmst auf jeden Fall einen klaren ersten Schritt mit.
+        Du gehst null Risiko ein. Wir finden in Ruhe heraus, ob wir zusammenpassen.
+        Und du nimmst auf jeden Fall einen klaren ersten Schritt mit.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <button
-          onclick="Calendly.initPopupWidget({url: 'https://calendly.com/danielepauli'});return false;"
+          onclick="window.dispatchEvent(new CustomEvent('open-booking'));return false;"
           class="btn-primary text-lg"
         >
           Kostenloses Erstgespräch

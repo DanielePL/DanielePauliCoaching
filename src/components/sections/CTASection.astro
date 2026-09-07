@@ -13,7 +13,7 @@
       </h2>
       <p class="text-xl text-text-secondary max-w-2xl mx-auto">
         Ich arbeite mit einer begrenzten Zahl an Klientinnen und Klienten persönlich.
-        Wenn du es ernst meinst, wieder zu Energie, Form und Klarheit zu finden – sollten wir reden.
+        Wenn du es ernst meinst, wieder zu Energie, Form und Klarheit zu finden, sollten wir reden.
       </p>
     </div>
 
@@ -33,7 +33,7 @@
           <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
         </a>
         <button
-          onclick="Calendly.initPopupWidget({url: 'https://calendly.com/danielepauli'});return false;"
+          onclick="window.dispatchEvent(new CustomEvent('open-booking'));return false;"
           class="btn-secondary text-lg"
         >
           Kostenloses Erstgespräch

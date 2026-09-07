@@ -1,14 +1,22 @@
 ---
 // Hero Section — Neukonzept: ganzheitliches Coaching ab 40
 // Siehe "konzept 2026.md" Abschnitt 4 (ABC-Hybrid)
+// Hintergrundfoto: Schweizermeisterschaft 2021, © Roland Riesen Photography
 ---
 
-<section class="min-h-screen flex items-center justify-center relative overflow-hidden">
-  <!-- Animated gradient rings (dezent gehalten – Orange-Fokus liegt auf dem CTA) -->
-  <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-    <div class="absolute w-[300px] h-[300px] rounded-full border border-orange/10 animate-ping" style="animation-duration: 4s;"></div>
-    <div class="absolute w-[500px] h-[500px] rounded-full border border-orange/5 animate-ping" style="animation-duration: 6s; animation-delay: 1s;"></div>
-    <div class="absolute w-[700px] h-[700px] rounded-full border border-orange/5 animate-ping" style="animation-duration: 8s; animation-delay: 2s;"></div>
+<section class="min-h-screen flex items-center relative overflow-hidden">
+  <!-- Hintergrundfoto (S/W) -->
+  <div class="absolute inset-0 pointer-events-none">
+    <img
+      src="/images/hero-daniele.webp"
+      alt=""
+      fetchpriority="high"
+      class="w-full h-full object-cover"
+      style="object-position: 32% 28%;"
+    />
+    <!-- Overlays: links lesbar, unten Übergang in den Seitenhintergrund -->
+    <div class="absolute inset-0 bg-gradient-to-l from-background via-background/75 to-background/25"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-background via-background/25 to-background/50"></div>
   </div>
 
   <!-- Navigation -->
@@ -24,9 +32,9 @@
     </a>
   </nav>
 
-  <!-- Main Content -->
-  <div class="section-container text-center relative z-10 px-6">
-    <div class="max-w-4xl mx-auto">
+  <!-- Main Content: linksbündig auf Desktop, zentriert auf Mobile -->
+  <div class="section-container relative z-10 px-6 w-full">
+    <div class="max-w-2xl mx-auto md:mr-0 md:ml-auto text-center md:text-left pt-28 pb-20">
       <!-- Badge -->
       <div class="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-8 animate-fade-up">
         <span class="w-2 h-2 bg-orange rounded-full animate-pulse"></span>
@@ -40,8 +48,8 @@
       </h1>
 
       <!-- Subtitle -->
-      <p class="text-xl md:text-2xl text-text-secondary mb-5 max-w-3xl mx-auto animate-fade-up delay-200">
-        Mehr Energie, weniger Bauch, klarer Kopf — ohne Crash-Diät,
+      <p class="text-xl md:text-2xl text-text-secondary mb-5 animate-fade-up delay-200">
+        Mehr Energie, weniger Bauch, klarer Kopf. Ohne Crash-Diät,
         ohne stundenlanges Cardio, ohne dich zu verbiegen.
       </p>
 
@@ -51,7 +59,7 @@
       </p>
 
       <!-- CTA Buttons -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up delay-400">
+      <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start animate-fade-up delay-400">
         <a
           href="/survey/"
           class="btn-primary glow-orange-hover group"
@@ -63,7 +71,7 @@
           <span class="group-hover:translate-x-1 transition-transform">→</span>
         </a>
         <button
-          onclick="Calendly.initPopupWidget({url: 'https://calendly.com/danielepauli'});return false;"
+          onclick="window.dispatchEvent(new CustomEvent('open-booking'));return false;"
           class="btn-secondary"
         >
           Kostenloses Erstgespräch
@@ -78,16 +86,21 @@
   </div>
 
   <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-10">
     <svg class="w-6 h-6 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
     </svg>
   </div>
 
   <!-- Quote -->
-  <div class="absolute bottom-8 left-8 max-w-xs hidden md:block">
+  <div class="absolute bottom-8 left-8 max-w-xs hidden md:block z-10">
     <p class="text-text-secondary/60 italic text-sm">
       "Stark sein heisst: ein Leben lang voll da sein."
     </p>
+  </div>
+
+  <!-- Bildnachweis -->
+  <div class="absolute bottom-3 right-4 hidden md:block z-10">
+    <p class="text-text-secondary/30 text-[10px] tracking-wide">© Roland Riesen Photography</p>
   </div>
 </section>

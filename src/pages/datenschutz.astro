@@ -7,7 +7,7 @@ import { OPERATOR, PROCESSING, isComplete } from '../lib/legal';
    Texten steht. Geprüft am 2026-08-20 an:
      src/components/Survey.tsx   → insert in `survey_submissions`, danach
                                    Edge Function `notify-email`
-     src/layouts/Layout.astro    → Google Fonts, Calendly-Widget
+     src/layouts/Layout.astro    → Google Fonts
      localStorage                → nur `survey_progress_v2`
    Wer den Code ändert, ändert diese Seite mit. Eine Datenschutzerklärung, die
    etwas anderes behauptet als die Software macht, ist schlimmer als keine. */
@@ -122,10 +122,11 @@ const updated = '20. August 2026';
           <h2 class="text-xl font-semibold mb-3">5. Externe Dienste</h2>
           <ul class="text-text-secondary leading-relaxed space-y-3">
             <li>
-              <strong class="text-text-primary">Calendly</strong> — Terminbuchung. Wer einen
-              Termin bucht, übermittelt Name, E-Mail und Terminwunsch direkt an Calendly.
-              Das Buchungs-Widget wird auf unseren Seiten geladen, wodurch deine IP-Adresse
-              technisch bedingt an Calendly übermittelt wird.
+              <strong class="text-text-primary">Terminbuchung</strong> — läuft direkt über
+              diese Website, ohne externen Anbieter. Wer ein Erstgespräch bucht, dessen
+              Angaben (Name, Telefonnummer, optional E-Mail und Anliegen) werden zusammen
+              mit dem gewählten Termin in unserer Datenbank (Supabase) gespeichert und nur
+              für die Durchführung dieses Gesprächs verwendet.
             </li>
             <li>
               <strong class="text-text-primary">WhatsApp</strong> — Kontaktaufnahme. Wer den

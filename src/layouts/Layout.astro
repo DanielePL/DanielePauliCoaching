@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css'
+import BookingModal from '../components/BookingModal'
 
 interface Props {
   title: string;
@@ -24,6 +25,7 @@ const ogImage = `${SITE}/images/og-cover.jpg`;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#f7f2e7" />
 
     <!-- Favicon (Prometheus-Flamme) -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -52,9 +54,6 @@ const ogImage = `${SITE}/images/og-cover.jpg`;
 
     <title>{title}</title>
 
-    <!-- Calendly -->
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
   </head>
   <body>
     <!-- Grain Texture Overlay -->
@@ -68,6 +67,10 @@ const ogImage = `${SITE}/images/og-cover.jpg`;
     </div>
 
     <slot />
+
+    <!-- Eigener Buchungskalender (ersetzt Calendly). Öffnen von überall mit:
+         window.dispatchEvent(new CustomEvent('open-booking')) -->
+    <BookingModal client:load />
 
     <!-- Floating Survey Button (shows after scroll) -->
     <a
@@ -86,11 +89,10 @@ const ogImage = `${SITE}/images/og-cover.jpg`;
          Suchbegriff einen Lead gebracht hat. Kein Cookie, keine Kennung —
          siehe src/lib/visits.ts. -->
     <script>
-      import { captureClickSource, listenForCalendlyBooking } from '../lib/tracking';
+      import { captureClickSource } from '../lib/tracking';
       import { countVisit } from '../lib/visits';
       captureClickSource();
       countVisit();
-      listenForCalendlyBooking();
     </script>
 
     <!-- Scroll Animation Script -->

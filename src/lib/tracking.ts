@@ -130,22 +130,3 @@ export const reportCoachingLead = () => report('coaching')
 
 /** Erstgespräch tatsächlich gebucht — das wertvollere Ereignis. */
 export const reportCoachingCall = () => report('coaching_call')
-
-/* Hört auf Calendly und meldet eine Buchung.
- *
- * Calendly schickt aus seinem iframe eine postMessage an das Fenster. Ein
- * einziger Zuhörer hier fängt jede Buchung ab — egal welcher der fünf Knöpfe im
- * Seitenlayout den Dialog geöffnet hat. Die Alternative wäre, an fünf Stellen
- * dasselbe zu verdrahten und beim sechsten Knopf zu vergessen.
- *
- * Die Herkunftsprüfung ist Pflicht, nicht Kür: postMessage kann jede Seite
- * schicken, die ein Fenster auf uns offen hat. Ohne sie könnte ein Fremder
- * Conversions in das Werbekonto schreiben und die Gebotsstrategie vergiften. */
-export function listenForCalendlyBooking(): void {
-  if (typeof window === 'undefined') return
-  window.addEventListener('message', (e: MessageEvent) => {
-    if (e.origin !== 'https://calendly.com') return
-    const data = e.data as { event?: string } | null
-    if (data?.event === 'calendly.event_scheduled') void reportCoachingCall()
-  })
-}
