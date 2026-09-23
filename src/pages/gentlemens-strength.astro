@@ -1,0 +1,273 @@
+---
+// Gruppen-Seite „Gentlemen's Strength" — konzept 2026.md, Abschnitt 14 (verbindlich: 14.11).
+// Ton-Regel 14.2: Härte im Anspruch, nicht in der Ansprache.
+// Kommunikations-Regel 14.11: nie „KI"/„AI" erwähnen — immer „individuell zugeschnitten".
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/sections/Footer.astro';
+import GroupWaitlistForm from '../components/GroupWaitlistForm';
+
+const pains = [
+  'Du lieferst im Job, zu Hause, für alle. Für dich selbst bleibt am Ende des Tages nichts übrig.',
+  'Energie, Kraft und Schlaf sind nicht mehr, was sie waren. Du merkst es jeden Tag und redest mit niemandem darüber.',
+  'Druck, Zweifel, Müdigkeit: Unter Männern bespricht man das nicht. Also schluckst du es runter.',
+  'Unter der Woche hältst du durch. Am Wochenende kippt es, und am Montag fängst du wieder bei null an.',
+];
+
+const week = [
+  {
+    day: 'Freitag, 12:00',
+    title: 'Der Gruppen-Call',
+    text: '45 Minuten, live. Wir werten die Woche aus, besprechen das Wochenende, bevor es kommt, und legen deine Aufgaben für die nächste Woche fest.',
+  },
+  {
+    day: 'Montag, 07:00',
+    title: 'Deine Aufgaben',
+    text: 'Die Aufgaben der Woche kommen in die App und per E-Mail. Du startest mit einem Plan statt mit schlechtem Gewissen.',
+  },
+  {
+    day: 'Dazwischen',
+    title: 'Training, Ernährung, die Gruppe',
+    text: 'Training und Ernährung sind individuell auf dich zugeschnitten und laufen in der Prometheus App. Im Gruppen-Chat bist du nie allein mit der Woche.',
+  },
+];
+
+const pkg = [
+  'Training, individuell auf dich zugeschnitten',
+  'Ernährung, individuell auf dich zugeschnitten',
+  'Jeden Freitag der Gruppen-Call mit mir',
+  'Jeden Montag deine Wochenaufgaben',
+  'Ein geschützter Gruppen-Chat, kein Social Media',
+];
+
+const gifts = [
+  { title: '2 DEXA-Scans', value: 'Wert je CHF 190', text: 'Einer zum Start, einer nach 6 Monaten. Fett, Muskeln und Knochen, gemessen und nicht geschätzt. Dazu bekommst du von mir eine kurze schriftliche Auswertung.' },
+  { title: 'Die Prometheus App', value: 'Wert USD 99 / Jahr', text: 'Dein Training, deine Ernährung und deine Gruppe an einem Ort.' },
+];
+
+const forYou = [
+  'du über 40 bist und merkst, dass es so nicht weitergeht',
+  'du an Körper und Kopf arbeiten willst, nicht nur an einem',
+  'du dich 6 Monate festlegen kannst und willst',
+  'du bereit bist, dich jede Woche zu zeigen, auch in einer schlechten Woche',
+];
+const notForYou = [
+  'du eine Abkürzung suchst',
+  'du nur einen Trainingsplan brauchst',
+  'du nach drei Wochen schauen willst, ob es passt',
+];
+
+const faq = [
+  {
+    q: 'Muss ich meine Werte vor der Gruppe zeigen?',
+    a: 'Nein. Deine DEXA-Auswertung bekommst nur du. In der Gruppe sprechen wir über Durchschnittswerte, nie über einzelne Männer. Niemand wird vorgeführt.',
+  },
+  {
+    q: 'Warum 6 Monate fix?',
+    a: 'Weil drei Monate nicht reichen, damit sich etwas hält. Und weil eine Gruppe nur trägt, wenn alle dabeibleiben. Wer mitmacht, legt sich fest. Das ist Teil der Wirkung.',
+  },
+  {
+    q: 'Was, wenn es bei mir keinen DEXA-Scan gibt?',
+    a: 'Dann bekommst du statt der Scans zusätzliches persönliches Coaching mit mir. Es gibt Service statt Geld zurück.',
+  },
+  {
+    q: 'In welcher Sprache läuft die Gruppe?',
+    a: 'Die erste Gruppe läuft auf Deutsch. Eine englische Gruppe startet, sobald genug Männer auf der Warteliste sind. Wähle beim Eintragen einfach „English".',
+  },
+  {
+    q: 'Ich bin schon 1:1-Klient. Was ändert sich?',
+    a: 'Du bist automatisch in der Gruppe, ohne Aufpreis.',
+  },
+  {
+    q: 'Ist das eine Therapie?',
+    a: 'Nein. Das ist Coaching für Körper, Kopf und Gewohnheiten, keine Therapie und keine medizinische Behandlung. Wenn es dir gerade wirklich schlecht geht, rede sofort mit jemandem: Die Dargebotene Hand 143 (Schweiz), Telefonseelsorge 0800 111 0 111 (Deutschland), Telefonseelsorge 142 (Österreich). Rund um die Uhr, anonym, kostenlos.',
+  },
+];
+---
+
+<Layout
+  title="Gentlemen's Strength | Gruppen-Coaching für Männer ab 40 | Daniele Pauli"
+  description="Eine geschlossene Gruppe für Männer ab 40, die liefern müssen und dabei nicht kaputtgehen wollen. 6 Monate, Training und Ernährung individuell, jeden Freitag der Call."
+>
+  <main>
+    <!-- Hero -->
+    <section class="section pt-8 md:pt-10">
+      <nav class="section-container flex justify-between items-center mb-16 md:mb-24">
+        <a href="/" class="text-base sm:text-xl font-bold text-text-primary whitespace-nowrap">
+          Daniele Pauli <span class="gradient-text">Coaching</span>
+        </a>
+        <a href="#warteliste" class="btn-secondary !w-auto text-xs sm:text-sm py-1.5 sm:py-2 px-3 sm:px-4">Warteliste</a>
+      </nav>
+
+      <div class="section-container max-w-4xl text-center" data-animate>
+        <p class="text-sm font-semibold tracking-widest uppercase text-orange mb-4">Gentlemen's Strength · by Daniele Pauli</p>
+        <h1 class="heading-xl mb-6">
+          Stark bleiben, wenn <span class="gradient-text">alle etwas von dir wollen.</span>
+        </h1>
+        <p class="text-xl text-text-secondary max-w-2xl mx-auto mb-8">
+          Eine geschlossene Gruppe für Männer ab 40, die liefern müssen und dabei nicht kaputtgehen wollen.
+          Wir trainieren Körper, Kopf und Gewohnheiten, gemeinsam, jede Woche.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#warteliste" class="btn-primary text-lg">Platz auf der Warteliste sichern</a>
+        </div>
+        <p class="text-sm text-text-muted mt-4">Founding Members: 10–15 Plätze · Start auf Deutsch</p>
+      </div>
+    </section>
+
+    <!-- Kennst du das? -->
+    <section class="section">
+      <div class="section-container max-w-3xl" data-animate>
+        <h2 class="heading-lg mb-8 text-center">Kennst du das?</h2>
+        <ul class="space-y-4">
+          {pains.map((p) => (
+            <li class="glass-card p-5 text-lg text-text-secondary">{p}</li>
+          ))}
+        </ul>
+        <p class="text-xl text-center mt-10 max-w-2xl mx-auto">
+          Das ist kein Charakterfehler. So geht es jedem, der immer liefert und auf den selbst
+          <span class="gradient-text font-semibold"> niemand schaut.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Was die Gruppe ist -->
+    <section class="section">
+      <div class="section-container max-w-3xl text-center" data-animate>
+        <h2 class="heading-lg mb-6">Ein Ort, an dem du <span class="gradient-text">nicht funktionieren musst.</span></h2>
+        <p class="text-lg text-text-secondary mb-4">
+          Hier wird Stärke trainiert, und Schmerz muss nicht versteckt werden. Männer in deinem Alter, in deiner Lage,
+          mit demselben Anspruch: wieder voll da sein, für sich und für die, die auf sie zählen.
+        </p>
+        <p class="text-lg text-text-secondary">
+          Die Gruppe läuft in der Prometheus App, nicht auf Facebook oder Instagram. Kein Algorithmus, keine Zuschauer.
+          <strong class="text-text-primary">Was in der Gruppe gesagt wird, bleibt in der Gruppe.</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- Wochenrhythmus -->
+    <section class="section">
+      <div class="section-container max-w-5xl" data-animate>
+        <h2 class="heading-lg mb-10 text-center">Deine Woche</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          {week.map((w) => (
+            <div class="glass-card p-6">
+              <p class="text-sm font-semibold text-orange mb-2">{w.day}</p>
+              <h3 class="text-xl font-semibold mb-3">{w.title}</h3>
+              <p class="text-text-secondary">{w.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Paket -->
+    <section class="section" id="paket">
+      <div class="section-container max-w-4xl" data-animate>
+        <h2 class="heading-lg mb-4 text-center">6 Monate. <span class="gradient-text">Ein Commitment.</span></h2>
+        <p class="text-lg text-text-secondary text-center max-w-2xl mx-auto mb-10">
+          Kein Abo, das man nach drei Wochen kündigt. Wer dabei ist, legt sich fest, und genau das macht den Unterschied.
+        </p>
+
+        <div class="glass-card p-6 sm:p-8 md:p-10 glow-orange">
+          <ul class="space-y-3 mb-8">
+            {pkg.map((item) => (
+              <li class="flex gap-3 text-lg"><span class="text-orange font-bold">✓</span><span>{item}</span></li>
+            ))}
+          </ul>
+
+          <p class="text-sm font-semibold tracking-widest uppercase text-orange mb-4">Obendrauf geschenkt</p>
+          <div class="grid sm:grid-cols-2 gap-4 mb-8">
+            {gifts.map((g) => (
+              <div class="rounded-xl border border-glass-border p-5">
+                <p class="text-lg font-semibold">{g.title}</p>
+                <p class="text-sm text-orange mb-2">{g.value}</p>
+                <p class="text-text-secondary text-sm">{g.text}</p>
+              </div>
+            ))}
+          </div>
+
+          <div class="text-center border-t border-glass-border pt-8">
+            <p class="text-text-muted line-through">CHF 1'500 für 6 Monate</p>
+            <p class="text-4xl font-bold mt-1">CHF 1'250</p>
+            <p class="text-text-secondary mt-1">für 6 Monate · Preis für die Founding Members</p>
+            <p class="text-sm text-text-muted mt-3">Nur für die ersten 10–15 Männer. Danach gilt der reguläre Preis.</p>
+            <a href="#warteliste" class="btn-primary text-lg mt-6 inline-flex">Auf die Warteliste</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wer führt -->
+    <section class="section">
+      <div class="section-container max-w-3xl" data-animate>
+        <h2 class="heading-lg mb-6 text-center">Wer die Gruppe führt</h2>
+        <div class="glass-card p-6 sm:p-8 text-lg text-text-secondary space-y-4">
+          <p>
+            <strong class="text-text-primary">Ich bin Daniele Pauli, 48.</strong> Ich trainiere seit ich 16 bin, 32 Jahre ohne Pause.
+            Weltmeister im Powerlifting (Masters, 2018), 10× Schweizer Meister, 22 Jahre Coaching.
+          </p>
+          <p>
+            Von den rund 1'000 Menschen, die ich begleitet habe, waren 950 keine Profis, sondern Leute mit Job, Familie
+            und einem Körper, der langsam nicht mehr mitzieht. Ich weiss, wie man 32 Jahre dranbleibt.
+            Das gebe ich dir weiter.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Für wen -->
+    <section class="section">
+      <div class="section-container max-w-4xl grid md:grid-cols-2 gap-6" data-animate>
+        <div class="glass-card p-6">
+          <h3 class="text-xl font-semibold mb-4">Für dich, wenn …</h3>
+          <ul class="space-y-2 text-text-secondary">
+            {forYou.map((f) => <li class="flex gap-2"><span class="text-orange">✓</span><span>{f}</span></li>)}
+          </ul>
+        </div>
+        <div class="glass-card p-6">
+          <h3 class="text-xl font-semibold mb-4">Nicht für dich, wenn …</h3>
+          <ul class="space-y-2 text-text-secondary">
+            {notForYou.map((f) => <li class="flex gap-2"><span class="text-text-muted">✕</span><span>{f}</span></li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <div class="section-container max-w-3xl" data-animate>
+        <h2 class="heading-lg mb-8 text-center">Fragen</h2>
+        <div class="space-y-3">
+          {faq.map((f) => (
+            <details class="glass-card p-5 group">
+              <summary class="cursor-pointer text-lg font-semibold list-none flex justify-between gap-4">
+                {f.q}<span class="text-orange group-open:rotate-45 transition-transform">+</span>
+              </summary>
+              <p class="text-text-secondary mt-3">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Warteliste -->
+    <section class="section" id="warteliste">
+      <div class="section-container max-w-xl" data-animate>
+        <h2 class="heading-lg mb-4 text-center">Sichere dir deinen Platz</h2>
+        <p class="text-text-secondary text-center mb-2">
+          Trag dich ein. Ich melde mich persönlich bei dir, bevor die Founding Members starten.
+        </p>
+        <p class="text-text-muted text-center text-sm mb-8" lang="en">
+          English speaker? The first group runs in German. Join the waitlist in English and I will contact you
+          when the English group opens.
+        </p>
+        <div class="glass-card p-6 sm:p-8">
+          <GroupWaitlistForm client:visible />
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>

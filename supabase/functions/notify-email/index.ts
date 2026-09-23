@@ -53,6 +53,11 @@ serve(async (req: Request) => {
       return await sendBookingEmail(payload.record as unknown as BookingRecord);
     }
 
+    // Warteliste der Gruppe „Gentlemen's Strength“
+    if (payload.table === 'site_group_waitlist') {
+      return await sendWaitlistEmail(payload.record as unknown as WaitlistRecord);
+    }
+
     const { name, phone, score, score_label, token, answers } = payload.record;
     // Q17 = Wichtigkeit (1–10), Q21 = monatliches Investment (Preis-Indikator).
     // Index 20 ist der Fallback für Einsendungen von vor der Fragebogen-Erweiterung
@@ -209,6 +214,62 @@ async function sendBookingEmail(record: BookingRecord): Promise<Response> {
   const result = await response.json();
   if (!response.ok) {
     console.error('Resend error (booking):', result);
+    return new Response(JSON.stringify(result), { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+  }
+  return new Response(JSON.stringify({ success: true, id: result.id }), {
+    status: 200,
+    headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+  });
+}
+
+interface WaitlistRecord {
+  name: string;
+  email: string;
+  phone?: string | null;
+  language?: string | null;
+  age_range?: string | null;
+  note?: string | null;
+}
+
+const esc = (v: unknown) =>
+  String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+async function sendWaitlistEmail(record: WaitlistRecord): Promise<Response> {
+  const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
+  const NOTIFY_EMAIL_TO = Deno.env.get('NOTIFY_EMAIL_TO');
+  const NOTIFY_EMAIL_FROM = Deno.env.get('NOTIFY_EMAIL_FROM') || 'onboarding@resend.dev';
+  if (!RESEND_API_KEY || !NOTIFY_EMAIL_TO) {
+    console.error('Missing RESEND_API_KEY or NOTIFY_EMAIL_TO');
+    return new Response('Missing config', { status: 500, headers: corsHeaders });
+  }
+
+  const lang = record.language === 'en' ? 'English' : 'Deutsch';
+  const subject = `🔥 Warteliste Gentlemen's Strength: ${record.name} (${lang})`;
+  const rows: [string, string][] = [
+    ['Name', record.name],
+    ['E-Mail', record.email],
+    ['Telefon', record.phone || '–'],
+    ['Sprache', lang],
+    ['Alter', record.age_range || '–'],
+    ['Nachricht', record.note || '–'],
+  ];
+  const text = ['Neuer Eintrag auf der Warteliste für Gentlemen\'s Strength:', '', ...rows.map(([k, v]) => `${k}: ${v}`)].join('\n');
+  const html = `
+    <div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:520px;margin:0 auto;color:#111">
+      <h2 style="margin:0 0 16px">🔥 Warteliste Gentlemen's Strength</h2>
+      <table style="border-collapse:collapse;font-size:15px">
+        ${rows.map(([k, v]) => `<tr><td style="padding:4px 12px 4px 0;color:#666;vertical-align:top">${k}</td><td style="padding:4px 0">${esc(v)}</td></tr>`).join('')}
+      </table>
+    </div>`;
+
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ from: NOTIFY_EMAIL_FROM, to: [NOTIFY_EMAIL_TO], subject, text, html, reply_to: record.email }),
+  });
+  const result = await response.json();
+  if (!response.ok) {
+    console.error('Resend error (waitlist):', result);
     return new Response(JSON.stringify(result), { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
   }
   return new Response(JSON.stringify({ success: true, id: result.id }), {
