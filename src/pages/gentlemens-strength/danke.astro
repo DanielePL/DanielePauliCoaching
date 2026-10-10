@@ -1,0 +1,29 @@
+---
+// Rückkehr-Seite nach der Stripe-Zahlung (im Payment Link als Weiterleitung nach Zahlung eintragen:
+// https://www.danielepauli.com/gentlemens-strength/danke/)
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/sections/Footer.astro';
+---
+
+<Layout
+  title="Willkommen bei Gentlemen's Strength | Daniele Pauli"
+  description="Deine Zahlung ist eingegangen. Willkommen bei Gentlemen's Strength."
+>
+  <main>
+    <section class="section py-24">
+      <div class="section-container max-w-2xl text-center">
+        <p class="text-sm font-semibold tracking-widest uppercase text-orange mb-4">Gentlemen's Strength · Founding Member</p>
+        <h1 class="heading-xl mb-6">Du bist <span class="gradient-text">dabei.</span></h1>
+        <p class="text-xl text-text-secondary mb-4">
+          Deine Zahlung ist eingegangen, dein Platz ist fix. Die Quittung kommt per E-Mail von Stripe.
+        </p>
+        <p class="text-lg text-text-secondary mb-10">
+          Ich melde mich persönlich bei dir, bevor wir am <strong class="text-text-primary">Freitag, 8. Januar 2027</strong> starten.
+          Dann klären wir deinen DEXA-Scan und richten die App für dich ein.
+        </p>
+        <a href="/" class="btn-secondary !w-auto inline-flex px-6">Zur Startseite</a>
+      </div>
+    </section>
+    <Footer />
+  </main>
+</Layout>

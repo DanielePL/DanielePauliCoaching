@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { getClickSource } from '../lib/tracking'
+import { GROUP_PAYMENT_LINK, GROUP_PRICE_LABEL } from '../lib/group'
 
 /* Warteliste „Gentlemen's Strength" (konzept 2026.md, Abschnitt 14).
    Insert in `site_group_waitlist`, danach notify-email an Dani. Zweisprachig:
@@ -20,7 +21,11 @@ const T = {
     age: 'Dein Alter',
     agePick: 'Bitte wählen',
     note: 'Was soll sich in den nächsten 6 Monaten ändern? (optional)',
-    submit: 'Jetzt anmelden',
+    submit: GROUP_PAYMENT_LINK ? 'Anmelden und Platz sichern' : 'Jetzt anmelden',
+    payNote: `Danach geht es direkt zur Zahlung: ${GROUP_PRICE_LABEL}, mit Karte oder Twint. Mit der Zahlung ist dein Platz fix.`,
+    redirectTitle: 'Weiter zur Zahlung …',
+    redirectText: 'Falls nichts passiert:',
+    redirectLink: 'Jetzt bezahlen',
     sending: 'Wird gesendet …',
     privacy: 'Deine Angaben nutze ich nur, um dich wegen der Gruppe zu kontaktieren.',
     privacyLink: 'Datenschutz',
@@ -37,6 +42,10 @@ const T = {
     agePick: 'Please choose',
     note: 'What should change in the next 6 months? (optional)',
     submit: 'Join the waitlist',
+    payNote: '',
+    redirectTitle: '',
+    redirectText: '',
+    redirectLink: '',
     sending: 'Sending …',
     privacy: 'I only use your details to contact you about the group.',
     privacyLink: 'Privacy',
@@ -56,7 +65,7 @@ export default function GroupWaitlistForm() {
   const [phone, setPhone] = useState('')
   const [age, setAge] = useState('')
   const [note, setNote] = useState('')
-  const [state, setState] = useState<'idle' | 'sending' | 'done'>('idle')
+  const [state, setState] = useState<'idle' | 'sending' | 'paying' | 'done'>('idle')
   const [error, setError] = useState<string | null>(null)
   const t = T[lang]
 
@@ -98,7 +107,26 @@ export default function GroupWaitlistForm() {
     } catch (notifyErr) {
       console.error('Notification failed (nicht kritisch):', notifyErr)
     }
+    // Deutsche Gruppe: direkt zur Zahlung (Owner 2026-10-10). Die englische Gruppe hat noch
+    // keinen Start, dort bleibt es bei der Warteliste.
+    if (lang === 'de' && GROUP_PAYMENT_LINK) {
+      setState('paying')
+      window.location.href = GROUP_PAYMENT_LINK
+      return
+    }
     setState('done')
+  }
+
+  if (state === 'paying') {
+    return (
+      <div className="text-center py-6" role="status">
+        <p className="text-2xl font-semibold mb-2">{t.redirectTitle}</p>
+        <p className="text-text-secondary">
+          {t.redirectText}{' '}
+          <a href={GROUP_PAYMENT_LINK} className="text-orange underline font-semibold">{t.redirectLink}</a>
+        </p>
+      </div>
+    )
   }
 
   if (state === 'done') {
@@ -144,6 +172,9 @@ export default function GroupWaitlistForm() {
       <button type="submit" className="btn-primary w-full text-lg" disabled={state === 'sending'}>
         {state === 'sending' ? t.sending : t.submit}
       </button>
+      {lang === 'de' && GROUP_PAYMENT_LINK && (
+        <p className="text-sm text-text-secondary text-center">{t.payNote}</p>
+      )}
       <p className="text-xs text-text-muted text-center">
         {t.privacy} <a href="/datenschutz/" className="underline hover:text-orange">{t.privacyLink}</a>
       </p>
