@@ -71,7 +71,7 @@ const faq = [
   },
   {
     q: 'In welcher Sprache läuft die Gruppe?',
-    a: 'Die erste Gruppe läuft auf Deutsch. Eine englische Gruppe startet, sobald genug Männer auf der Warteliste sind. Wähle beim Eintragen einfach „English".',
+    a: 'Die erste Gruppe läuft auf Deutsch. Eine englische Gruppe startet, sobald genug Männer angemeldet sind. Wähle beim Eintragen einfach „English".',
   },
   {
     q: 'Ich bin schon 1:1-Klient. Was ändert sich?',
@@ -95,7 +95,7 @@ const faq = [
         <a href="/" class="text-base sm:text-xl font-bold text-text-primary whitespace-nowrap">
           Daniele Pauli <span class="gradient-text">Coaching</span>
         </a>
-        <a href="#warteliste" class="btn-secondary !w-auto text-xs sm:text-sm py-1.5 sm:py-2 px-3 sm:px-4">Warteliste</a>
+        <a href="#warteliste" class="btn-secondary !w-auto text-xs sm:text-sm py-1.5 sm:py-2 px-3 sm:px-4">Anmelden</a>
       </nav>
 
       <div class="section-container max-w-4xl text-center" data-animate>
@@ -108,9 +108,10 @@ const faq = [
           Wir trainieren Körper, Kopf und Gewohnheiten, gemeinsam, jede Woche.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#warteliste" class="btn-primary text-lg">Platz auf der Warteliste sichern</a>
+          <a href="#warteliste" class="btn-primary text-lg">Jetzt anmelden</a>
         </div>
-        <p class="text-sm text-text-muted mt-4">Founding Members: 10–15 Plätze · Start auf Deutsch</p>
+        <p class="text-base font-semibold text-text-primary mt-5">Start: Freitag, 8. Januar 2027</p>
+        <p class="text-sm text-text-muted mt-1">Nur 15 Plätze · Anmeldeschluss 18. Dezember 2026 · Start auf Deutsch</p>
       </div>
     </section>
 
@@ -191,8 +192,8 @@ const faq = [
             <p class="text-text-muted line-through">CHF 1'500 für 6 Monate</p>
             <p class="text-4xl font-bold mt-1">CHF 1'250</p>
             <p class="text-text-secondary mt-1">für 6 Monate · Preis für die Founding Members</p>
-            <p class="text-sm text-text-muted mt-3">Nur für die ersten 10–15 Männer. Danach gilt der reguläre Preis.</p>
-            <a href="#warteliste" class="btn-primary text-lg mt-6 inline-flex">Auf die Warteliste</a>
+            <p class="text-sm text-text-muted mt-3">Nur für die ersten 15 Männer. Start am 8. Januar 2027, Anmeldeschluss 18. Dezember 2026. Danach gilt der reguläre Preis.</p>
+            <a href="#warteliste" class="btn-primary text-lg mt-6 inline-flex">Jetzt anmelden</a>
           </div>
         </div>
       </div>
@@ -251,12 +252,13 @@ const faq = [
       </div>
     </section>
 
-    <!-- Warteliste -->
+    <!-- Anmeldung (id bleibt „warteliste“, weil Links darauf zeigen) -->
     <section class="section" id="warteliste">
       <div class="section-container max-w-xl" data-animate>
         <h2 class="heading-lg mb-4 text-center">Sichere dir deinen Platz</h2>
+        <p class="text-orange font-semibold text-center mb-2">Start: Freitag, 8. Januar 2027 · nur 15 Plätze</p>
         <p class="text-text-secondary text-center mb-2">
-          Trag dich ein. Ich melde mich persönlich bei dir, bevor die Founding Members starten.
+          Trag dich bis zum 18. Dezember ein. Ich melde mich persönlich bei dir und wir klären alles vor dem Start.
         </p>
         <p class="text-text-muted text-center text-sm mb-8" lang="en">
           English speaker? The first group runs in German. Join the waitlist in English and I will contact you
