@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
 import type { SurveySubmission } from '../../lib/types';
 import AdminBookings from './AdminBookings';
+import AdminGroup from './AdminGroup';
 
 type ViewMode = 'list' | 'detail';
-type Tab = 'survey' | 'bookings';
+type Tab = 'survey' | 'bookings' | 'group';
 
 const STATUS_LABELS: Record<string, { label: string; color: string }> = {
   neu: { label: 'Neu', color: 'bg-blue-500/20 text-blue-400' },
@@ -262,7 +263,7 @@ export default function AdminDashboard() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-            <div className="flex gap-4 mt-2">
+            <div className="flex gap-4 mt-2 flex-wrap">
               <button
                 onClick={() => setTab('survey')}
                 className={`text-sm pb-1 border-b-2 transition-colors ${tab === 'survey' ? 'border-orange text-text-primary' : 'border-transparent text-text-secondary hover:text-text-primary'}`}
@@ -285,6 +286,12 @@ export default function AdminDashboard() {
                   </span>
                 )}
               </button>
+              <button
+                onClick={() => setTab('group')}
+                className={`text-sm pb-1 border-b-2 transition-colors ${tab === 'group' ? 'border-orange text-text-primary' : 'border-transparent text-text-secondary hover:text-text-primary'}`}
+              >
+                Gentlemen's Strength
+              </button>
             </div>
           </div>
           <button onClick={handleLogout} className="text-text-secondary hover:text-text-primary transition-colors text-sm">
@@ -292,7 +299,9 @@ export default function AdminDashboard() {
           </button>
         </div>
 
-        {tab === 'bookings' ? (
+        {tab === 'group' ? (
+          <AdminGroup />
+        ) : tab === 'bookings' ? (
           <AdminBookings />
         ) : submissions.length === 0 ? (
           <div className="glass-card p-12 text-center">
