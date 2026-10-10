@@ -31,6 +31,15 @@ const week = [
   },
 ];
 
+const themes = [
+  { month: 'Januar', title: 'Bestandsaufnahme', text: 'DEXA-Scan zum Start, deine Ziele, wo du wirklich stehst.' },
+  { month: 'Februar', title: 'Energie und Schlaf', text: 'Warum du müde bist und wie dein Abend aussehen muss.' },
+  { month: 'März', title: 'Kraft aufbauen', text: 'Training ab 40: Muskeln erhalten, Verletzungen vermeiden.' },
+  { month: 'April', title: 'Ernährung im Alltag', text: 'Wochenenden, Geschäftsessen, Alkohol.' },
+  { month: 'Mai', title: 'Kopf und Druck', text: 'Stress, Job, Familie und Nein sagen.' },
+  { month: 'Juni', title: 'Dranbleiben', text: 'Was nach den 6 Monaten trägt. DEXA-Scan zum Abschluss.' },
+];
+
 const pkg = [
   'Training, individuell auf dich zugeschnitten',
   'Ernährung, individuell auf dich zugeschnitten',
@@ -156,6 +165,25 @@ const faq = [
               <p class="text-sm font-semibold text-orange mb-2">{w.day}</p>
               <h3 class="text-xl font-semibold mb-3">{w.title}</h3>
               <p class="text-text-secondary">{w.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Monatsthemen (konzept 14.14) -->
+    <section class="section">
+      <div class="section-container max-w-5xl" data-animate>
+        <h2 class="heading-lg mb-4 text-center">Was dich <span class="gradient-text">erwartet</span></h2>
+        <p class="text-lg text-text-secondary text-center max-w-2xl mx-auto mb-10">
+          Jeder Monat hat ein Thema. Der erste Freitag führt hinein, die anderen Freitage gehören deiner Woche und deinen Fragen.
+        </p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {themes.map((t) => (
+            <div class="glass-card p-6">
+              <p class="text-sm font-semibold text-orange mb-2">{t.month}</p>
+              <h3 class="text-xl font-semibold mb-2">{t.title}</h3>
+              <p class="text-text-secondary">{t.text}</p>
             </div>
           ))}
         </div>
